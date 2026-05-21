@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rimeh Mechichi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep:   #1a3d1f;
+    --green-mid:    #2d6a35;
+    --green-sage:   #5a8a60;
+    --green-light:  #a8c9a0;
+    --green-pale:   #e6f0e5;
+    --green-soft:   #f0f7ef;
+    --cream:        #fafaf7;
+    --text-dark:    #1a2b1c;
+    --text-mid:     #3d5c42;
+    --text-muted:   #7a9b7e;
+    --white:        #ffffff;
+    --radius-sm:    8px;
+    --radius-md:    14px;
+    --radius-lg:    24px;
+    --radius-full:  9999px;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Nunito', sans-serif;
+    --shadow-soft:  0 4px 24px rgba(45, 106, 53, 0.10);
+    --shadow-card:  0 2px 16px rgba(45, 106, 53, 0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text-dark); line-height: 1.7; font-size: 16px; }
+
+  /* ── NAV ─────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(90,138,96,0.15);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--green-deep); letter-spacing: 0.5px; text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; color: var(--text-mid); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--green-mid); }
+  .lang-toggle { display: flex; align-items: center; background: var(--green-pale); border-radius: var(--radius-full); padding: 3px; border: 1px solid rgba(90,138,96,0.2); }
+  .lang-btn { font-family: var(--font-body); font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: var(--radius-full); border: none; cursor: pointer; background: transparent; color: var(--text-muted); transition: all 0.2s; letter-spacing: 0.5px; }
+  .lang-btn.active { background: var(--green-mid); color: white; box-shadow: var(--shadow-soft); }
+
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 2.5rem 3rem; position: relative; overflow: hidden; background: var(--cream); }
+  .hero-bg-circle { position: absolute; border-radius: 50%; background: var(--green-pale); z-index: 0; }
+  .hero-bg-circle.c1 { width: 500px; height: 500px; top: -100px; right: -80px; opacity: 0.8; }
+  .hero-bg-circle.c2 { width: 280px; height: 280px; bottom: 60px; left: -60px; opacity: 0.6; }
+  .hero-bg-dots { position: absolute; top: 120px; right: 200px; width: 200px; height: 200px; background-image: radial-gradient(var(--green-light) 1.5px, transparent 1.5px); background-size: 18px 18px; opacity: 0.35; z-index: 0; }
+  .hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-pale); border: 1px solid rgba(90,138,96,0.3); border-radius: var(--radius-full); padding: 6px 14px; font-size: 0.8rem; color: var(--green-sage); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1.4rem; text-transform: uppercase; }
+  .hero-badge::before { content: '✦'; font-size: 0.65rem; }
+  .hero-name { font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 1.05; font-weight: 300; color: var(--text-dark); margin-bottom: 0.5rem; }
+  .hero-name em { font-style: italic; color: var(--green-mid); }
+  .hero-tagline { font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--text-muted); font-weight: 300; margin-bottom: 1.8rem; line-height: 1.5; }
+  .hero-desc { font-size: 0.98rem; color: var(--text-mid); max-width: 440px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--green-deep); color: white; padding: 12px 26px; border-radius: var(--radius-full); font-family: var(--font-body); font-size: 0.88rem; font-weight: 600; letter-spacing: 0.3px; text-decoration: none; border: none; cursor: pointer; transition: all 0.25s; }
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: var(--green-deep); padding: 11px 24px; border-radius: var(--radius-full); font-family: var(--font-body); font-size: 0.88rem; font-weight: 600; letter-spacing: 0.3px; text-decoration: none; border: 1.5px solid var(--green-mid); cursor: pointer; transition: all 0.25s; }
+  .btn-outline:hover { background: var(--green-pale); transform: translateY(-1px); }
+  .hero-socials { display: flex; gap: 1rem; margin-top: 2rem; align-items: center; }
+  .social-link { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid rgba(90,138,96,0.3); color: var(--green-sage); text-decoration: none; font-size: 0.85rem; transition: all 0.2s; }
+  .social-link:hover { background: var(--green-mid); border-color: var(--green-mid); color: white; }
+
+  /* Photo / Avatar */
+  .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+  .hero-avatar-wrap { position: relative; width: 340px; height: 420px; }
+  .hero-avatar-bg { position: absolute; width: 300px; height: 380px; background: var(--green-light); border-radius: 120px 120px 80px 80px; bottom: 0; left: 50%; transform: translateX(-50%); opacity: 0.45; }
+  .hero-avatar-ring { position: absolute; width: 280px; height: 360px; border: 2px solid rgba(90,138,96,0.25); border-radius: 110px 110px 75px 75px; bottom: 0; left: 50%; transform: translateX(-50%) rotate(3deg); }
+  .hero-avatar { position: absolute; width: 270px; height: 350px; background: linear-gradient(160deg, var(--green-pale) 0%, var(--green-light) 100%); border-radius: 105px 105px 70px 70px; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); box-shadow: var(--shadow-soft); }
+  .hero-avatar-initials { font-family: var(--font-display); font-size: 6rem; font-weight: 300; color: var(--green-mid); letter-spacing: -2px; user-select: none; }
+  .hero-avatar-note { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: white; border: 1px solid var(--green-pale); border-radius: var(--radius-md); padding: 6px 14px; font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; box-shadow: var(--shadow-card); }
+  .hero-float-chip { position: absolute; background: white; border: 1px solid var(--green-pale); border-radius: var(--radius-md); padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: var(--text-mid); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 6px; }
+  .hero-float-chip .dot { width: 8px; height: 8px; background: var(--green-mid); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.2)} }
+  .hero-float-chip.c1 { top: 30px; right: 0px; }
+  .hero-float-chip.c2 { top: 50%; left: -10px; transform: translateY(-50%); }
+
+  /* ── SECTIONS COMMON ─────────────────────────────── */
+  section { padding: 6rem 2.5rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--green-sage); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 10px; }
+  .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--green-sage); border-radius: 2px; }
+  .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; color: var(--text-dark); line-height: 1.15; margin-bottom: 3.5rem; }
+  .section-title em { font-style: italic; color: var(--green-mid); }
+
+  /* ── ABOUT ────────────────────────────────────────── */
+  .about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: var(--green-soft); border: 1px solid var(--green-pale); border-radius: var(--radius-md); padding: 1.4rem 1.2rem; text-align: center; }
+  .stat-number { font-family: var(--font-display); font-size: 2.6rem; font-weight: 600; color: var(--green-mid); line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .about-text { font-size: 1.05rem; color: var(--text-mid); line-height: 1.85; }
+  .lang-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .lang-chip { background: var(--green-pale); color: var(--green-mid); border-radius: var(--radius-full); padding: 5px 14px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(90,138,96,0.2); }
+
+  /* ── EXPERIENCE ───────────────────────────────────── */
+  .experience { background: var(--cream); }
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--green-mid) 0%, var(--green-light) 100%); border-radius: 2px; }
+  .timeline-item { position: relative; margin-bottom: 2rem; padding: 2rem; background: var(--white); border-radius: var(--radius-lg); border: 1px solid rgba(90,138,96,0.12); box-shadow: var(--shadow-card); transition: box-shadow 0.25s, transform 0.25s; }
+  .timeline-item:hover { box-shadow: var(--shadow-soft); transform: translateY(-2px); }
+  .timeline-dot { position: absolute; left: -3rem; top: 2.2rem; width: 14px; height: 14px; background: var(--green-mid); border-radius: 50%; border: 3px solid var(--cream); box-shadow: 0 0 0 2px var(--green-sage); }
+  .timeline-dot.active { background: #22c55e; box-shadow: 0 0 0 2px #86efac, 0 0 12px rgba(34,197,94,0.4); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-company { font-weight: 700; font-size: 1.05rem; color: var(--text-dark); }
+  .exp-period { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; background: var(--green-pale); padding: 3px 10px; border-radius: var(--radius-full); }
+  .exp-role { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--green-mid); margin-bottom: 1rem; }
+  .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-list li { font-size: 0.92rem; color: var(--text-mid); padding-left: 1.2rem; position: relative; }
+  .exp-list li::before { content: '↳'; position: absolute; left: 0; color: var(--green-light); font-size: 0.85rem; }
+  .exp-badge { display: inline-block; background: #dcfce7; color: #15803d; font-size: 0.72rem; font-weight: 700; padding: 2px 10px; border-radius: var(--radius-full); margin-left: 8px; letter-spacing: 0.5px; text-transform: uppercase; vertical-align: middle; }
+
+  /* ── PROJECTS ──────────────────────────────────────── */
+  .projects { background: var(--white); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--cream); border-radius: var(--radius-lg); border: 1px solid rgba(90,138,96,0.12); padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: box-shadow 0.25s, transform 0.25s; box-shadow: var(--shadow-card); }
+  .project-card:hover { box-shadow: var(--shadow-soft); transform: translateY(-3px); }
+  .project-card.featured { background: var(--green-deep); border-color: transparent; }
+  .project-card.featured .project-year { color: var(--green-light); }
+  .project-card.featured .project-title { color: white; }
+  .project-card.featured .project-desc { color: rgba(255,255,255,0.75); }
+  .project-card.featured .project-tag { background: rgba(255,255,255,0.15); color: var(--green-light); }
+  .project-year { font-size: 0.78rem; font-weight: 700; color: var(--green-sage); text-transform: uppercase; letter-spacing: 1px; }
+  .project-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-dark); line-height: 1.2; }
+  .project-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-tag { background: var(--green-pale); color: var(--green-mid); border-radius: var(--radius-full); padding: 3px 12px; font-size: 0.78rem; font-weight: 600; }
+
+  /* ── SKILLS ───────────────────────────────────────── */
+  .skills { background: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+  .skill-category { background: var(--white); border-radius: var(--radius-lg); border: 1px solid rgba(90,138,96,0.12); padding: 2rem; box-shadow: var(--shadow-card); }
+  .skill-cat-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .skill-cat-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dark); margin-bottom: 1rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-pill { background: var(--green-soft); color: var(--green-mid); border-radius: var(--radius-full); padding: 4px 12px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--green-pale); }
+
+  /* ── CREATIVE ─────────────────────────────────────── */
+  .creative { background: var(--white); }
+  .creative-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .creative-card { background: var(--green-soft); border: 1px solid var(--green-pale); border-radius: var(--radius-lg); padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: box-shadow 0.25s, transform 0.25s; }
+  .creative-card:hover { box-shadow: var(--shadow-soft); transform: translateY(-2px); }
+  .creative-icon { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
+  .creative-cat { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-sage); margin-bottom: 0.3rem; }
+  .creative-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+  .creative-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; }
+
+  /* ── CONTACT ──────────────────────────────────────── */
+  .contact { background: var(--cream); }
+  .contact-box { background: var(--green-deep); border-radius: var(--radius-lg); padding: 4rem 3rem; text-align: center; }
+  .contact-box .section-eyebrow { color: var(--green-light); justify-content: center; }
+  .contact-box .section-eyebrow::before { background: var(--green-light); }
+  .contact-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; color: white; margin: 0.5rem 0 1rem; }
+  .contact-headline em { font-style: italic; color: var(--green-light); }
+  .contact-sub { color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 2.5rem; }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; }
+  .contact-item { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); color: white; text-decoration: none; padding: 10px 20px; border-radius: var(--radius-full); font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; }
+  .contact-item:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+  .contact-item .icon { font-size: 1rem; }
+
+  /* ── FOOTER ───────────────────────────────────────── */
+  footer { text-align: center; padding: 2rem; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--green-pale); }
+
+  /* ── REVEAL ───────────────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ───────────────────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-visual { order: -1; }
+    .hero-avatar-wrap { width: 220px; height: 280px; }
+    .hero-avatar { width: 180px; height: 230px; }
+    .hero-avatar-initials { font-size: 4rem; }
+    .hero-avatar-bg { width: 200px; height: 250px; }
+    .hero-avatar-ring { width: 190px; height: 240px; }
+    .hero-float-chip { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    section { padding: 4rem 1.2rem; }
+    .contact-box { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo">R. Mechichi</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav_about">About</a></li>
+    <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+    <li><a href="#projects" data-i18n="nav_proj">Projects</a></li>
+    <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-dots"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge" data-i18n="hero_badge">Software · Fashion · Creative</div>
+      <h1 class="hero-name">Rimeh<br><em>Mechichi</em></h1>
+      <p class="hero-tagline" data-i18n="hero_tagline">Engineer · Designer · Dreamer</p>
+      <p class="hero-desc" data-i18n="hero_desc">A multidisciplinary profile combining full-stack engineering, fashion design, and artistic creativity. Fluent in six languages. Thriving in tech, creative, and international environments alike.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary" data-i18n="hero_cta1">See my work →</a>
+        <a href="Rimeh_Mechichi_Resume.pdf" class="btn-outline" target="_blank" data-i18n="hero_cta2">Download CV</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://www.linkedin.com/in/rimeh-mechichi-a49945216/" target="_blank" class="social-link" title="LinkedIn">in</a>
+        <a href="https://github.com/RimehMechichi" target="_blank" class="social-link" title="GitHub">gh</a>
+        <a href="mailto:rimehmechichi08@gmail.com" class="social-link" title="Email">✉</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar-bg"></div>
+        <div class="hero-avatar-ring"></div>
+        <div class="hero-avatar">
+          <img src="C:\Users\Asus\Downloads\Rimeh_Photo.png" alt="Rimeh Mechichi"
+              style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+        <div class="hero-avatar-note">📍 El Mourouj, Tunisia</div>
+        <div class="hero-float-chip c1"><span class="dot"></span> <span data-i18n="chip1">Open to work</span></div>
+        <div class="hero-float-chip c2">🌍 <span data-i18n="chip2">6 Languages</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────────── -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <p class="section-eyebrow" data-i18n="about_eyebrow">About me</p>
+        <div class="about-stats">
+          <div class="stat-card"><div class="stat-number">4+</div><div class="stat-label" data-i18n="stat1">Years coding</div></div>
+          <div class="stat-card"><div class="stat-number">6</div><div class="stat-label" data-i18n="stat2">Languages</div></div>
+          <div class="stat-card"><div class="stat-number">5</div><div class="stat-label" data-i18n="stat3">Projects</div></div>
+          <div class="stat-card"><div class="stat-number">∞</div><div class="stat-label" data-i18n="stat4">Creativity</div></div>
+        </div>
+        <div class="lang-chips">
+          <span class="lang-chip" data-i18n="lang_ar">🇸🇦 Arabic</span>
+          <span class="lang-chip" data-i18n="lang_en">🇬🇧 English</span>
+          <span class="lang-chip" data-i18n="lang_fr">🇫🇷 French</span>
+          <span class="lang-chip" data-i18n="lang_tr">🇹🇷 Turkish</span>
+          <span class="lang-chip" data-i18n="lang_ru">🇷🇺 Russian</span>
+          <span class="lang-chip" data-i18n="lang_it">🇮🇹 Italian</span>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title" data-i18n="about_title">Who <em>I am</em></h2>
+        <p class="about-text" data-i18n="about_text">
+          I'm a multidisciplinary engineer based in El Mourouj, Tunisia. I bridge software engineering, fashion design, and creative arts — bringing adaptability, strong communication, and a solution-focused mindset to every environment. Whether I'm architecting a mobile app with AI, designing an original outfit, performing on stage, or sketching by hand, I bring the same energy: purposeful and curious.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────── -->
+<section class="experience" id="experience">
+  <div class="container">
+    <p class="section-eyebrow" data-i18n="exp_eyebrow">Experience</p>
+    <h2 class="section-title" data-i18n="exp_title">Where I've <em>grown</em></h2>
+    <div class="timeline">
+
+      <!-- UK Drilling — current -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot active"></div>
+        <div class="exp-header">
+          <span class="exp-company">UK Drilling Tunisia <span class="exp-badge" data-i18n="badge_current">Current</span></span>
+          <span class="exp-period" data-i18n="exp1_period">Apr 2026 – Present</span>
+        </div>
+        <p class="exp-role" data-i18n="exp1_role">Assistant & Turkish Translator</p>
+        <ul class="exp-list">
+          <li data-i18n="exp1_b1">Providing Turkish translation and cross-language communications support for daily operations.</li>
+          <li data-i18n="exp1_b2">Acting as personal assistant to management, coordinating tasks across departments.</li>
+          <li data-i18n="exp1_b3">Bridging communication between Tunisian and international teams.</li>
+        </ul>
+      </div>
+
+      <!-- ProService -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <span class="exp-company">ProService Training Company</span>
+          <span class="exp-period" data-i18n="exp5_period">Jan – Mar 2026</span>
+        </div>
+        <p class="exp-role" data-i18n="exp5_role">Flutter Mobile Developer Intern</p>
+        <ul class="exp-list">
+          <li data-i18n="exp5_b1">Developed the APK version of the company's web platform to digitalize educational experiences and make learning more accessible across Tunisia.</li>
+          <li data-i18n="exp5_b2">Used the Provider state management package to build scalable and maintainable Flutter features.</li>
+          <li data-i18n="exp5_b3">Collaborated with the dev team to improve mobile responsiveness and overall user experience.</li>
+        </ul>
+      </div>
+
+      <!-- Orange Tunisia — PFE -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <span class="exp-company">Orange Tunisia — App Salary Maxit</span>
+          <span class="exp-period" data-i18n="exp2_period">Mar – Aug 2025</span>
+        </div>
+        <p class="exp-role" data-i18n="exp2_role">Final Year Project — Mobile App Developer</p>
+        <ul class="exp-list">
+          <li data-i18n="exp2_b1">Built core HR features: leave requests, employee management, and real-time notifications.</li>
+          <li data-i18n="exp2_b2">Developed an AI tool that auto-generates captions and summarizes live meetings in real time.</li>
+          <li data-i18n="exp2_b3">Integrated a live-stream meeting feature for seamless internal communication.</li>
+          <li data-i18n="exp2_b4">Created an immersive 3D virtual workspace using Unity for interactive office exploration.</li>
+          <li data-i18n="exp2_b5">Collaborated with HR and IT teams to align with business and security requirements.</li>
+        </ul>
+      </div>
+
+      <!-- Tunisie Telecom -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <span class="exp-company">Tunisie Telecom</span>
+          <span class="exp-period" data-i18n="exp3_period">Jul – Sep 2024</span>
+        </div>
+        <p class="exp-role" data-i18n="exp3_role">Intern — Mobile App Security</p>
+        <ul class="exp-list">
+          <li data-i18n="exp3_b1">Identified vulnerabilities and implemented robust security measures using Kali Linux and OWASP.</li>
+          <li data-i18n="exp3_b2">Conducted penetration testing and security assessments on mobile applications.</li>
+          <li data-i18n="exp3_b3">Documented findings and recommended actionable solutions for improved app resilience.</li>
+        </ul>
+      </div>
+
+      <!-- University Club -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <span class="exp-company" data-i18n="exp4_company">University Club — ESPRIT</span>
+          <span class="exp-period" data-i18n="exp4_period">2022 – 2024</span>
+        </div>
+        <p class="exp-role" data-i18n="exp4_role">HR Manager</p>
+        <ul class="exp-list">
+          <li data-i18n="exp4_b1">Managed recruitment, onboarding, and member coordination.</li>
+          <li data-i18n="exp4_b2">Led teams and resolved internal conflicts effectively.</li>
+          <li data-i18n="exp4_b3">Organized events and fostered cross-department collaboration.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ─────────────────────────────────────── -->
+<section class="projects" id="projects">
+  <div class="container">
+    <p class="section-eyebrow" data-i18n="proj_eyebrow">Projects</p>
+    <h2 class="section-title" data-i18n="proj_title">What I've <em>built</em></h2>
+    <div class="projects-grid">
+
+      <div class="project-card featured reveal">
+        <p class="project-year">2025 · PFE · Orange Tunisia</p>
+        <h3 class="project-title" data-i18n="proj1_title">AI Workplace Platform</h3>
+        <p class="project-desc" data-i18n="proj1_desc">Full-stack HR mobile app with real-time AI meeting summarization, live-stream integration, and an immersive 3D virtual office built in Unity. Deployed for internal use at Orange Tunisia.</p>
+        <div class="project-tags">
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">AI / NLP</span>
+          <span class="project-tag">Unity</span>
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">Live Stream</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-year">2024 · Strapi / Koa.js</p>
+        <h3 class="project-title" data-i18n="proj2_title">Strapi Auto-Diagram Feature</h3>
+        <p class="project-desc" data-i18n="proj2_desc">Group project to design and implement a Strapi plugin that auto-generates UML class diagrams and CRUD operations, then pushes generated code directly to GitHub branches.</p>
+        <div class="project-tags">
+          <span class="project-tag">Strapi</span>
+          <span class="project-tag">Koa.js</span>
+          <span class="project-tag">GitHub API</span>
+          <span class="project-tag">UML</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-year">2024 · Node.js</p>
+        <h3 class="project-title" data-i18n="proj3_title">Sports Community App</h3>
+        <p class="project-desc" data-i18n="proj3_desc">Scalable sports and gym management platform with event management and community features, built on a JavaScript microservices architecture with an API gateway system.</p>
+        <div class="project-tags">
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">Microservices</span>
+          <span class="project-tag">API Gateway</span>
+          <span class="project-tag">HTML/CSS</span>
+          <span class="project-tag">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-year">2023 · Flutter</p>
+        <h3 class="project-title" data-i18n="proj4_title">Bike Rental App</h3>
+        <p class="project-desc" data-i18n="proj4_desc">Mobile application with real-time bike tracking, Google Maps integration, and a polished UX backed by iterative user testing on iOS and Android.</p>
+        <div class="project-tags">
+          <span class="project-tag">Flutter</span>
+          <span class="project-tag">Google Maps API</span>
+          <span class="project-tag">iOS / Android</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-year">2023 · Full-Stack</p>
+        <h3 class="project-title" data-i18n="proj5_title">E-Commerce Platform</h3>
+        <p class="project-desc" data-i18n="proj5_desc">Full-stack e-commerce site with product management, user authentication, secure payment processing, and responsive design optimized for performance.</p>
+        <div class="project-tags">
+          <span class="project-tag">React</span>
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">MySQL</span>
+          <span class="project-tag">Docker</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ─────────────────────────────────────────── -->
+<section class="skills" id="skills">
+  <div class="container">
+    <p class="section-eyebrow" data-i18n="skills_eyebrow">Skills</p>
+    <h2 class="section-title" data-i18n="skills_title">My <em>toolkit</em></h2>
+    <div class="skills-grid">
+      <div class="skill-category reveal">
+        <div class="skill-cat-icon">📱</div>
+        <p class="skill-cat-title" data-i18n="skill_cat1">Mobile & Frontend</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Flutter</span><span class="skill-pill">Swift</span><span class="skill-pill">Kotlin</span><span class="skill-pill">React Native</span><span class="skill-pill">React</span>
+        </div>
+      </div>
+      <div class="skill-category reveal">
+        <div class="skill-cat-icon">⚙️</div>
+        <p class="skill-cat-title" data-i18n="skill_cat2">Backend & Databases</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Node.js</span><span class="skill-pill">Express.js</span><span class="skill-pill">Spring Boot</span><span class="skill-pill">Python</span><span class="skill-pill">MongoDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">SQLite</span>
+        </div>
+      </div>
+      <div class="skill-category reveal">
+        <div class="skill-cat-icon">🛠️</div>
+        <p class="skill-cat-title" data-i18n="skill_cat3">DevOps & Tools</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Docker</span><span class="skill-pill">Jenkins</span><span class="skill-pill">GitLab CI</span><span class="skill-pill">Git / GitHub</span><span class="skill-pill">Unity</span><span class="skill-pill">Xcode</span>
+        </div>
+      </div>
+      <div class="skill-category reveal">
+        <div class="skill-cat-icon">🎨</div>
+        <p class="skill-cat-title" data-i18n="skill_cat4">Design & Soft Skills</p>
+        <div class="skill-pills">
+          <span class="skill-pill">Photoshop</span><span class="skill-pill">Illustrator</span><span class="skill-pill" data-i18n="pill_fashion">Fashion Design</span><span class="skill-pill" data-i18n="pill_leadership">Leadership</span><span class="skill-pill" data-i18n="pill_hr">HR Management</span><span class="skill-pill" data-i18n="pill_comm">Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CREATIVE ─────────────────────────────────────── -->
+<section class="creative" id="creative">
+  <div class="container">
+    <p class="section-eyebrow" data-i18n="creative_eyebrow">Creative side</p>
+    <h2 class="section-title" data-i18n="creative_title">Beyond the <em>screen</em></h2>
+    <div class="creative-grid">
+
+      <div class="creative-card reveal">
+        <div class="creative-icon">🤝</div>
+        <div>
+          <p class="creative-cat" data-i18n="creative4_cat">Community</p>
+          <h3 class="creative-title" data-i18n="creative4_title">JCI Berges du Lac</h3>
+          <p class="creative-desc" data-i18n="creative4_desc">Active member of JCI Berges du Lac — participating in community initiatives, networking activities, and professional development events that connect and empower young people.</p>
+        </div>
+      </div>
+
+      <div class="creative-card reveal">
+        <div class="creative-icon">👗</div>
+        <div>
+          <p class="creative-cat" data-i18n="creative2_cat">Design</p>
+          <h3 class="creative-title" data-i18n="creative2_title">Fashion Design</h3>
+          <p class="creative-desc" data-i18n="creative2_desc">Creator of original pieces with careful attention to detail. Fashion as a personal language — building a distinct visual identity through craftsmanship and intuition.</p>
+        </div>
+      </div>
+
+      <div class="creative-card reveal">
+        <div class="creative-icon">✏️</div>
+        <div>
+          <p class="creative-cat" data-i18n="creative3_cat">Visual Arts</p>
+          <h3 class="creative-title" data-i18n="creative3_title">Drawing & Sketching</h3>
+          <p class="creative-desc" data-i18n="creative3_desc">Passionate about hand-drawn sketches and illustrations. A practice that fuels design thinking — from quick ideation sketches to detailed fashion figure drawings.</p>
+        </div>
+      </div>
+
+      <div class="creative-card reveal">
+        <div class="creative-icon">🎤</div>
+        <div>
+          <p class="creative-cat" data-i18n="creative1_cat">Performing Arts</p>
+          <h3 class="creative-title" data-i18n="creative1_title">Singing</h3>
+          <p class="creative-desc" data-i18n="creative1_desc">Artist and performer with a developed vocal technique and stage presence. Music as a space for authentic expression and emotional creativity.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────── -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-box reveal">
+      <p class="section-eyebrow" style="justify-content:center" data-i18n="contact_eyebrow">Contact</p>
+      <h2 class="contact-headline" data-i18n="contact_title">Let's <em>connect</em></h2>
+      <p class="contact-sub" data-i18n="contact_sub">Open to opportunities, collaborations, and good conversations.</p>
+      <div class="contact-links">
+        <a href="mailto:rimehmechichi08@gmail.com" class="contact-item"><span class="icon">✉</span> rimehmechichi08@gmail.com</a>
+        <a href="tel:+21658673227" class="contact-item"><span class="icon">📞</span> +216 58 673 227</a>
+        <a href="https://linkedin.com/in/rimeh-mechichi-a49945216/" target="_blank" class="contact-item"><span class="icon">💼</span> LinkedIn</a>
+        <a href="https://github.com/RimehMechichi" target="_blank" class="contact-item"><span class="icon">⌥</span> GitHub</a>
+      </div>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin-top:0.5rem">📍 El Mourouj, Tunisia 2074</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer>
+  <span data-i18n="footer_text">Crafted with 💚 by</span> <strong>Rimeh Mechichi</strong> · 2025
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    nav_about:"About", nav_exp:"Experience", nav_proj:"Projects", nav_skills:"Skills", nav_contact:"Contact",
+    hero_badge:"Software · Fashion · Creative",
+    hero_tagline:"Engineer · Designer · Dreamer",
+    hero_desc:"A multidisciplinary profile combining full-stack engineering, fashion design, and artistic creativity. Fluent in six languages. Thriving in tech, creative, and international environments alike.",
+    hero_cta1:"See my work →", hero_cta2:"Download CV",
+    chip1:"Open to work", chip2:"6 Languages",
+    about_eyebrow:"About me", stat1:"Years coding", stat2:"Languages", stat3:"Projects", stat4:"Creativity",
+    lang_ar:"🇸🇦 Arabic", lang_en:"🇬🇧 English", lang_fr:"🇫🇷 French", lang_tr:"🇹🇷 Turkish", lang_ru:"🇷🇺 Russian", lang_it:"🇮🇹 Italian",
+    about_title:"Who I am",
+    about_text:"I'm a multidisciplinary engineer based in El Mourouj, Tunisia. I bridge software engineering, fashion design, and creative arts — bringing adaptability, strong communication, and a solution-focused mindset to every environment. Whether I'm architecting a mobile app with AI, designing an original outfit, performing on stage, or sketching by hand, I bring the same energy: purposeful and curious.",
+    badge_current:"Current",
+    exp_eyebrow:"Experience", exp_title:"Where I've grown",
+    exp1_period:"Apr 2026 – Present", exp1_role:"Assistant & Turkish Translator",
+    exp1_b1:"Providing Turkish translation and cross-language communications support for daily operations.",
+    exp1_b2:"Acting as personal assistant to management, coordinating tasks across departments.",
+    exp1_b3:"Bridging communication between Tunisian and international teams.",
+    exp2_period:"Mar – Aug 2025", exp2_role:"Final Year Project — Mobile App Developer",
+    exp2_b1:"Built core HR features: leave requests, employee management, and real-time notifications.",
+    exp2_b2:"Developed an AI tool that auto-generates captions and summarizes live meetings in real time.",
+    exp2_b3:"Integrated a live-stream meeting feature for seamless internal communication.",
+    exp2_b4:"Created an immersive 3D virtual workspace using Unity for interactive office exploration.",
+    exp2_b5:"Collaborated with HR and IT teams to align with business and security requirements.",
+    exp3_period:"Jul – Sep 2024", exp3_role:"Intern — Mobile App Security",
+    exp3_b1:"Identified vulnerabilities and implemented robust security measures using Kali Linux and OWASP.",
+    exp3_b2:"Conducted penetration testing and security assessments on mobile applications.",
+    exp3_b3:"Documented findings and recommended actionable solutions for improved app resilience.",
+    exp4_company:"University Club — ESPRIT", exp4_period:"2022 – 2024", exp4_role:"HR Manager",
+    exp4_b1:"Managed recruitment, onboarding, and member coordination.",
+    exp4_b2:"Led teams and resolved internal conflicts effectively.",
+    exp4_b3:"Organized events and fostered cross-department collaboration.",
+    proj_eyebrow:"Projects", proj_title:"What I've built",
+    proj1_title:"AI Workplace Platform",
+    proj1_desc:"Full-stack HR mobile app with real-time AI meeting summarization, live-stream integration, and an immersive 3D virtual office built in Unity. Deployed for internal use at Orange Tunisia.",
+    proj2_title:"Strapi Auto-Diagram Feature",
+    proj2_desc:"Group project to design and implement a Strapi plugin that auto-generates UML class diagrams and CRUD operations, then pushes generated code directly to GitHub branches.",
+    proj3_title:"Sports Community App",
+    exp5_period:"Jan – Mar 2026", exp5_role:"Flutter Mobile Developer Intern",
+    exp5_b1:"Developed the APK version of the company's web platform to digitalize educational experiences across Tunisia.",
+    exp5_b2:"Used Provider state management to build scalable and maintainable Flutter features.",
+    exp5_b3:"Collaborated with the dev team to improve mobile responsiveness and user experience.",
+    proj3_desc:"Scalable sports and gym management platform with event management and community features, built on a JavaScript microservices architecture with an API gateway system.",
+    creative4_cat:"Community", creative4_title:"JCI Berges du Lac",
+    creative4_desc:"Active member of JCI Berges du Lac — participating in community initiatives, networking activities, and professional development events that connect and empower young people.",
+    proj4_title:"Bike Rental App",
+    proj4_desc:"Mobile application with real-time bike tracking, Google Maps integration, and a polished UX backed by iterative user testing on iOS and Android.",
+    proj5_title:"E-Commerce Platform",
+    proj5_desc:"Full-stack e-commerce site with product management, user authentication, secure payment processing, and responsive design optimized for performance.",
+    skills_eyebrow:"Skills", skills_title:"My toolkit",
+    skill_cat1:"Mobile & Frontend", skill_cat2:"Backend & Databases", skill_cat3:"DevOps & Tools", skill_cat4:"Design & Soft Skills",
+    pill_fashion:"Fashion Design", pill_leadership:"Leadership", pill_hr:"HR Management", pill_comm:"Communication",
+    creative_eyebrow:"Creative side", creative_title:"Beyond the screen",
+    creative1_cat:"Performing Arts", creative1_title:"Singing",
+    creative1_desc:"Artist and performer with a developed vocal technique and stage presence. Music as a space for authentic expression and emotional creativity.",
+    creative2_cat:"Design", creative2_title:"Fashion Design",
+    creative2_desc:"Creator of original pieces with careful attention to detail. Fashion as a personal language — building a distinct visual identity through craftsmanship and intuition.",
+    creative3_cat:"Visual Arts", creative3_title:"Drawing & Sketching",
+    creative3_desc:"Passionate about hand-drawn sketches and illustrations. A practice that fuels design thinking — from quick ideation sketches to detailed fashion figure drawings.",
+    contact_eyebrow:"Contact", contact_title:"Let's connect",
+    contact_sub:"Open to opportunities, collaborations, and good conversations.",
+    footer_text:"Crafted with 💚 by"
+  },
+  fr: {
+    nav_about:"À propos", nav_exp:"Expérience", nav_proj:"Projets", nav_skills:"Compétences", nav_contact:"Contact",
+    hero_badge:"Logiciel · Mode · Créativité",
+    hero_tagline:"Ingénieure · Designeuse · Rêveuse",
+    hero_desc:"Un profil multidisciplinaire alliant ingénierie full-stack, design de mode et créativité artistique. Courante en six langues. À l'aise dans les environnements tech, créatif et international.",
+    hero_cta1:"Voir mes projets →", hero_cta2:"Télécharger le CV",
+    chip1:"Disponible", chip2:"6 Langues",
+    about_eyebrow:"À propos", stat1:"Ans de code", stat2:"Langues", stat3:"Projets", stat4:"Créativité",
+    lang_ar:"🇸🇦 Arabe", lang_en:"🇬🇧 Anglais", lang_fr:"🇫🇷 Français", lang_tr:"🇹🇷 Turc", lang_ru:"🇷🇺 Russe", lang_it:"🇮🇹 Italien",
+    about_title:"Qui je suis",
+    about_text:"Je suis une ingénieure multidisciplinaire basée à El Mourouj, Tunisie. Je combine ingénierie logicielle, design de mode et arts créatifs — avec une forte adaptabilité, un excellent sens de la communication et une vision orientée solutions. Que je développe une app mobile avec IA, crée une tenue, monte sur scène ou dessine, j'apporte toujours la même énergie : déterminée et curieuse.",
+    badge_current:"En poste",
+    exp_eyebrow:"Expérience", exp_title:"Là où j'ai grandi",
+    exp1_period:"Avr 2026 – Présent", exp1_role:"Assistante & Traductrice Turc",
+    exp1_b1:"Traduction en turc et support des communications multilingues pour les opérations quotidiennes.",
+    exp1_b2:"Assistance personnelle à la direction, coordination des tâches entre départements.",
+    exp1_b3:"Interface entre les équipes tunisiennes et internationales.",
+    exp2_period:"Mars – Août 2025", exp2_role:"Projet de Fin d'Études — Développeuse Mobile",
+    exp2_b1:"Développement des fonctionnalités RH : demandes de congés, gestion des employés, notifications en temps réel.",
+    exp2_b2:"Création d'un outil IA générant des sous-titres et résumant les réunions en direct.",
+    exp2_b3:"Intégration d'une fonctionnalité de live-stream pour la communication interne.",
+    exp2_b4:"Création d'un espace de travail virtuel 3D immersif avec Unity.",
+    exp2_b5:"Collaboration avec les équipes RH et IT pour les exigences métier et de sécurité.",
+    exp3_period:"Juil – Sep 2024", exp3_role:"Stagiaire — Sécurité Applications Mobiles",
+    exp3_b1:"Identification de vulnérabilités et mise en place de mesures de sécurité avec Kali Linux et OWASP.",
+    exp3_b2:"Tests d'intrusion et évaluations de sécurité sur les applications mobiles.",
+    exp3_b3:"Documentation des résultats et recommandations pour améliorer la résilience des apps.",
+    exp4_company:"Club Universitaire — ESPRIT", exp4_period:"2022 – 2024", exp4_role:"Responsable RH",
+    exp4_b1:"Gestion du recrutement, de l'intégration et de la coordination des membres.",
+    exp4_b2:"Encadrement des équipes et résolution des conflits internes.",
+    exp4_b3:"Organisation d'événements et collaboration interdépartements.",
+    proj_eyebrow:"Projets", proj_title:"Ce que j'ai créé",
+    proj1_title:"Plateforme IA Workplace",
+    proj1_desc:"Application mobile RH full-stack avec résumé IA des réunions en temps réel, live-stream intégré, et espace virtuel 3D immersif sous Unity. Déployé en interne chez Orange Tunisie.",
+    proj2_title:"Fonctionnalité Auto-Diagramme Strapi",
+    proj2_desc:"Projet de groupe pour implémenter un plugin Strapi générant automatiquement des diagrammes UML et opérations CRUD, puis poussant le code directement sur GitHub.",
+    proj3_title:"Application Communauté Sportive",
+    exp5_period:"Jan – Mar 2026", exp5_role:"Stagiaire Développeuse Flutter Mobile",
+    exp5_b1:"Développement de la version APK de la plateforme web de l'entreprise pour digitaliser l'expérience éducative en Tunisie.",
+    exp5_b2:"Utilisation du package Provider pour créer des fonctionnalités Flutter scalables et maintenables.",
+    exp5_b3:"Collaboration avec l'équipe de développement pour améliorer la responsivité mobile et l'expérience utilisateur.",
+    proj3_desc:"Plateforme scalable de gestion sportive et de salle de sport avec gestion d'événements et fonctionnalités communautaires, construite sur une architecture microservices JavaScript avec API gateway.",
+    creative4_cat:"Communauté", creative4_title:"JCI Berges du Lac",
+    creative4_desc:"Membre active de JCI Berges du Lac — participant à des initiatives communautaires, des événements de networking et de développement professionnel qui connectent et inspirent les jeunes.",
+    proj4_title:"Application de Location de Vélos",
+    proj4_desc:"Application mobile avec suivi en temps réel, intégration Google Maps et expérience utilisateur optimisée sur iOS et Android.",
+    proj5_title:"Plateforme E-commerce",
+    proj5_desc:"Site e-commerce complet avec gestion produits, authentification, paiement sécurisé et design responsive performant.",
+    skills_eyebrow:"Compétences", skills_title:"Ma boîte à outils",
+    skill_cat1:"Mobile & Frontend", skill_cat2:"Backend & Bases de données", skill_cat3:"DevOps & Outils", skill_cat4:"Design & Soft Skills",
+    pill_fashion:"Design de Mode", pill_leadership:"Leadership", pill_hr:"Gestion RH", pill_comm:"Communication",
+    creative_eyebrow:"Côté créatif", creative_title:"Au-delà de l'écran",
+    creative1_cat:"Arts de la scène", creative1_title:"Chant",
+    creative1_desc:"Artiste et performeuse avec une technique vocale développée et une forte présence scénique. La musique comme espace d'expression authentique.",
+    creative2_cat:"Design", creative2_title:"Design de Mode",
+    creative2_desc:"Créatrice de pièces originales avec une attention particulière aux détails. La mode comme langage personnel — construire une identité visuelle distinctive.",
+    creative3_cat:"Arts Visuels", creative3_title:"Dessin & Croquis",
+    creative3_desc:"Passionnée de croquis et d'illustrations à la main. Une pratique qui nourrit la réflexion design — des esquisses rapides aux dessins de silhouettes de mode détaillés.",
+    contact_eyebrow:"Contact", contact_title:"Travaillons ensemble",
+    contact_sub:"Ouverte aux opportunités, collaborations et belles conversations.",
+    footer_text:"Créé avec 💚 par"
+  }
+};
+
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+  document.documentElement.lang = lang;
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
