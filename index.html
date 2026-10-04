@@ -3,641 +3,780 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rimeh Mechichi — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Rimeh Mechichi — Flutter & Full-Stack Engineer, Fashion Designer</title>
+<meta name="description" content="Rimeh Mechichi is a software engineer specialised in Flutter and full-stack development, and a fashion designer, based in El Mourouj, Tunisia.">
+<meta name="theme-color" content="#0f2a1a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rimeh Mechichi — Flutter & Full-Stack Engineer">
+<meta property="og:description" content="Flutter apps, AI-powered features and full-stack platforms. Also a fashion designer.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2a1a'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23a8c9a0'%3ERM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rimeh Mechichi",
+  "jobTitle": "Software Engineer",
+  "email": "mailto:rimehmechichi08@gmail.com",
+  "telephone": "+21658673227",
+  "address": { "@type": "PostalAddress", "addressLocality": "El Mourouj", "addressCountry": "TN" },
+  "alumniOf": "ESPRIT School of Engineering and Technology",
+  "knowsLanguage": ["ar", "en", "fr", "tr", "ru", "it"],
+  "sameAs": ["https://linkedin.com/in/rimeh-mechichi-a49945216/", "https://github.com/RimehMechichi"]
+}
+</script>
 <style>
   :root {
-    --green-deep:   #1a3d1f;
-    --green-mid:    #2d6a35;
-    --green-sage:   #5a8a60;
-    --green-light:  #a8c9a0;
-    --green-pale:   #e6f0e5;
-    --green-soft:   #f0f7ef;
-    --cream:        #fafaf7;
-    --text-dark:    #1a2b1c;
-    --text-mid:     #3d5c42;
-    --text-muted:   #7a9b7e;
-    --white:        #ffffff;
-    --radius-sm:    8px;
-    --radius-md:    14px;
-    --radius-lg:    24px;
-    --radius-full:  9999px;
-    --font-display: 'Cormorant Garamond', Georgia, serif;
-    --font-body:    'Nunito', sans-serif;
-    --shadow-soft:  0 4px 24px rgba(45, 106, 53, 0.10);
-    --shadow-card:  0 2px 16px rgba(45, 106, 53, 0.08);
+    --ink:     #0f2a1a;
+    --forest:  #1a3d1f;
+    --moss:    #2d6a35;
+    --sage:    #5a8a60;
+    --leaf:    #a8c9a0;
+    --mint:    #e3eee0;
+    --paper:   #f4f8f2;
+    --white:   #ffffff;
+    --text:    #1a2b1c;
+    --text-2:  #3d5c42;
+    --muted:   #4f7255;
+    --line:    rgba(45, 106, 53, 0.2);
+    --serif:   'Cormorant Garamond', Georgia, serif;
+    --sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --max:     1160px;
+    --nav-h:   64px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); background: var(--cream); color: var(--text-dark); line-height: 1.7; font-size: 16px; }
+  html { scroll-padding-top: calc(var(--nav-h) + 16px); -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { font-family: var(--sans); background: var(--paper); color: var(--text); line-height: 1.65; font-size: 1rem; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  ul { list-style: none; }
+  button { font: inherit; color: inherit; }
+
+  :focus-visible { outline: 2px solid var(--moss); outline-offset: 3px; border-radius: 4px; }
+  .on-dark :focus-visible { outline-color: var(--leaf); }
+
+  .skip { position: absolute; left: 1rem; top: -60px; background: var(--ink); color: var(--white); padding: .6rem 1rem; border-radius: 8px; z-index: 200; text-decoration: none; }
+  .skip:focus { top: .75rem; }
 
   /* ── NAV ─────────────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(250,250,247,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(90,138,96,0.15);
-    padding: 0 2.5rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
-  }
-  .nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--green-deep); letter-spacing: 0.5px; text-decoration: none; }
-  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-  .nav-links a { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; color: var(--text-mid); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--green-mid); }
-  .lang-toggle { display: flex; align-items: center; background: var(--green-pale); border-radius: var(--radius-full); padding: 3px; border: 1px solid rgba(90,138,96,0.2); }
-  .lang-btn { font-family: var(--font-body); font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: var(--radius-full); border: none; cursor: pointer; background: transparent; color: var(--text-muted); transition: all 0.2s; letter-spacing: 0.5px; }
-  .lang-btn.active { background: var(--green-mid); color: white; box-shadow: var(--shadow-soft); }
+  nav { position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--nav-h); background: rgba(244,248,242,.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; }
+  .nav-logo { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; color: var(--forest); text-decoration: none; letter-spacing: .01em; }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links { display: flex; gap: 1.75rem; }
+  .nav-links a { font-size: .92rem; font-weight: 500; color: var(--text-2); text-decoration: none; padding: .35rem 0; border-bottom: 1.5px solid transparent; transition: color .2s, border-color .2s; }
+  .nav-links a:hover { color: var(--moss); }
+  .nav-links a[aria-current="true"] { color: var(--forest); border-bottom-color: var(--moss); }
+  .lang-toggle { display: flex; background: var(--mint); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+  .lang-btn { font-size: .78rem; font-weight: 700; letter-spacing: .04em; padding: 5px 13px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; transition: background .2s, color .2s; }
+  .lang-btn[aria-pressed="true"] { background: var(--moss); color: var(--white); }
+  .menu-btn { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); cursor: pointer; align-items: center; justify-content: center; }
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after { display: block; width: 18px; height: 2px; background: var(--forest); border-radius: 2px; content: ''; position: relative; transition: transform .25s, background .25s; }
+  .menu-btn span::before { position: absolute; top: -6px; }
+  .menu-btn span::after { position: absolute; top: 6px; }
+  nav.open .menu-btn span { background: transparent; }
+  nav.open .menu-btn span::before { transform: translateY(6px) rotate(45deg); }
+  nav.open .menu-btn span::after { transform: translateY(-6px) rotate(-45deg); }
 
   /* ── HERO ─────────────────────────────────────────── */
-  .hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 2.5rem 3rem; position: relative; overflow: hidden; background: var(--cream); }
-  .hero-bg-circle { position: absolute; border-radius: 50%; background: var(--green-pale); z-index: 0; }
-  .hero-bg-circle.c1 { width: 500px; height: 500px; top: -100px; right: -80px; opacity: 0.8; }
-  .hero-bg-circle.c2 { width: 280px; height: 280px; bottom: 60px; left: -60px; opacity: 0.6; }
-  .hero-bg-dots { position: absolute; top: 120px; right: 200px; width: 200px; height: 200px; background-image: radial-gradient(var(--green-light) 1.5px, transparent 1.5px); background-size: 18px 18px; opacity: 0.35; z-index: 0; }
-  .hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-pale); border: 1px solid rgba(90,138,96,0.3); border-radius: var(--radius-full); padding: 6px 14px; font-size: 0.8rem; color: var(--green-sage); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1.4rem; text-transform: uppercase; }
-  .hero-badge::before { content: '✦'; font-size: 0.65rem; }
-  .hero-name { font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 1.05; font-weight: 300; color: var(--text-dark); margin-bottom: 0.5rem; }
-  .hero-name em { font-style: italic; color: var(--green-mid); }
-  .hero-tagline { font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--text-muted); font-weight: 300; margin-bottom: 1.8rem; line-height: 1.5; }
-  .hero-desc { font-size: 0.98rem; color: var(--text-mid); max-width: 440px; margin-bottom: 2.5rem; line-height: 1.8; }
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 6px; background: var(--green-deep); color: white; padding: 12px 26px; border-radius: var(--radius-full); font-family: var(--font-body); font-size: 0.88rem; font-weight: 600; letter-spacing: 0.3px; text-decoration: none; border: none; cursor: pointer; transition: all 0.25s; }
-  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-  .btn-outline { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: var(--green-deep); padding: 11px 24px; border-radius: var(--radius-full); font-family: var(--font-body); font-size: 0.88rem; font-weight: 600; letter-spacing: 0.3px; text-decoration: none; border: 1.5px solid var(--green-mid); cursor: pointer; transition: all 0.25s; }
-  .btn-outline:hover { background: var(--green-pale); transform: translateY(-1px); }
-  .hero-socials { display: flex; gap: 1rem; margin-top: 2rem; align-items: center; }
-  .social-link { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid rgba(90,138,96,0.3); color: var(--green-sage); text-decoration: none; font-size: 0.85rem; transition: all 0.2s; }
-  .social-link:hover { background: var(--green-mid); border-color: var(--green-mid); color: white; }
+  .hero { background: var(--ink); color: #eef5ea; min-height: 100vh; min-height: 100svh; padding: calc(var(--nav-h) + 3rem) 2.5rem 3.5rem; display: flex; align-items: center; }
+  .hero-inner { max-width: var(--max); width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1.4fr .6fr; gap: 4rem; align-items: center; }
+  .hero-kicker { display: inline-flex; align-items: center; gap: .6rem; font-size: .95rem; color: var(--leaf); margin-bottom: 1.6rem; }
+  .status-dot { width: 9px; height: 9px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.18); }
+  .hero-name { font-family: var(--serif); font-weight: 300; font-size: clamp(3.6rem, 9.5vw, 8.2rem); line-height: .94; letter-spacing: -.015em; color: #f4f9f1; }
+  .stitch { display: block; width: min(100%, 520px); height: 0; border-top: 2px dashed var(--leaf); margin: 2rem 0 1.8rem; opacity: .75; }
+  .hero-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.7; color: rgba(238,245,234,.82); max-width: 34em; margin-bottom: 2.2rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: 3rem; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: .85rem 1.6rem; border-radius: 999px; font-weight: 600; font-size: .95rem; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: background .2s, color .2s, border-color .2s, transform .2s; }
+  .btn-light { background: var(--mint); color: var(--ink); }
+  .btn-light:hover { background: #fff; }
+  .btn-ghost { border-color: rgba(168,201,160,.55); color: #eef5ea; background: transparent; }
+  .btn-ghost:hover { background: rgba(168,201,160,.14); border-color: var(--leaf); }
+  .hero-facts { display: grid; grid-template-columns: repeat(3, auto); gap: 1.5rem 2.5rem; justify-content: start; }
+  .hero-facts dt { font-size: .82rem; color: var(--leaf); margin-bottom: .15rem; }
+  .hero-facts dd { font-size: .95rem; color: rgba(238,245,234,.88); max-width: 17em; }
 
-  /* Photo / Avatar */
-  .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
-  .hero-avatar-wrap { position: relative; width: 340px; height: 420px; }
-  .hero-avatar-bg { position: absolute; width: 300px; height: 380px; background: var(--green-light); border-radius: 120px 120px 80px 80px; bottom: 0; left: 50%; transform: translateX(-50%); opacity: 0.45; }
-  .hero-avatar-ring { position: absolute; width: 280px; height: 360px; border: 2px solid rgba(90,138,96,0.25); border-radius: 110px 110px 75px 75px; bottom: 0; left: 50%; transform: translateX(-50%) rotate(3deg); }
-  .hero-avatar { position: absolute; width: 270px; height: 350px; background: linear-gradient(160deg, var(--green-pale) 0%, var(--green-light) 100%); border-radius: 105px 105px 70px 70px; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); box-shadow: var(--shadow-soft); }
-  .hero-avatar-initials { font-family: var(--font-display); font-size: 6rem; font-weight: 300; color: var(--green-mid); letter-spacing: -2px; user-select: none; }
-  .hero-avatar-note { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: white; border: 1px solid var(--green-pale); border-radius: var(--radius-md); padding: 6px 14px; font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; box-shadow: var(--shadow-card); }
-  .hero-float-chip { position: absolute; background: white; border: 1px solid var(--green-pale); border-radius: var(--radius-md); padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: var(--text-mid); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 6px; }
-  .hero-float-chip .dot { width: 8px; height: 8px; background: var(--green-mid); border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.2)} }
-  .hero-float-chip.c1 { top: 30px; right: 0px; }
-  .hero-float-chip.c2 { top: 50%; left: -10px; transform: translateY(-50%); }
+  .portrait { position: relative; width: min(100%, 330px); aspect-ratio: 4 / 5; margin-left: auto; }
+  .portrait::before { content: ''; position: absolute; inset: -14px; border: 2px dashed rgba(168,201,160,.5); border-radius: 999px 999px 34px 34px; }
+  .portrait-frame { position: absolute; inset: 0; border-radius: 999px 999px 24px 24px; overflow: hidden; background: linear-gradient(165deg, var(--forest), var(--moss) 120%); display: grid; place-items: center; }
+  .portrait-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .portrait-initials { font-family: var(--serif); font-weight: 300; font-size: 6.5rem; color: var(--leaf); letter-spacing: -.02em; user-select: none; }
 
-  /* ── SECTIONS COMMON ─────────────────────────────── */
-  section { padding: 6rem 2.5rem; }
-  .container { max-width: 1100px; margin: 0 auto; }
-  .section-eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--green-sage); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 10px; }
-  .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--green-sage); border-radius: 2px; }
-  .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; color: var(--text-dark); line-height: 1.15; margin-bottom: 3.5rem; }
-  .section-title em { font-style: italic; color: var(--green-mid); }
+  @media (prefers-reduced-motion: no-preference) {
+    .rise { opacity: 0; transform: translateY(16px); animation: rise .85s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+  }
 
-  /* ── ABOUT ────────────────────────────────────────── */
-  .about { background: var(--white); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
-  .stat-card { background: var(--green-soft); border: 1px solid var(--green-pale); border-radius: var(--radius-md); padding: 1.4rem 1.2rem; text-align: center; }
-  .stat-number { font-family: var(--font-display); font-size: 2.6rem; font-weight: 600; color: var(--green-mid); line-height: 1; margin-bottom: 0.4rem; }
-  .stat-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-  .about-text { font-size: 1.05rem; color: var(--text-mid); line-height: 1.85; }
-  .lang-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
-  .lang-chip { background: var(--green-pale); color: var(--green-mid); border-radius: var(--radius-full); padding: 5px 14px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(90,138,96,0.2); }
+  /* ── SECTION SHELL ──────────────────────────────── */
+  .sec { padding: 6.5rem 2.5rem; }
+  .sec-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 4rem; }
+  .sec-head { position: sticky; top: calc(var(--nav-h) + 2rem); align-self: start; }
+  .sec-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 3.4vw, 3rem); line-height: 1.08; color: var(--text); margin-bottom: .75rem; }
+  .sec-head p { font-size: .95rem; color: var(--muted); max-width: 22em; }
+  .bg-paper { background: var(--paper); }
+  .bg-white { background: var(--white); }
+
+  /* ── WORK ─────────────────────────────────────────── */
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+  .filter { padding: .45rem 1.05rem; border-radius: 999px; border: 1px solid var(--line); background: var(--white); font-size: .88rem; font-weight: 600; color: var(--text-2); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .filter:hover { border-color: var(--sage); }
+  .filter[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--white); }
+  .work-list { border-top: 1px solid var(--line); }
+  .work-row { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 0 1.5rem; padding: 1.7rem 0; border-bottom: 1px solid var(--line); }
+  .work-row[hidden] { display: none; }
+  .work-year { font-family: var(--serif); font-size: 1.25rem; color: var(--muted); padding-top: .25rem; }
+  .work-title { font-family: var(--serif); font-weight: 500; font-size: 1.85rem; line-height: 1.15; color: var(--text); margin-bottom: .2rem; }
+  .work-ctx { font-size: .88rem; color: var(--muted); margin-bottom: .8rem; display: flex; flex-wrap: wrap; gap: .4rem .75rem; align-items: center; }
+  .wip { font-size: .76rem; font-weight: 700; color: var(--moss); background: var(--mint); border-radius: 999px; padding: 2px 10px; }
+  .work-desc { color: var(--text-2); max-width: 40em; margin-bottom: 1rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tags li { font-size: .8rem; font-weight: 600; color: var(--moss); border: 1px solid var(--line); border-radius: 999px; padding: 2px 11px; background: var(--paper); }
+  .work-row:hover .work-title { color: var(--moss); }
+  .work-title { transition: color .2s; }
 
   /* ── EXPERIENCE ───────────────────────────────────── */
-  .experience { background: var(--cream); }
-  .timeline { position: relative; padding-left: 2.5rem; }
-  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--green-mid) 0%, var(--green-light) 100%); border-radius: 2px; }
-  .timeline-item { position: relative; margin-bottom: 2rem; padding: 2rem; background: var(--white); border-radius: var(--radius-lg); border: 1px solid rgba(90,138,96,0.12); box-shadow: var(--shadow-card); transition: box-shadow 0.25s, transform 0.25s; }
-  .timeline-item:hover { box-shadow: var(--shadow-soft); transform: translateY(-2px); }
-  .timeline-dot { position: absolute; left: -3rem; top: 2.2rem; width: 14px; height: 14px; background: var(--green-mid); border-radius: 50%; border: 3px solid var(--cream); box-shadow: 0 0 0 2px var(--green-sage); }
-  .timeline-dot.active { background: #22c55e; box-shadow: 0 0 0 2px #86efac, 0 0 12px rgba(34,197,94,0.4); }
-  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
-  .exp-company { font-weight: 700; font-size: 1.05rem; color: var(--text-dark); }
-  .exp-period { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; background: var(--green-pale); padding: 3px 10px; border-radius: var(--radius-full); }
-  .exp-role { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--green-mid); margin-bottom: 1rem; }
-  .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .exp-list li { font-size: 0.92rem; color: var(--text-mid); padding-left: 1.2rem; position: relative; }
-  .exp-list li::before { content: '↳'; position: absolute; left: 0; color: var(--green-light); font-size: 0.85rem; }
-  .exp-badge { display: inline-block; background: #dcfce7; color: #15803d; font-size: 0.72rem; font-weight: 700; padding: 2px 10px; border-radius: var(--radius-full); margin-left: 8px; letter-spacing: 0.5px; text-transform: uppercase; vertical-align: middle; }
+  .roles { border-left: 2px dashed var(--leaf); padding-left: 2.25rem; margin-left: 6px; }
+  .role { position: relative; padding-bottom: 2.75rem; }
+  .role:last-child { padding-bottom: 0; }
+  .role::before { content: ''; position: absolute; left: calc(-2.25rem - 7px); top: .5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 0 4px var(--white); }
+  .role-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .25rem 1rem; }
+  .role-company { font-weight: 700; font-size: 1.08rem; }
+  .role-period { font-size: .88rem; color: var(--muted); font-weight: 600; }
+  .role-title { font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--moss); margin: .1rem 0 .8rem; }
+  .role ul { list-style: disc; padding-left: 1.15rem; display: grid; gap: .45rem; max-width: 44em; }
+  .role li { color: var(--text-2); font-size: .96rem; }
+  .role li::marker { color: var(--leaf); }
 
-  /* ── PROJECTS ──────────────────────────────────────── */
-  .projects { background: var(--white); }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-  .project-card { background: var(--cream); border-radius: var(--radius-lg); border: 1px solid rgba(90,138,96,0.12); padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: box-shadow 0.25s, transform 0.25s; box-shadow: var(--shadow-card); }
-  .project-card:hover { box-shadow: var(--shadow-soft); transform: translateY(-3px); }
-  .project-card.featured { background: var(--green-deep); border-color: transparent; }
-  .project-card.featured .project-year { color: var(--green-light); }
-  .project-card.featured .project-title { color: white; }
-  .project-card.featured .project-desc { color: rgba(255,255,255,0.75); }
-  .project-card.featured .project-tag { background: rgba(255,255,255,0.15); color: var(--green-light); }
-  .project-year { font-size: 0.78rem; font-weight: 700; color: var(--green-sage); text-transform: uppercase; letter-spacing: 1px; }
-  .project-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-dark); line-height: 1.2; }
-  .project-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; flex: 1; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .project-tag { background: var(--green-pale); color: var(--green-mid); border-radius: var(--radius-full); padding: 3px 12px; font-size: 0.78rem; font-weight: 600; }
+  /* ── ABOUT ────────────────────────────────────────── */
+  .about-text { font-family: var(--serif); font-size: clamp(1.35rem, 2vw, 1.65rem); line-height: 1.55; color: var(--text); max-width: 32em; margin-bottom: 1.25rem; }
+  .about-text.secondary { font-family: var(--sans); font-size: 1.02rem; color: var(--text-2); line-height: 1.8; max-width: 38em; margin-bottom: 2.5rem; }
+  .facts { border-top: 1px solid var(--line); }
+  .facts div { display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: .95rem 0; border-bottom: 1px solid var(--line); }
+  .facts dt { font-size: .9rem; color: var(--muted); font-weight: 600; }
+  .facts dd { color: var(--text); }
 
   /* ── SKILLS ───────────────────────────────────────── */
-  .skills { background: var(--cream); }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
-  .skill-category { background: var(--white); border-radius: var(--radius-lg); border: 1px solid rgba(90,138,96,0.12); padding: 2rem; box-shadow: var(--shadow-card); }
-  .skill-cat-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-  .skill-cat-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dark); margin-bottom: 1rem; }
-  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .skill-pill { background: var(--green-soft); color: var(--green-mid); border-radius: var(--radius-full); padding: 4px 12px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--green-pale); }
+  .skills-list { border-top: 1px solid var(--line); }
+  .skill-row { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 1.05rem 0; border-bottom: 1px solid var(--line); }
+  .skill-row dt { font-weight: 700; font-size: .95rem; color: var(--forest); }
+  .skill-row dd { color: var(--text-2); }
 
-  /* ── CREATIVE ─────────────────────────────────────── */
-  .creative { background: var(--white); }
-  .creative-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-  .creative-card { background: var(--green-soft); border: 1px solid var(--green-pale); border-radius: var(--radius-lg); padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: box-shadow 0.25s, transform 0.25s; }
-  .creative-card:hover { box-shadow: var(--shadow-soft); transform: translateY(-2px); }
-  .creative-icon { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
-  .creative-cat { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green-sage); margin-bottom: 0.3rem; }
-  .creative-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
-  .creative-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; }
+  /* ── BEYOND ───────────────────────────────────────── */
+  .beyond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
+  .beyond-item { padding: 1.5rem 0; border-top: 1px solid var(--line); }
+  .beyond-item h3 { font-family: var(--serif); font-weight: 500; font-size: 1.55rem; margin-bottom: .4rem; }
+  .beyond-item p { color: var(--text-2); font-size: .95rem; max-width: 30em; }
 
   /* ── CONTACT ──────────────────────────────────────── */
-  .contact { background: var(--cream); }
-  .contact-box { background: var(--green-deep); border-radius: var(--radius-lg); padding: 4rem 3rem; text-align: center; }
-  .contact-box .section-eyebrow { color: var(--green-light); justify-content: center; }
-  .contact-box .section-eyebrow::before { background: var(--green-light); }
-  .contact-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; color: white; margin: 0.5rem 0 1rem; }
-  .contact-headline em { font-style: italic; color: var(--green-light); }
-  .contact-sub { color: rgba(255,255,255,0.65); font-size: 1rem; margin-bottom: 2.5rem; }
-  .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; }
-  .contact-item { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); color: white; text-decoration: none; padding: 10px 20px; border-radius: var(--radius-full); font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; }
-  .contact-item:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
-  .contact-item .icon { font-size: 1rem; }
+  .contact { background: var(--ink); color: #eef5ea; }
+  .contact .sec-head h2 { color: #f4f9f1; }
+  .contact .sec-head p { color: rgba(238,245,234,.72); }
+  .mail-big { display: inline-block; font-family: var(--serif); font-weight: 300; font-size: clamp(1.7rem, 4.2vw, 3.1rem); line-height: 1.15; color: #f4f9f1; text-decoration: none; border-bottom: 2px dashed var(--leaf); padding-bottom: .2rem; word-break: break-word; transition: color .2s; }
+  .mail-big:hover { color: var(--leaf); }
+  .copy-row { display: flex; align-items: center; gap: .9rem; margin: 1.5rem 0 3rem; }
+  .copy-status { font-size: .9rem; color: var(--leaf); }
+  .contact-list { border-top: 1px solid rgba(168,201,160,.28); }
+  .contact-list div { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; padding: .95rem 0; border-bottom: 1px solid rgba(168,201,160,.28); }
+  .contact-list dt { color: var(--leaf); font-size: .9rem; font-weight: 600; }
+  .contact-list a { text-decoration: none; border-bottom: 1px solid rgba(168,201,160,.45); transition: border-color .2s, color .2s; }
+  .contact-list a:hover { color: var(--leaf); border-color: var(--leaf); }
 
-  /* ── FOOTER ───────────────────────────────────────── */
-  footer { text-align: center; padding: 2rem; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--green-pale); }
-
-  /* ── REVEAL ───────────────────────────────────────── */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  footer { background: var(--ink); color: rgba(238,245,234,.6); text-align: center; font-size: .85rem; padding: 1.75rem 1rem 2.25rem; border-top: 1px solid rgba(168,201,160,.2); }
 
   /* ── RESPONSIVE ───────────────────────────────────── */
-  @media (max-width: 768px) {
-    nav { padding: 0 1.2rem; }
-    .nav-links { display: none; }
-    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-visual { order: -1; }
-    .hero-avatar-wrap { width: 220px; height: 280px; }
-    .hero-avatar { width: 180px; height: 230px; }
-    .hero-avatar-initials { font-size: 4rem; }
-    .hero-avatar-bg { width: 200px; height: 250px; }
-    .hero-avatar-ring { width: 190px; height: 240px; }
-    .hero-float-chip { display: none; }
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    section { padding: 4rem 1.2rem; }
-    .contact-box { padding: 2.5rem 1.5rem; }
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .portrait { margin: 0 auto 0 14px; order: -1; width: min(70%, 260px); }
+    .portrait-initials { font-size: 5rem; }
+    .hero-facts { grid-template-columns: 1fr 1fr; }
+    .sec-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .sec-head { position: static; }
+  }
+  @media (max-width: 820px) {
+    nav { padding: 0 1.1rem; }
+    .menu-btn { display: inline-flex; }
+    .nav-right { gap: .75rem; }
+    .nav-links { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; flex-direction: column; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); padding: .5rem 1.1rem 1rem; }
+    nav.open .nav-links { display: flex; }
+    .nav-links a { display: block; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+    .nav-links a[aria-current="true"] { border-bottom-color: var(--line); color: var(--moss); }
+    .nav-right { flex-direction: row-reverse; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: calc(var(--nav-h) + 2rem) 1.2rem 3rem; }
+    .sec { padding: 4.5rem 1.2rem; }
+    .hero-facts { grid-template-columns: 1fr; }
+    .work-row { grid-template-columns: 1fr; }
+    .work-year { padding: 0 0 .25rem; font-size: 1.05rem; }
+    .skill-row, .facts div, .contact-list div { grid-template-columns: 1fr; gap: .15rem; }
+    .beyond-grid { grid-template-columns: 1fr; }
+    .roles { padding-left: 1.6rem; }
+    .role::before { left: calc(-1.6rem - 7px); }
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
 <!-- ── NAV ─────────────────────────────────────────── -->
-<nav>
-  <a href="#" class="nav-logo">R. Mechichi</a>
-  <ul class="nav-links">
-    <li><a href="#about" data-i18n="nav_about">About</a></li>
-    <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
-    <li><a href="#projects" data-i18n="nav_proj">Projects</a></li>
-    <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-  </ul>
-  <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+<nav id="nav">
+  <a href="#home" class="nav-logo">R. Mechichi</a>
+  <div class="nav-right">
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#work" data-i18n="nav_work">Work</a></li>
+      <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
+    </div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span></button>
   </div>
 </nav>
 
+<main id="main">
+
 <!-- ── HERO ─────────────────────────────────────────── -->
-<section class="hero" id="home">
-  <div class="hero-bg-circle c1"></div>
-  <div class="hero-bg-circle c2"></div>
-  <div class="hero-bg-dots"></div>
+<header class="hero on-dark" id="home">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge" data-i18n="hero_badge">Software · Creative</div>
-      <h1 class="hero-name">Rimeh<br><em>Mechichi</em></h1>
-      <p class="hero-tagline" data-i18n="hero_tagline">Engineer · Designer · Dreamer</p>
-      <p class="hero-desc" data-i18n="hero_desc">A multidisciplinary profile combining full-stack engineering, artistic creativity. Fluent in six languages. Thriving in tech, creative, and international environments alike.</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn-primary" data-i18n="hero_cta1">See my work →</a>
-        <a href="rimeh_cv.pdf" class="btn-outline" target="_blank" data-i18n="hero_cta2">Download CV</a>
+      <p class="hero-kicker rise" style="--i:0"><span class="status-dot" aria-hidden="true"></span><span data-i18n="status">Open to work · Flutter & full-stack roles</span></p>
+      <h1 class="hero-name rise" style="--i:1">Rimeh<br>Mechichi</h1>
+      <span class="stitch rise" style="--i:2" aria-hidden="true"></span>
+      <p class="hero-lead rise" style="--i:3" data-i18n="hero_lead">Software engineer building Flutter apps, AI-powered features and full-stack platforms. I also design fashion.</p>
+      <div class="hero-actions rise" style="--i:4">
+        <a href="#work" class="btn btn-light" data-i18n="cta1">View my work</a>
+        <a href="rimeh_cv.pdf" class="btn btn-ghost" target="_blank" rel="noopener" data-i18n="cta2">Download CV</a>
       </div>
-      <div class="hero-socials">
-        <a href="https://linkedin.com/in/rimeh-mechichi-a49945216/" target="_blank" class="social-link" title="LinkedIn">in</a>
-        <a href="https://github.com/RimehMechichi" target="_blank" class="social-link" title="GitHub">gh</a>
-        <a href="mailto:rimehmechichi08@gmail.com" class="social-link" title="Email">✉</a>
-      </div>
+      <dl class="hero-facts rise" style="--i:5">
+        <div><dt data-i18n="hf1_l">Based in</dt><dd data-i18n="hf1_v">El Mourouj, Tunisia</dd></div>
+        <div><dt data-i18n="hf2_l">Degree</dt><dd data-i18n="hf2_v">National Engineering Degree, ESPRIT 2025</dd></div>
+        <div><dt data-i18n="hf3_l">Languages</dt><dd data-i18n="hf3_v">Arabic, English, French, Turkish, Russian, Italian</dd></div>
+      </dl>
     </div>
-    <div class="hero-visual">
-      <div class="hero-avatar-wrap">
-        <div class="hero-avatar-bg"></div>
-        <div class="hero-avatar-ring"></div>
-        <div class="hero-avatar">
-          <span class="hero-avatar-initials">RM</span>
-        </div>
-        <div class="hero-avatar-note">📍 El Mourouj, Tunisia</div>
-        <div class="hero-float-chip c1"><span class="dot"></span> <span data-i18n="chip1">Open to work</span></div>
-        <div class="hero-float-chip c2">🌍 <span data-i18n="chip2">6 Languages</span></div>
+    <div class="portrait rise" style="--i:3">
+      <div class="portrait-frame">
+        <span class="portrait-initials" aria-hidden="true">RM</span>
+        <!-- Drop a portrait named photo.jpg next to this file and it replaces the initials automatically -->
+        <img src="photo.jpg" alt="Portrait of Rimeh Mechichi" onerror="this.remove()">
       </div>
     </div>
   </div>
-</section>
+</header>
 
-<!-- ── ABOUT ─────────────────────────────────────────── -->
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div>
-        <p class="section-eyebrow" data-i18n="about_eyebrow">About me</p>
-        <div class="about-stats">
-          <div class="stat-card"><div class="stat-number">4+</div><div class="stat-label" data-i18n="stat1">Years coding</div></div>
-          <div class="stat-card"><div class="stat-number">6</div><div class="stat-label" data-i18n="stat2">Languages</div></div>
-          <div class="stat-card"><div class="stat-number">5</div><div class="stat-label" data-i18n="stat3">Projects</div></div>
-          <div class="stat-card"><div class="stat-number">∞</div><div class="stat-label" data-i18n="stat4">Creativity</div></div>
-        </div>
-        <div class="lang-chips">
-          <span class="lang-chip" data-i18n="lang_ar">🇸🇦 Arabic</span>
-          <span class="lang-chip" data-i18n="lang_en">🇬🇧 English</span>
-          <span class="lang-chip" data-i18n="lang_fr">🇫🇷 French</span>
-          <span class="lang-chip" data-i18n="lang_tr">🇹🇷 Turkish</span>
-          <span class="lang-chip" data-i18n="lang_ru">🇷🇺 Russian</span>
-          <span class="lang-chip" data-i18n="lang_it">🇮🇹 Italian</span>
-        </div>
+<!-- ── WORK ─────────────────────────────────────────── -->
+<section class="sec bg-paper" id="work">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 data-i18n="work_title">Selected work</h2>
+      <p data-i18n="work_sub">Mobile apps and platforms, from client projects to my own experiments.</p>
+    </div>
+    <div>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true" data-i18n="f_all">All</button>
+        <button class="filter" type="button" data-filter="mobile" aria-pressed="false" data-i18n="f_mobile">Mobile</button>
+        <button class="filter" type="button" data-filter="fullstack" aria-pressed="false" data-i18n="f_fullstack">Full-stack</button>
+        <button class="filter" type="button" data-filter="design" aria-pressed="false" data-i18n="f_design">Design</button>
       </div>
-      <div>
-        <h2 class="section-title" data-i18n="about_title">Who <em>I am</em></h2>
-        <p class="about-text" data-i18n="about_text">
-          I'm a multidisciplinary engineer based in El Mourouj, Tunisia. I bridge software engineering, fashion design, and creative arts — bringing adaptability, strong communication, and a solution-focused mindset to every environment. Whether I'm architecting a mobile app with AI, designing an original outfit, performing on stage, or sketching by hand, I bring the same energy: purposeful and curious.
-        </p>
-      </div>
+      <ul class="work-list" id="work-list">
+
+        <li class="work-row" data-cat="mobile">
+          <span class="work-year">2026</span>
+          <div>
+            <h3 class="work-title">WAW</h3>
+            <p class="work-ctx" data-i18n="p1_ctx">Digital Group Performance</p>
+            <p class="work-desc" data-i18n="p1_desc">Tourism platform that connects users with activities and tourism businesses. I added new features, REST API integrations, state management and UI/UX improvements.</p>
+            <ul class="tags"><li>Flutter</li><li>REST APIs</li><li>State management</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="mobile">
+          <span class="work-year">2026</span>
+          <div>
+            <h3 class="work-title">Ecoplat</h3>
+            <p class="work-ctx" data-i18n="p2_ctx">Digital Group Performance</p>
+            <p class="work-desc" data-i18n="p2_desc">Food-waste reduction platform that connects restaurants with consumers. I maintained the app and extended it with new features and API integrations.</p>
+            <ul class="tags"><li>Flutter</li><li>REST APIs</li><li>UI/UX</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="mobile">
+          <span class="work-year">2026</span>
+          <div>
+            <h3 class="work-title">El Arab</h3>
+            <p class="work-ctx" data-i18n="p3_ctx">Digital Group Performance</p>
+            <p class="work-desc" data-i18n="p3_desc">News app for Arabic and Tunisian readers, with a redesigned interface and features for browsing and managing news content.</p>
+            <ul class="tags"><li>Flutter</li><li>UI redesign</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="mobile design">
+          <span class="work-year">2026</span>
+          <div>
+            <h3 class="work-title">DRAPE</h3>
+            <p class="work-ctx"><span data-i18n="p4_ctx">Personal project</span><span class="wip" data-i18n="wip">In development</span></p>
+            <p class="work-desc" data-i18n="p4_desc">Flutter app that brings fashion design and digital art together, exploring digital tools for creating and managing fashion designs.</p>
+            <ul class="tags"><li>Flutter</li><li>Fashion design</li><li>Digital art</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="mobile fullstack">
+          <span class="work-year">2025</span>
+          <div>
+            <h3 class="work-title" data-i18n="p5_title">AI Workplace Platform</h3>
+            <p class="work-ctx" data-i18n="p5_ctx">Final year project, Orange Tunisia</p>
+            <p class="work-desc" data-i18n="p5_desc">HR mobile app with leave management, notifications and real-time features, plus an AI meeting assistant that live-captions and summarises meetings, live-stream meetings and a 3D virtual workspace built in Unity.</p>
+            <ul class="tags"><li>Flutter</li><li>AI / NLP</li><li>Unity</li><li>Node.js</li><li>Live stream</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="fullstack">
+          <span class="work-year">2024</span>
+          <div>
+            <h3 class="work-title" data-i18n="p6_title">Strapi Auto-Diagram Feature</h3>
+            <p class="work-ctx" data-i18n="p6_ctx">Group project</p>
+            <p class="work-desc" data-i18n="p6_desc">Strapi plugin that automatically generates UML class diagrams and CRUD operations, then pushes the generated code to GitHub branches.</p>
+            <ul class="tags"><li>Strapi</li><li>Koa.js</li><li>GitHub API</li><li>UML</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="fullstack">
+          <span class="work-year">2024</span>
+          <div>
+            <h3 class="work-title" data-i18n="p7_title">Sports Community Platform</h3>
+            <p class="work-ctx" data-i18n="p7_ctx">Microservices architecture</p>
+            <p class="work-desc" data-i18n="p7_desc">Scalable sports and gym management platform with event management and community features, built on JavaScript microservices behind an API gateway.</p>
+            <ul class="tags"><li>Node.js</li><li>Microservices</li><li>API Gateway</li><li>MongoDB</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="mobile">
+          <span class="work-year">2023</span>
+          <div>
+            <h3 class="work-title" data-i18n="p8_title">Bike Rental App</h3>
+            <p class="work-ctx" data-i18n="p8_ctx">iOS and Android</p>
+            <p class="work-desc" data-i18n="p8_desc">Mobile app with real-time bike tracking and Google Maps integration, refined through iterative user testing.</p>
+            <ul class="tags"><li>Flutter</li><li>Google Maps API</li></ul>
+          </div>
+        </li>
+
+        <li class="work-row" data-cat="fullstack">
+          <span class="work-year">2023</span>
+          <div>
+            <h3 class="work-title" data-i18n="p9_title">E-Commerce Platform</h3>
+            <p class="work-ctx" data-i18n="p9_ctx">Full-stack web</p>
+            <p class="work-desc" data-i18n="p9_desc">E-commerce site with product management, user authentication, secure payment processing and a responsive design.</p>
+            <ul class="tags"><li>React</li><li>Node.js</li><li>MySQL</li><li>Docker</li></ul>
+          </div>
+        </li>
+
+      </ul>
     </div>
   </div>
 </section>
 
 <!-- ── EXPERIENCE ─────────────────────────────────────── -->
-<section class="experience" id="experience">
-  <div class="container">
-    <p class="section-eyebrow" data-i18n="exp_eyebrow">Experience</p>
-    <h2 class="section-title" data-i18n="exp_title">Where I've <em>grown</em></h2>
-    <div class="timeline">
+<section class="sec bg-white" id="experience">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 data-i18n="exp_title">Experience</h2>
+      <p data-i18n="exp_sub">Freelance contracts, internships and a few years of student leadership.</p>
+    </div>
+    <div class="roles">
 
-      <!-- UK Drilling -->
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="exp-header">
-          <span class="exp-company">Freelance — UK Drilling Tunisia</span>
-          <span class="exp-period" data-i18n="exp1_period">Mar – May 2026</span>
-        </div>
-        <p class="exp-role" data-i18n="exp1_role">Flutter Developer & Technical Translator</p>
-        <ul class="exp-list">
-          <li data-i18n="exp1_b1">Developed a mobile application for managing drilling projects, internal operations, and team coordination.</li>
-          <li data-i18n="exp1_b2">Designed features for project tracking, task management, and communication workflows to improve operational efficiency.</li>
-          <li data-i18n="exp1_b3">Provided Turkish–Arabic–English translation support during technical meetings and coordination with international teams.</li>
+      <article class="role">
+        <div class="role-top"><span class="role-company">Digital Group Performance</span><span class="role-period" data-i18n="e1_period">Jun – Aug 2026</span></div>
+        <p class="role-title" data-i18n="e1_role">Mobile Developer, Flutter</p>
+        <ul>
+          <li data-i18n="e1_b1">Developed and enhanced Flutter apps, including WAW, a tourism platform, and Ecoplat, a food-waste reduction platform.</li>
+          <li data-i18n="e1_b2">Extended existing apps with new features, REST API integrations, state management and UI/UX improvements.</li>
+          <li data-i18n="e1_b3">Built El Arab, a news app with a redesigned interface and features for browsing and managing news content.</li>
         </ul>
-      </div>
+      </article>
 
-      <!-- Erudaxis -->
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="exp-header">
-          <span class="exp-company">Freelance — Erudaxis</span>
-          <span class="exp-period" data-i18n="exp5_period">Jan – Feb 2026</span>
-        </div>
-        <p class="exp-role" data-i18n="exp5_role">Flutter Mobile Developer</p>
-        <ul class="exp-list">
-          <li data-i18n="exp5_b1">Developed the APK/mobile version of the company's educational platform using Flutter and Provider state management.</li>
-          <li data-i18n="exp5_b2">Improved application responsiveness, scalability, and user experience while collaborating with the development team.</li>
-          <li data-i18n="exp5_b3">Contributed to the digitalization of educational services by making the platform more accessible on mobile devices.</li>
+      <article class="role">
+        <div class="role-top"><span class="role-company">UK Drilling Tunisia</span><span class="role-period" data-i18n="e2_period">Mar – May 2026</span></div>
+        <p class="role-title" data-i18n="e2_role">Freelance Flutter Developer & Technical Translator</p>
+        <ul>
+          <li data-i18n="e2_b1">Developed a mobile app for managing drilling projects, internal operations and team coordination.</li>
+          <li data-i18n="e2_b2">Built project tracking, task management and communication workflows with responsive mobile interfaces.</li>
+          <li data-i18n="e2_b3">Provided Turkish–Arabic–English translation support in technical meetings with international teams.</li>
         </ul>
-      </div>
+      </article>
 
-      <!-- Orange Tunisia — PFE -->
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="exp-header">
-          <span class="exp-company">Orange Tunisia — App Salary Maxit</span>
-          <span class="exp-period" data-i18n="exp2_period">Mar – Aug 2025</span>
-        </div>
-        <p class="exp-role" data-i18n="exp2_role">Final Year Project — Mobile App Developer</p>
-        <ul class="exp-list">
-          <li data-i18n="exp2_b1">Built core HR features: leave requests, employee management, and real-time notifications.</li>
-          <li data-i18n="exp2_b2">Developed an AI tool that auto-generates captions and summarizes live meetings in real time.</li>
-          <li data-i18n="exp2_b3">Integrated a live-stream meeting feature for seamless internal communication.</li>
-          <li data-i18n="exp2_b4">Created an immersive 3D virtual workspace using Unity for interactive office exploration.</li>
-          <li data-i18n="exp2_b5">Collaborated with HR and IT teams to align with business and security requirements.</li>
+      <article class="role">
+        <div class="role-top"><span class="role-company">Erudaxis</span><span class="role-period" data-i18n="e3_period">Jan – Feb 2026</span></div>
+        <p class="role-title" data-i18n="e3_role">Freelance Flutter Developer</p>
+        <ul>
+          <li data-i18n="e3_b1">Developed the mobile version of an educational platform using Flutter and Provider.</li>
+          <li data-i18n="e3_b2">Improved responsiveness, scalability, navigation and the overall mobile user experience.</li>
         </ul>
-      </div>
+      </article>
 
-      <!-- Tunisie Telecom -->
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="exp-header">
-          <span class="exp-company">Tunisie Telecom</span>
-          <span class="exp-period" data-i18n="exp3_period">Jul – Sep 2024</span>
-        </div>
-        <p class="exp-role" data-i18n="exp3_role">Intern — Mobile App Security</p>
-        <ul class="exp-list">
-          <li data-i18n="exp3_b1">Identified vulnerabilities and implemented robust security measures using Kali Linux and OWASP.</li>
-          <li data-i18n="exp3_b2">Conducted penetration testing and security assessments on mobile applications.</li>
-          <li data-i18n="exp3_b3">Documented findings and recommended actionable solutions for improved app resilience.</li>
+      <article class="role">
+        <div class="role-top"><span class="role-company">Orange Tunisia</span><span class="role-period" data-i18n="e4_period">Mar – Aug 2025</span></div>
+        <p class="role-title" data-i18n="e4_role">Final Year Project, Mobile App Developer (Salary Maxit)</p>
+        <ul>
+          <li data-i18n="e4_b1">Built HR services, leave management, notifications and real-time features in Flutter.</li>
+          <li data-i18n="e4_b2">Developed an AI meeting assistant with live captions and automatic meeting summaries.</li>
+          <li data-i18n="e4_b3">Integrated live-stream meetings for internal communication.</li>
+          <li data-i18n="e4_b4">Created a 3D virtual workspace in Unity for interactive office exploration.</li>
+          <li data-i18n="e4_b5">Worked with HR and IT teams to meet business and security requirements.</li>
         </ul>
-      </div>
+      </article>
+
+      <article class="role">
+        <div class="role-top"><span class="role-company">Tunisie Telecom</span><span class="role-period" data-i18n="e5_period">Jul – Sep 2024</span></div>
+        <p class="role-title" data-i18n="e5_role">Intern, Mobile App Security</p>
+        <ul>
+          <li data-i18n="e5_b1">Identified vulnerabilities and applied security measures using Kali Linux and OWASP.</li>
+          <li data-i18n="e5_b2">Ran penetration tests and security assessments on mobile applications.</li>
+          <li data-i18n="e5_b3">Documented findings and recommended fixes to make apps more resilient.</li>
+        </ul>
+      </article>
+
+      <article class="role">
+        <div class="role-top"><span class="role-company" data-i18n="e6_company">ESPRIT University Club</span><span class="role-period" data-i18n="e6_period">2022 – 2024</span></div>
+        <p class="role-title" data-i18n="e6_role">HR Manager</p>
+        <ul>
+          <li data-i18n="e6_b1">Managed recruitment, onboarding and member coordination.</li>
+          <li data-i18n="e6_b2">Led teams and resolved internal conflicts.</li>
+          <li data-i18n="e6_b3">Organised events and encouraged collaboration between departments.</li>
+        </ul>
+      </article>
+
     </div>
   </div>
 </section>
 
-<!-- ── PROJECTS ─────────────────────────────────────── -->
-<section class="projects" id="projects">
-  <div class="container">
-    <p class="section-eyebrow" data-i18n="proj_eyebrow">Projects</p>
-    <h2 class="section-title" data-i18n="proj_title">What I've <em>built</em></h2>
-    <div class="projects-grid">
-
-      <div class="project-card featured reveal">
-        <p class="project-year">2025 · PFE · Orange Tunisia</p>
-        <h3 class="project-title" data-i18n="proj1_title">AI Workplace Platform</h3>
-        <p class="project-desc" data-i18n="proj1_desc">Full-stack HR mobile app with real-time AI meeting summarization, live-stream integration, and an immersive 3D virtual office built in Unity. Deployed for internal use at Orange Tunisia.</p>
-        <div class="project-tags">
-          <span class="project-tag">Flutter</span>
-          <span class="project-tag">AI / NLP</span>
-          <span class="project-tag">Unity</span>
-          <span class="project-tag">Node.js</span>
-          <span class="project-tag">Live Stream</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <p class="project-year">2024 · Strapi / Koa.js</p>
-        <h3 class="project-title" data-i18n="proj2_title">Strapi Auto-Diagram Feature</h3>
-        <p class="project-desc" data-i18n="proj2_desc">Group project to design and implement a Strapi plugin that auto-generates UML class diagrams and CRUD operations, then pushes generated code directly to GitHub branches.</p>
-        <div class="project-tags">
-          <span class="project-tag">Strapi</span>
-          <span class="project-tag">Koa.js</span>
-          <span class="project-tag">GitHub API</span>
-          <span class="project-tag">UML</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <p class="project-year">2024 · Node.js</p>
-        <h3 class="project-title" data-i18n="proj3_title">Sports Community App</h3>
-        <p class="project-desc" data-i18n="proj3_desc">Scalable sports and gym management platform with event management and community features, built on a JavaScript microservices architecture with an API gateway system.</p>
-        <div class="project-tags">
-          <span class="project-tag">Node.js</span>
-          <span class="project-tag">Microservices</span>
-          <span class="project-tag">API Gateway</span>
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">MongoDB</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <p class="project-year">2023 · Flutter</p>
-        <h3 class="project-title" data-i18n="proj4_title">Bike Rental App</h3>
-        <p class="project-desc" data-i18n="proj4_desc">Mobile application with real-time bike tracking, Google Maps integration, and a polished UX backed by iterative user testing on iOS and Android.</p>
-        <div class="project-tags">
-          <span class="project-tag">Flutter</span>
-          <span class="project-tag">Google Maps API</span>
-          <span class="project-tag">iOS / Android</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <p class="project-year">2023 · Full-Stack</p>
-        <h3 class="project-title" data-i18n="proj5_title">E-Commerce Platform</h3>
-        <p class="project-desc" data-i18n="proj5_desc">Full-stack e-commerce site with product management, user authentication, secure payment processing, and responsive design optimized for performance.</p>
-        <div class="project-tags">
-          <span class="project-tag">React</span>
-          <span class="project-tag">Node.js</span>
-          <span class="project-tag">MySQL</span>
-          <span class="project-tag">Docker</span>
-        </div>
-      </div>
-
+<!-- ── ABOUT ─────────────────────────────────────────── -->
+<section class="sec bg-paper" id="about">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 data-i18n="about_title">About</h2>
+    </div>
+    <div>
+      <p class="about-text" data-i18n="about_p1">I'm a software engineer specialised in Flutter and full-stack development, based in El Mourouj, Tunisia.</p>
+      <p class="about-text secondary" data-i18n="about_p2">I build cross-platform mobile apps, AI-powered features and enterprise platforms, with a focus on clean architecture, API integration, state management and real-time features. Away from the keyboard I design fashion, sing and sketch, and the same habit of paying attention to detail carries over between all of it.</p>
+      <dl class="facts">
+        <div><dt data-i18n="ab1_l">Education</dt><dd data-i18n="ab1_v">National Engineering Degree in Computer Science, ESPRIT School of Engineering and Technology (2020–2025)</dd></div>
+        <div><dt data-i18n="ab2_l">Languages</dt><dd data-i18n="ab2_v">Arabic, English, French, Turkish, Russian, Italian</dd></div>
+        <div><dt data-i18n="ab4_l">Location</dt><dd data-i18n="ab4_v">El Mourouj, Tunisia</dd></div>
+      </dl>
     </div>
   </div>
 </section>
 
 <!-- ── SKILLS ─────────────────────────────────────────── -->
-<section class="skills" id="skills">
-  <div class="container">
-    <p class="section-eyebrow" data-i18n="skills_eyebrow">Skills</p>
-    <h2 class="section-title" data-i18n="skills_title">My <em>toolkit</em></h2>
-    <div class="skills-grid">
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">📱</div>
-        <p class="skill-cat-title" data-i18n="skill_cat1">Mobile & Frontend</p>
-        <div class="skill-pills">
-          <span class="skill-pill">Flutter</span><span class="skill-pill">Swift</span><span class="skill-pill">Kotlin</span><span class="skill-pill">React Native</span><span class="skill-pill">React</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">⚙️</div>
-        <p class="skill-cat-title" data-i18n="skill_cat2">Backend & Databases</p>
-        <div class="skill-pills">
-          <span class="skill-pill">Node.js</span><span class="skill-pill">Express.js</span><span class="skill-pill">Spring Boot</span><span class="skill-pill">Python</span><span class="skill-pill">MongoDB</span><span class="skill-pill">MySQL</span><span class="skill-pill">SQLite</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">🛠️</div>
-        <p class="skill-cat-title" data-i18n="skill_cat3">DevOps & Tools</p>
-        <div class="skill-pills">
-          <span class="skill-pill">Docker</span><span class="skill-pill">Jenkins</span><span class="skill-pill">GitLab CI</span><span class="skill-pill">Git / GitHub</span><span class="skill-pill">Unity</span><span class="skill-pill">Xcode</span>
-        </div>
-      </div>
-      <div class="skill-category reveal">
-        <div class="skill-cat-icon">🎨</div>
-        <p class="skill-cat-title" data-i18n="skill_cat4">Design & Soft Skills</p>
-        <div class="skill-pills">
-          <span class="skill-pill">Photoshop</span><span class="skill-pill">Illustrator</span><span class="skill-pill" data-i18n="pill_fashion">Fashion Design</span><span class="skill-pill" data-i18n="pill_leadership">Leadership</span><span class="skill-pill" data-i18n="pill_hr">HR Management</span><span class="skill-pill" data-i18n="pill_comm">Communication</span>
-        </div>
-      </div>
+<section class="sec bg-white" id="skills">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 data-i18n="sk_title">Skills</h2>
+      <p data-i18n="sk_sub">The tools I use across mobile, backend and design.</p>
     </div>
+    <dl class="skills-list">
+      <div class="skill-row"><dt data-i18n="sk1">Languages</dt><dd>Dart, JavaScript, Python, Java, Kotlin, Swift, SQL</dd></div>
+      <div class="skill-row"><dt data-i18n="sk2">Mobile and frontend</dt><dd>Flutter, React, React Native, HTML, CSS, Provider, Riverpod</dd></div>
+      <div class="skill-row"><dt data-i18n="sk3">Backend</dt><dd>Node.js, Express.js, Spring Boot, REST APIs, Socket.IO</dd></div>
+      <div class="skill-row"><dt data-i18n="sk4">Databases</dt><dd>MongoDB, MySQL, SQLite, Hive</dd></div>
+      <div class="skill-row"><dt data-i18n="sk5">Architecture</dt><dd data-i18n="sk5_v">Clean Architecture, MVC, Microservices, State management</dd></div>
+      <div class="skill-row"><dt data-i18n="sk6">DevOps and tools</dt><dd>Docker, Jenkins, Git, GitHub, GitLab CI, Android Studio, Xcode, Unity</dd></div>
+      <div class="skill-row"><dt data-i18n="sk7">Security</dt><dd>OWASP Mobile Security Framework, Kali Linux</dd></div>
+      <div class="skill-row"><dt data-i18n="sk8">Design and people</dt><dd data-i18n="sk8_v">Fashion design, Photoshop, Illustrator, Leadership, HR management, Communication</dd></div>
+    </dl>
   </div>
 </section>
 
+<!-- ── BEYOND THE SCREEN ──────────────────────────────── -->
+<section class="sec bg-paper" id="beyond">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 data-i18n="bd_title">Beyond the screen</h2>
+      <p data-i18n="bd_sub">What I do when I'm not shipping code.</p>
+    </div>
+    <div class="beyond-grid">
+      <div class="beyond-item"><h3 data-i18n="bd1_t">Fashion design</h3><p data-i18n="bd1_d">I create original pieces with close attention to detail. Fashion is a personal language for me, a way to build a distinct visual identity.</p></div>
+      <div class="beyond-item"><h3 data-i18n="bd2_t">Singing</h3><p data-i18n="bd2_d">Performer with a developed vocal technique and stage presence. Music is where I express myself most directly.</p></div>
+      <div class="beyond-item"><h3 data-i18n="bd3_t">Drawing and sketching</h3><p data-i18n="bd3_d">Hand-drawn sketches and illustrations, from quick ideas to detailed fashion figure drawings. It feeds my design thinking.</p></div>
+    </div>
+  </div>
+</section>
 
 <!-- ── CONTACT ─────────────────────────────────────── -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="contact-box reveal">
-      <p class="section-eyebrow" style="justify-content:center" data-i18n="contact_eyebrow">Contact</p>
-      <h2 class="contact-headline" data-i18n="contact_title">Let's <em>connect</em></h2>
-      <p class="contact-sub" data-i18n="contact_sub">Open to opportunities, collaborations, and good conversations.</p>
-      <div class="contact-links">
-        <a href="mailto:rimehmechichi08@gmail.com" class="contact-item"><span class="icon">✉</span> rimehmechichi08@gmail.com</a>
-        <a href="tel:+21658673227" class="contact-item"><span class="icon">📞</span> +216 58 673 227</a>
-        <a href="https://linkedin.com/in/rimeh-mechichi-a49945216/" target="_blank" class="contact-item"><span class="icon">💼</span> LinkedIn</a>
-        <a href="https://github.com/RimehMechichi" target="_blank" class="contact-item"><span class="icon">⌥</span> GitHub</a>
+<section class="sec contact on-dark" id="contact">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 data-i18n="ct_title">Let's work together</h2>
+      <p data-i18n="ct_sub">Open to Flutter and full-stack roles, freelance projects and collaborations.</p>
+    </div>
+    <div>
+      <a class="mail-big" id="mail" href="mailto:rimehmechichi08@gmail.com">rimehmechichi08@gmail.com</a>
+      <div class="copy-row">
+        <button class="btn btn-ghost" type="button" id="copy-btn" data-i18n="ct_copy">Copy email</button>
+        <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
       </div>
-      <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin-top:0.5rem">📍 El Mourouj, Tunisia 2074</p>
+      <dl class="contact-list">
+        <div><dt data-i18n="ct_phone">Phone</dt><dd><a href="tel:+21658673227">+216 58 673 227</a></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://linkedin.com/in/rimeh-mechichi-a49945216/" target="_blank" rel="noopener">linkedin.com/in/rimeh-mechichi</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/RimehMechichi" target="_blank" rel="noopener">github.com/RimehMechichi</a></dd></div>
+        <div><dt data-i18n="ct_loc">Location</dt><dd data-i18n="ct_loc_v">El Mourouj, Tunisia</dd></div>
+      </dl>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ─────────────────────────────────────── -->
-<footer>
-  <span data-i18n="footer_text">Crafted with 💚 by</span> <strong>Rimeh Mechichi</strong> · 2025
-</footer>
+</main>
+
+<footer>© 2026 Rimeh Mechichi</footer>
 
 <script>
 const i18n = {
   en: {
-    nav_about:"About", nav_exp:"Experience", nav_proj:"Projects", nav_skills:"Skills", nav_contact:"Contact",
-    hero_badge:"Software · Fashion · Creative",
-    hero_tagline:"Engineer · Designer · Dreamer",
-    hero_desc:"A multidisciplinary profile combining full-stack engineering, fashion design, and artistic creativity. Fluent in six languages. Thriving in tech, creative, and international environments alike.",
-    hero_cta1:"See my work →", hero_cta2:"Download CV",
-    chip1:"Open to work", chip2:"6 Languages",
-    about_eyebrow:"About me", stat1:"Years coding", stat2:"Languages", stat3:"Projects", stat4:"Creativity",
-    lang_ar:"🇸🇦 Arabic", lang_en:"🇬🇧 English", lang_fr:"🇫🇷 French", lang_tr:"🇹🇷 Turkish", lang_ru:"🇷🇺 Russian", lang_it:"🇮🇹 Italian",
-    about_title:"Who I am",
-    about_text:"I'm a multidisciplinary engineer based in El Mourouj, Tunisia. I bridge software engineering, fashion design, and creative arts — bringing adaptability, strong communication, and a solution-focused mindset to every environment. Whether I'm architecting a mobile app with AI, designing an original outfit, performing on stage, or sketching by hand, I bring the same energy: purposeful and curious.",
-    badge_current:"Current",
-    exp_eyebrow:"Experience", exp_title:"Where I've grown",
-    exp1_period:"Mar – May 2026", exp1_role:"Flutter Developer & Technical Translator",
-    exp1_b1:"Developed a mobile application for managing drilling projects, internal operations, and team coordination.",
-    exp1_b2:"Designed features for project tracking, task management, and communication workflows to improve operational efficiency.",
-    exp1_b3:"Provided Turkish–Arabic–English translation support during technical meetings and coordination with international teams.",
-    exp2_period:"Mar – Aug 2025", exp2_role:"Final Year Project — Mobile App Developer",
-    exp2_b1:"Built core HR features: leave requests, employee management, and real-time notifications.",
-    exp2_b2:"Developed an AI tool that auto-generates captions and summarizes live meetings in real time.",
-    exp2_b3:"Integrated a live-stream meeting feature for seamless internal communication.",
-    exp2_b4:"Created an immersive 3D virtual workspace using Unity for interactive office exploration.",
-    exp2_b5:"Collaborated with HR and IT teams to align with business and security requirements.",
-    exp3_period:"Jul – Sep 2024", exp3_role:"Intern — Mobile App Security",
-    exp3_b1:"Identified vulnerabilities and implemented robust security measures using Kali Linux and OWASP.",
-    exp3_b2:"Conducted penetration testing and security assessments on mobile applications.",
-    exp3_b3:"Documented findings and recommended actionable solutions for improved app resilience.",
-    exp4_company:"University Club — ESPRIT", exp4_period:"2022 – 2024", exp4_role:"HR Manager",
-    exp4_b1:"Managed recruitment, onboarding, and member coordination.",
-    exp4_b2:"Led teams and resolved internal conflicts effectively.",
-    exp4_b3:"Organized events and fostered cross-department collaboration.",
-    proj_eyebrow:"Projects", proj_title:"What I've built",
-    proj1_title:"AI Workplace Platform",
-    proj1_desc:"Full-stack HR mobile app with real-time AI meeting summarization, live-stream integration, and an immersive 3D virtual office built in Unity. Deployed for internal use at Orange Tunisia.",
-    proj2_title:"Strapi Auto-Diagram Feature",
-    proj2_desc:"Group project to design and implement a Strapi plugin that auto-generates UML class diagrams and CRUD operations, then pushes generated code directly to GitHub branches.",
-    proj3_title:"Sports Community App",
-    exp5_period:"Jan – Feb 2026", exp5_role:"Flutter Mobile Developer",
-    exp5_b1:"Developed the APK/mobile version of the company's educational platform using Flutter and Provider state management.",
-    exp5_b2:"Improved application responsiveness, scalability, and user experience while collaborating with the development team.",
-    exp5_b3:"Contributed to the digitalization of educational services by making the platform more accessible on mobile devices.",
-    proj3_desc:"Scalable sports and gym management platform with event management and community features, built on a JavaScript microservices architecture with an API gateway system.",
-    creative4_cat:"Community", creative4_title:"JCI Berges du Lac",
-    creative4_desc:"Active member of JCI Berges du Lac — participating in community initiatives, networking activities, and professional development events that connect and empower young people.",
-    proj4_title:"Bike Rental App",
-    proj4_desc:"Mobile application with real-time bike tracking, Google Maps integration, and a polished UX backed by iterative user testing on iOS and Android.",
-    proj5_title:"E-Commerce Platform",
-    proj5_desc:"Full-stack e-commerce site with product management, user authentication, secure payment processing, and responsive design optimized for performance.",
-    skills_eyebrow:"Skills", skills_title:"My toolkit",
-    skill_cat1:"Mobile & Frontend", skill_cat2:"Backend & Databases", skill_cat3:"DevOps & Tools", skill_cat4:"Design & Soft Skills",
-    pill_fashion:"Fashion Design", pill_leadership:"Leadership", pill_hr:"HR Management", pill_comm:"Communication",
-    creative_eyebrow:"Creative side", creative_title:"Beyond the screen",
-    creative1_cat:"Performing Arts", creative1_title:"Singing",
-    creative1_desc:"Artist and performer with a developed vocal technique and stage presence. Music as a space for authentic expression and emotional creativity.",
-    creative2_cat:"Design", creative2_title:"Fashion Design",
-    creative2_desc:"Creator of original pieces with careful attention to detail. Fashion as a personal language — building a distinct visual identity through craftsmanship and intuition.",
-    creative3_cat:"Visual Arts", creative3_title:"Drawing & Sketching",
-    creative3_desc:"Passionate about hand-drawn sketches and illustrations. A practice that fuels design thinking — from quick ideation sketches to detailed fashion figure drawings.",
-    contact_eyebrow:"Contact", contact_title:"Let's connect",
-    contact_sub:"Open to opportunities, collaborations, and good conversations.",
-    footer_text:"Crafted with 💚 by"
+    skip:"Skip to content",
+    nav_work:"Work", nav_exp:"Experience", nav_about:"About", nav_skills:"Skills", nav_contact:"Contact",
+    status:"Open to work · Flutter & full-stack roles",
+    hero_lead:"Software engineer building Flutter apps, AI-powered features and full-stack platforms. I also design fashion.",
+    cta1:"View my work", cta2:"Download CV",
+    hf1_l:"Based in", hf1_v:"El Mourouj, Tunisia",
+    hf2_l:"Degree", hf2_v:"National Engineering Degree, ESPRIT 2025",
+    hf3_l:"Languages", hf3_v:"Arabic, English, French, Turkish, Russian, Italian",
+
+    work_title:"Selected work", work_sub:"Mobile apps and platforms, from client projects to my own experiments.",
+    f_all:"All", f_mobile:"Mobile", f_fullstack:"Full-stack", f_design:"Design",
+    wip:"In development",
+    p1_ctx:"Digital Group Performance",
+    p1_desc:"Tourism platform that connects users with activities and tourism businesses. I added new features, REST API integrations, state management and UI/UX improvements.",
+    p2_ctx:"Digital Group Performance",
+    p2_desc:"Food-waste reduction platform that connects restaurants with consumers. I maintained the app and extended it with new features and API integrations.",
+    p3_ctx:"Digital Group Performance",
+    p3_desc:"News app for Arabic and Tunisian readers, with a redesigned interface and features for browsing and managing news content.",
+    p4_ctx:"Personal project",
+    p4_desc:"Flutter app that brings fashion design and digital art together, exploring digital tools for creating and managing fashion designs.",
+    p5_title:"AI Workplace Platform", p5_ctx:"Final year project, Orange Tunisia",
+    p5_desc:"HR mobile app with leave management, notifications and real-time features, plus an AI meeting assistant that live-captions and summarises meetings, live-stream meetings and a 3D virtual workspace built in Unity.",
+    p6_title:"Strapi Auto-Diagram Feature", p6_ctx:"Group project",
+    p6_desc:"Strapi plugin that automatically generates UML class diagrams and CRUD operations, then pushes the generated code to GitHub branches.",
+    p7_title:"Sports Community Platform", p7_ctx:"Microservices architecture",
+    p7_desc:"Scalable sports and gym management platform with event management and community features, built on JavaScript microservices behind an API gateway.",
+    p8_title:"Bike Rental App", p8_ctx:"iOS and Android",
+    p8_desc:"Mobile app with real-time bike tracking and Google Maps integration, refined through iterative user testing.",
+    p9_title:"E-Commerce Platform", p9_ctx:"Full-stack web",
+    p9_desc:"E-commerce site with product management, user authentication, secure payment processing and a responsive design.",
+
+    exp_title:"Experience", exp_sub:"Freelance contracts, internships and a few years of student leadership.",
+    e1_period:"Jun – Aug 2026", e1_role:"Mobile Developer, Flutter",
+    e1_b1:"Developed and enhanced Flutter apps, including WAW, a tourism platform, and Ecoplat, a food-waste reduction platform.",
+    e1_b2:"Extended existing apps with new features, REST API integrations, state management and UI/UX improvements.",
+    e1_b3:"Built El Arab, a news app with a redesigned interface and features for browsing and managing news content.",
+    e2_period:"Mar – May 2026", e2_role:"Freelance Flutter Developer & Technical Translator",
+    e2_b1:"Developed a mobile app for managing drilling projects, internal operations and team coordination.",
+    e2_b2:"Built project tracking, task management and communication workflows with responsive mobile interfaces.",
+    e2_b3:"Provided Turkish–Arabic–English translation support in technical meetings with international teams.",
+    e3_period:"Jan – Feb 2026", e3_role:"Freelance Flutter Developer",
+    e3_b1:"Developed the mobile version of an educational platform using Flutter and Provider.",
+    e3_b2:"Improved responsiveness, scalability, navigation and the overall mobile user experience.",
+    e4_period:"Mar – Aug 2025", e4_role:"Final Year Project, Mobile App Developer (Salary Maxit)",
+    e4_b1:"Built HR services, leave management, notifications and real-time features in Flutter.",
+    e4_b2:"Developed an AI meeting assistant with live captions and automatic meeting summaries.",
+    e4_b3:"Integrated live-stream meetings for internal communication.",
+    e4_b4:"Created a 3D virtual workspace in Unity for interactive office exploration.",
+    e4_b5:"Worked with HR and IT teams to meet business and security requirements.",
+    e5_period:"Jul – Sep 2024", e5_role:"Intern, Mobile App Security",
+    e5_b1:"Identified vulnerabilities and applied security measures using Kali Linux and OWASP.",
+    e5_b2:"Ran penetration tests and security assessments on mobile applications.",
+    e5_b3:"Documented findings and recommended fixes to make apps more resilient.",
+    e6_company:"ESPRIT University Club", e6_period:"2022 – 2024", e6_role:"HR Manager",
+    e6_b1:"Managed recruitment, onboarding and member coordination.",
+    e6_b2:"Led teams and resolved internal conflicts.",
+    e6_b3:"Organised events and encouraged collaboration between departments.",
+
+    about_title:"About",
+    about_p1:"I'm a software engineer specialised in Flutter and full-stack development, based in El Mourouj, Tunisia.",
+    about_p2:"I build cross-platform mobile apps, AI-powered features and enterprise platforms, with a focus on clean architecture, API integration, state management and real-time features. Away from the keyboard I design fashion, sing and sketch, and the same habit of paying attention to detail carries over between all of it.",
+    ab1_l:"Education", ab1_v:"National Engineering Degree in Computer Science, ESPRIT School of Engineering and Technology (2020–2025)",
+    ab2_l:"Languages", ab2_v:"Arabic, English, French, Turkish, Russian, Italian",
+    ab4_l:"Location", ab4_v:"El Mourouj, Tunisia",
+
+    sk_title:"Skills", sk_sub:"The tools I use across mobile, backend and design.",
+    sk1:"Languages", sk2:"Mobile and frontend", sk3:"Backend", sk4:"Databases", sk5:"Architecture", sk6:"DevOps and tools", sk7:"Security", sk8:"Design and people",
+    sk5_v:"Clean Architecture, MVC, Microservices, State management",
+    sk8_v:"Fashion design, Photoshop, Illustrator, Leadership, HR management, Communication",
+
+    bd_title:"Beyond the screen", bd_sub:"What I do when I'm not shipping code.",
+    bd1_t:"Fashion design", bd1_d:"I create original pieces with close attention to detail. Fashion is a personal language for me, a way to build a distinct visual identity.",
+    bd2_t:"Singing", bd2_d:"Performer with a developed vocal technique and stage presence. Music is where I express myself most directly.",
+    bd3_t:"Drawing and sketching", bd3_d:"Hand-drawn sketches and illustrations, from quick ideas to detailed fashion figure drawings. It feeds my design thinking.",
+
+    ct_title:"Let's work together", ct_sub:"Open to Flutter and full-stack roles, freelance projects and collaborations.",
+    ct_copy:"Copy email", ct_copied:"Email copied", ct_failed:"Couldn't copy. Select the address above instead.",
+    ct_phone:"Phone", ct_loc:"Location", ct_loc_v:"El Mourouj, Tunisia",
+    menu:"Menu", title:"Rimeh Mechichi — Flutter & Full-Stack Engineer, Fashion Designer"
   },
   fr: {
-    nav_about:"À propos", nav_exp:"Expérience", nav_proj:"Projets", nav_skills:"Compétences", nav_contact:"Contact",
-    hero_badge:"Logiciel · Mode · Créativité",
-    hero_tagline:"Ingénieure · Designeuse · Rêveuse",
-    hero_desc:"Un profil multidisciplinaire alliant ingénierie full-stack, design de mode et créativité artistique. Courante en six langues. À l'aise dans les environnements tech, créatif et international.",
-    hero_cta1:"Voir mes projets →", hero_cta2:"Télécharger le CV",
-    chip1:"Disponible", chip2:"6 Langues",
-    about_eyebrow:"À propos", stat1:"Ans de code", stat2:"Langues", stat3:"Projets", stat4:"Créativité",
-    lang_ar:"🇸🇦 Arabe", lang_en:"🇬🇧 Anglais", lang_fr:"🇫🇷 Français", lang_tr:"🇹🇷 Turc", lang_ru:"🇷🇺 Russe", lang_it:"🇮🇹 Italien",
-    about_title:"Qui je suis",
-    about_text:"Je suis une ingénieure multidisciplinaire basée à El Mourouj, Tunisie. Je combine ingénierie logicielle, design de mode et arts créatifs — avec une forte adaptabilité, un excellent sens de la communication et une vision orientée solutions. Que je développe une app mobile avec IA, crée une tenue, monte sur scène ou dessine, j'apporte toujours la même énergie : déterminée et curieuse.",
-    badge_current:"En poste",
-    exp_eyebrow:"Expérience", exp_title:"Là où j'ai grandi",
-    exp1_period:"Mars – Mai 2026", exp1_role:"Développeuse Flutter & Traductrice Technique",
-    exp1_b1:"Développement d'une application mobile pour la gestion de projets de forage, des opérations internes et de la coordination d'équipe.",
-    exp1_b2:"Conception de fonctionnalités de suivi de projet, gestion des tâches et workflows de communication pour améliorer l'efficacité opérationnelle.",
-    exp1_b3:"Support de traduction Turc–Arabe–Anglais lors des réunions techniques et coordination avec les équipes internationales.",
-    exp2_period:"Mars – Août 2025", exp2_role:"Projet de Fin d'Études — Développeuse Mobile",
-    exp2_b1:"Développement des fonctionnalités RH : demandes de congés, gestion des employés, notifications en temps réel.",
-    exp2_b2:"Création d'un outil IA générant des sous-titres et résumant les réunions en direct.",
-    exp2_b3:"Intégration d'une fonctionnalité de live-stream pour la communication interne.",
-    exp2_b4:"Création d'un espace de travail virtuel 3D immersif avec Unity.",
-    exp2_b5:"Collaboration avec les équipes RH et IT pour les exigences métier et de sécurité.",
-    exp3_period:"Juil – Sep 2024", exp3_role:"Stagiaire — Sécurité Applications Mobiles",
-    exp3_b1:"Identification de vulnérabilités et mise en place de mesures de sécurité avec Kali Linux et OWASP.",
-    exp3_b2:"Tests d'intrusion et évaluations de sécurité sur les applications mobiles.",
-    exp3_b3:"Documentation des résultats et recommandations pour améliorer la résilience des apps.",
-    exp4_company:"Club Universitaire — ESPRIT", exp4_period:"2022 – 2024", exp4_role:"Responsable RH",
-    exp4_b1:"Gestion du recrutement, de l'intégration et de la coordination des membres.",
-    exp4_b2:"Encadrement des équipes et résolution des conflits internes.",
-    exp4_b3:"Organisation d'événements et collaboration interdépartements.",
-    proj_eyebrow:"Projets", proj_title:"Ce que j'ai créé",
-    proj1_title:"Plateforme IA Workplace",
-    proj1_desc:"Application mobile RH full-stack avec résumé IA des réunions en temps réel, live-stream intégré, et espace virtuel 3D immersif sous Unity. Déployé en interne chez Orange Tunisie.",
-    proj2_title:"Fonctionnalité Auto-Diagramme Strapi",
-    proj2_desc:"Projet de groupe pour implémenter un plugin Strapi générant automatiquement des diagrammes UML et opérations CRUD, puis poussant le code directement sur GitHub.",
-    proj3_title:"Application Communauté Sportive",
-    exp5_period:"Jan – Fév 2026", exp5_role:"Développeuse Flutter Mobile",
-    exp5_b1:"Développement de la version APK/mobile de la plateforme éducative avec Flutter et la gestion d'état Provider.",
-    exp5_b2:"Amélioration de la responsivité, scalabilité et expérience utilisateur en collaboration avec l'équipe de développement.",
-    exp5_b3:"Contribution à la digitalisation des services éducatifs en rendant la plateforme plus accessible sur mobile.",
-    proj3_desc:"Plateforme scalable de gestion sportive et de salle de sport avec gestion d'événements et fonctionnalités communautaires, construite sur une architecture microservices JavaScript avec API gateway.",
-    creative4_cat:"Communauté", creative4_title:"JCI Berges du Lac",
-    creative4_desc:"Membre active de JCI Berges du Lac — participant à des initiatives communautaires, des événements de networking et de développement professionnel qui connectent et inspirent les jeunes.",
-    proj4_title:"Application de Location de Vélos",
-    proj4_desc:"Application mobile avec suivi en temps réel, intégration Google Maps et expérience utilisateur optimisée sur iOS et Android.",
-    proj5_title:"Plateforme E-commerce",
-    proj5_desc:"Site e-commerce complet avec gestion produits, authentification, paiement sécurisé et design responsive performant.",
-    skills_eyebrow:"Compétences", skills_title:"Ma boîte à outils",
-    skill_cat1:"Mobile & Frontend", skill_cat2:"Backend & Bases de données", skill_cat3:"DevOps & Outils", skill_cat4:"Design & Soft Skills",
-    pill_fashion:"Design de Mode", pill_leadership:"Leadership", pill_hr:"Gestion RH", pill_comm:"Communication",
-    creative_eyebrow:"Côté créatif", creative_title:"Au-delà de l'écran",
-    creative1_cat:"Arts de la scène", creative1_title:"Chant",
-    creative1_desc:"Artiste et performeuse avec une technique vocale développée et une forte présence scénique. La musique comme espace d'expression authentique.",
-    creative2_cat:"Design", creative2_title:"Design de Mode",
-    creative2_desc:"Créatrice de pièces originales avec une attention particulière aux détails. La mode comme langage personnel — construire une identité visuelle distinctive.",
-    creative3_cat:"Arts Visuels", creative3_title:"Dessin & Croquis",
-    creative3_desc:"Passionnée de croquis et d'illustrations à la main. Une pratique qui nourrit la réflexion design — des esquisses rapides aux dessins de silhouettes de mode détaillés.",
-    contact_eyebrow:"Contact", contact_title:"Travaillons ensemble",
-    contact_sub:"Ouverte aux opportunités, collaborations et belles conversations.",
-    footer_text:"Créé avec 💚 par"
+    skip:"Aller au contenu",
+    nav_work:"Réalisations", nav_exp:"Expérience", nav_about:"À propos", nav_skills:"Compétences", nav_contact:"Contact",
+    status:"Disponible · Postes Flutter et full-stack",
+    hero_lead:"Ingénieure logiciel, je développe des applications Flutter, des fonctionnalités basées sur l'IA et des plateformes full-stack. Je crée aussi des vêtements.",
+    cta1:"Voir mes réalisations", cta2:"Télécharger le CV",
+    hf1_l:"Basée à", hf1_v:"El Mourouj, Tunisie",
+    hf2_l:"Diplôme", hf2_v:"Diplôme national d'ingénieur, ESPRIT 2025",
+    hf3_l:"Langues", hf3_v:"Arabe, anglais, français, turc, russe, italien",
+
+    work_title:"Réalisations", work_sub:"Applications mobiles et plateformes, de mes missions clients à mes propres expérimentations.",
+    f_all:"Tout", f_mobile:"Mobile", f_fullstack:"Full-stack", f_design:"Design",
+    wip:"En développement",
+    p1_ctx:"Digital Group Performance",
+    p1_desc:"Plateforme de tourisme qui met en relation les utilisateurs avec des activités et des acteurs du tourisme. J'y ai ajouté de nouvelles fonctionnalités, des intégrations d'API REST, de la gestion d'état et des améliorations UI/UX.",
+    p2_ctx:"Digital Group Performance",
+    p2_desc:"Plateforme de réduction du gaspillage alimentaire qui met en relation restaurants et consommateurs. J'ai assuré la maintenance de l'application et l'ai enrichie de nouvelles fonctionnalités et d'intégrations d'API.",
+    p3_ctx:"Digital Group Performance",
+    p3_desc:"Application d'actualités pour un public arabophone et tunisien, avec une interface repensée et des fonctionnalités pour consulter et gérer les contenus d'actualité.",
+    p4_ctx:"Projet personnel",
+    p4_desc:"Application Flutter qui réunit design de mode et art numérique, pour explorer des outils numériques de création et de gestion de designs de mode.",
+    p5_title:"Plateforme IA Workplace", p5_ctx:"Projet de fin d'études, Orange Tunisie",
+    p5_desc:"Application mobile RH avec gestion des congés, notifications et fonctionnalités temps réel, ainsi qu'un assistant IA de réunion (sous-titres en direct et résumés), des réunions en live-stream et un espace de travail virtuel 3D développé sous Unity.",
+    p6_title:"Fonctionnalité Auto-Diagramme Strapi", p6_ctx:"Projet de groupe",
+    p6_desc:"Plugin Strapi qui génère automatiquement des diagrammes de classes UML et des opérations CRUD, puis pousse le code généré vers des branches GitHub.",
+    p7_title:"Plateforme de communauté sportive", p7_ctx:"Architecture microservices",
+    p7_desc:"Plateforme évolutive de gestion sportive et de salle de sport, avec gestion d'événements et fonctionnalités communautaires, construite sur des microservices JavaScript derrière une API gateway.",
+    p8_title:"Application de location de vélos", p8_ctx:"iOS et Android",
+    p8_desc:"Application mobile avec suivi des vélos en temps réel et intégration Google Maps, affinée par des tests utilisateurs itératifs.",
+    p9_title:"Plateforme e-commerce", p9_ctx:"Web full-stack",
+    p9_desc:"Site e-commerce avec gestion des produits, authentification, paiement sécurisé et design responsive.",
+
+    exp_title:"Expérience", exp_sub:"Missions freelance, stages et plusieurs années d'engagement étudiant.",
+    e1_period:"Juin – Août 2026", e1_role:"Développeuse mobile, Flutter",
+    e1_b1:"Développement et amélioration d'applications Flutter, dont WAW, une plateforme de tourisme, et Ecoplat, une plateforme de réduction du gaspillage alimentaire.",
+    e1_b2:"Ajout de nouvelles fonctionnalités, d'intégrations d'API REST, de gestion d'état et d'améliorations UI/UX sur des applications existantes.",
+    e1_b3:"Réalisation d'El Arab, une application d'actualités avec une interface repensée et des fonctionnalités pour consulter et gérer les contenus.",
+    e2_period:"Mars – Mai 2026", e2_role:"Développeuse Flutter freelance & traductrice technique",
+    e2_b1:"Développement d'une application mobile de gestion de projets de forage, d'opérations internes et de coordination d'équipe.",
+    e2_b2:"Mise en place du suivi de projet, de la gestion des tâches et de workflows de communication, avec des interfaces mobiles responsives.",
+    e2_b3:"Traduction turc–arabe–anglais lors de réunions techniques avec des équipes internationales.",
+    e3_period:"Janv. – Fév. 2026", e3_role:"Développeuse Flutter freelance",
+    e3_b1:"Développement de la version mobile d'une plateforme éducative avec Flutter et Provider.",
+    e3_b2:"Amélioration de la responsivité, de la scalabilité, de la navigation et de l'expérience utilisateur mobile.",
+    e4_period:"Mars – Août 2025", e4_role:"Projet de fin d'études, développeuse mobile (Salary Maxit)",
+    e4_b1:"Développement de services RH, de la gestion des congés, des notifications et de fonctionnalités temps réel avec Flutter.",
+    e4_b2:"Création d'un assistant IA de réunion avec sous-titres en direct et résumés automatiques.",
+    e4_b3:"Intégration de réunions en live-stream pour la communication interne.",
+    e4_b4:"Conception d'un espace de travail virtuel 3D sous Unity pour explorer un bureau de façon interactive.",
+    e4_b5:"Collaboration avec les équipes RH et IT pour répondre aux exigences métier et de sécurité.",
+    e5_period:"Juil. – Sep. 2024", e5_role:"Stagiaire, sécurité des applications mobiles",
+    e5_b1:"Identification de vulnérabilités et mise en place de mesures de sécurité avec Kali Linux et OWASP.",
+    e5_b2:"Tests d'intrusion et évaluations de sécurité sur des applications mobiles.",
+    e5_b3:"Documentation des résultats et recommandations pour renforcer la résilience des applications.",
+    e6_company:"Club universitaire ESPRIT", e6_period:"2022 – 2024", e6_role:"Responsable RH",
+    e6_b1:"Gestion du recrutement, de l'intégration et de la coordination des membres.",
+    e6_b2:"Encadrement des équipes et résolution des conflits internes.",
+    e6_b3:"Organisation d'événements et développement de la collaboration entre départements.",
+
+    about_title:"À propos",
+    about_p1:"Je suis ingénieure logiciel, spécialisée en Flutter et en développement full-stack, basée à El Mourouj, en Tunisie.",
+    about_p2:"Je conçois des applications mobiles multiplateformes, des fonctionnalités basées sur l'IA et des plateformes d'entreprise, avec une attention particulière portée à la clean architecture, à l'intégration d'API, à la gestion d'état et aux fonctionnalités temps réel. En dehors du code, je crée des vêtements, je chante et je dessine, et le même souci du détail m'accompagne dans tout cela.",
+    ab1_l:"Formation", ab1_v:"Diplôme national d'ingénieur en informatique, ESPRIT School of Engineering and Technology (2020–2025)",
+    ab2_l:"Langues", ab2_v:"Arabe, anglais, français, turc, russe, italien",
+    ab4_l:"Localisation", ab4_v:"El Mourouj, Tunisie",
+
+    sk_title:"Compétences", sk_sub:"Les outils que j'utilise en mobile, en backend et en design.",
+    sk1:"Langages", sk2:"Mobile et frontend", sk3:"Backend", sk4:"Bases de données", sk5:"Architecture", sk6:"DevOps et outils", sk7:"Sécurité", sk8:"Design et humain",
+    sk5_v:"Clean Architecture, MVC, Microservices, Gestion d'état",
+    sk8_v:"Design de mode, Photoshop, Illustrator, Leadership, Gestion RH, Communication",
+
+    bd_title:"Au-delà de l'écran", bd_sub:"Ce que je fais quand je ne livre pas de code.",
+    bd1_t:"Design de mode", bd1_d:"Je crée des pièces originales avec une grande attention aux détails. La mode est pour moi un langage personnel, une manière de construire une identité visuelle singulière.",
+    bd2_t:"Chant", bd2_d:"Interprète avec une technique vocale développée et une vraie présence scénique. La musique est l'endroit où je m'exprime le plus directement.",
+    bd3_t:"Dessin et croquis", bd3_d:"Croquis et illustrations à la main, des idées rapides aux figurines de mode détaillées. Cette pratique nourrit ma réflexion de designeuse.",
+
+    ct_title:"Travaillons ensemble", ct_sub:"Ouverte aux postes Flutter et full-stack, aux missions freelance et aux collaborations.",
+    ct_copy:"Copier l'e-mail", ct_copied:"E-mail copié", ct_failed:"Copie impossible. Sélectionnez l'adresse ci-dessus.",
+    ct_phone:"Téléphone", ct_loc:"Localisation", ct_loc_v:"El Mourouj, Tunisie",
+    menu:"Menu", title:"Rimeh Mechichi — Ingénieure Flutter & Full-Stack, Designeuse de mode"
   }
 };
 
 let currentLang = 'en';
+
 function setLang(lang) {
+  if (!i18n[lang]) lang = 'en';
   currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
-  });
   const t = i18n[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key]) el.textContent = t[key];
+    const v = t[el.getAttribute('data-i18n')];
+    if (v !== undefined) el.textContent = v;
   });
+  document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
   document.documentElement.lang = lang;
+  document.title = t.title;
+  document.getElementById('menu-btn').setAttribute('aria-label', t.menu);
+  document.getElementById('copy-status').textContent = '';
+  try { localStorage.setItem('lang', lang); } catch (e) {}
 }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+/* Language: saved choice first, then browser language */
+(function initLang() {
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  const browser = (navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+  setLang(saved || browser);
+})();
+
+/* Project filters */
+document.querySelectorAll('.filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.filter').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    document.querySelectorAll('.work-row').forEach(row => {
+      row.hidden = !(f === 'all' || row.dataset.cat.split(' ').includes(f));
+    });
+  });
+});
+
+/* Mobile menu */
+const nav = document.getElementById('nav');
+const menuBtn = document.getElementById('menu-btn');
+function setMenu(open) {
+  nav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+}
+menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+/* Highlight the section you're reading */
+const navLinks = [...document.querySelectorAll('.nav-links a')];
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(a => {
+      if (a.getAttribute('href') === '#' + entry.target.id) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+['work', 'experience', 'about', 'skills', 'contact'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
+});
+
+/* Copy email */
+document.getElementById('copy-btn').addEventListener('click', async () => {
+  const status = document.getElementById('copy-status');
+  const email = document.getElementById('mail').textContent.trim();
+  try {
+    await navigator.clipboard.writeText(email);
+    status.textContent = i18n[currentLang].ct_copied;
+  } catch (e) {
+    status.textContent = i18n[currentLang].ct_failed;
+  }
+});
 </script>
 </body>
 </html>
