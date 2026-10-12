@@ -1,0 +1,29 @@
+RIMEH MECHICHI — COMBINED PORTFOLIO
+
+Extract the ZIP and open portfolio/index.html in a browser.
+Keep the media folder beside index.html. The design and animations are
+embedded in index.html, so no build or installation is necessary.
+
+What's combined:
+- Your current portrait, green palette, English/French content and 9 projects.
+- The reference's clickable project selector and animated detail panel.
+- A floating phone that cycles through real El Arab screenshots.
+- Browser/phone demo frames, native controls, keyboard navigation and filters.
+- Reduced-motion support and a pause button for the phone preview.
+
+Included recordings:
+- WAW: new web template (media/waw-demo.mp4).
+- El Arab: sign-in/article/profile and the news feed (two recordings).
+
+Optional recordings from your latest HTML were NOT attached. They are
+represented honestly, and activate automatically if you add these files:
+- media/waw-mobile-demo.mp4      (WAW mobile app)
+- media/Ecoplat-demo.mp4         (Ecoplat)
+- media/AppSalary-demo2.mp4      (Salary MAXIT)
+
+Optional posters, with exact capitalization:
+- media/waw-mobile-poster.jpg
+- media/Ecoplat-poster.jpg
+- media/AppSalary-poster.jpg
+
+To publish, upload all the files inside portfolio/ to your static website host.

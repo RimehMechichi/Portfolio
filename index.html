@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -136,11 +137,112 @@
   .work-row:hover .work-title { color: var(--moss); }
   .work-title { transition: color .2s; }
 
+  /* ── PROJECT DEMOS ────────────────────────────────── */
+  .demos { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.25rem; margin-top: 1.6rem; }
+  .demo { margin: 0; }
+  .demo-wide { width: min(100%, 640px); }
+  .demo-phone { width: 200px; }
+  .demo-frame { position: relative; overflow: hidden; background: var(--ink); border: 1px solid var(--line); border-radius: 14px; }
+  .demo-wide .demo-frame { aspect-ratio: 1280 / 680; }
+  .demo-phone .demo-frame { aspect-ratio: 9 / 19; border: 5px solid var(--ink); border-radius: 28px; }
+  .demo video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--ink); }
+  .demo-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: .6rem; padding: .6rem 1.1rem .6rem .8rem; border: 1.5px solid rgba(168,201,160,.6); border-radius: 999px; background: rgba(15,42,26,.86); color: #f4f9f1; font-size: .88rem; font-weight: 600; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background .2s, border-color .2s; }
+  .demo-play { white-space: nowrap; }
+  .demo-phone .demo-play { padding: .5rem .85rem .5rem .65rem; font-size: .82rem; gap: .45rem; }
+  .demo-play:hover { background: var(--forest); border-color: var(--leaf); }
+  .demo-play::before { content: ''; width: 0; height: 0; margin-left: 3px; border-left: 10px solid var(--leaf); border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+  .demo.is-playing .demo-play { display: none; }
+  .demo figcaption { margin-top: .55rem; font-size: .82rem; color: var(--muted); max-width: 30em; }
+  .demo-frame :focus-visible { outline-color: var(--leaf); }
+
+  /* ── MOTION & LIFE ────────────────────────────────── */
+  /* Scroll thread under the nav: a stitched line that sews as you scroll */
+  .thread { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; background: repeating-linear-gradient(90deg, var(--moss) 0 9px, transparent 9px 15px); clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0); }
+
+  /* Hero: cursor glow, drifting light, live status dot */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(480px circle at var(--mx, 72%) var(--my, 30%), rgba(168,201,160,.14), transparent 62%); }
+  .hero::after { content: ''; position: absolute; right: -14%; top: -22%; width: min(52vw, 680px); aspect-ratio: 1; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(45,106,53,.42), transparent 66%); }
+  .hero-inner { position: relative; z-index: 1; }
+  .status-dot { position: relative; flex: none; }
+  .status-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #4ade80; opacity: 0; }
+
+  .hero-name .ch { display: inline-block; transition: transform .3s cubic-bezier(.3,1.6,.5,1), color .3s; }
+  .hero-name .ch:hover { transform: translateY(-.07em); color: var(--leaf); }
+  .stitch { margin-bottom: 1.3rem; }
+  .hero-type { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.55rem, 2.7vw, 2.15rem); line-height: 1.25; color: var(--leaf); min-height: 1.3em; margin-bottom: 1.1rem; }
+  .caret { display: inline-block; width: 2px; height: .95em; margin-left: 3px; background: var(--leaf); vertical-align: -.1em; }
+
+  /* Portrait: floats, parallax, rotating label */
+  .portrait-frame { translate: calc(var(--px, 0) * 10px) calc(var(--py, 0) * 10px); transition: translate .3s ease-out; }
+  .portrait::before { translate: calc(var(--px, 0) * -12px) calc(var(--py, 0) * -12px); transition: translate .35s ease-out; }
+  .badge { position: absolute; left: -38px; bottom: -16px; width: 112px; height: 112px; z-index: 2; }
+  .badge .bg { fill: var(--ink); stroke: rgba(168,201,160,.55); stroke-width: 1.2; stroke-dasharray: 3 4; }
+  .badge text { font-family: var(--serif); font-style: italic; font-size: 12.5px; fill: var(--leaf); }
+  .badge .dot { fill: var(--leaf); }
+  .badge .spin { transform-origin: 60px 60px; }
+
+  /* Skills ticker */
+  .marquee { background: var(--forest); border-block: 1px solid rgba(168,201,160,.25); overflow: hidden; padding: 1.15rem 0; }
+  .marquee-track { display: flex; width: max-content; }
+  .marquee-set { display: flex; flex: none; align-items: center; }
+  .marquee-set li { display: flex; align-items: center; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.2; color: #eaf3e6; white-space: nowrap; }
+  .marquee-set li::after { content: ''; width: 34px; margin: 0 1.8rem; border-top: 2px dashed var(--leaf); opacity: .7; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  /* Section headings get a short stitch that draws in */
+  .sec-head h2::after { content: ''; display: block; width: 88px; margin-top: .8rem; border-top: 2px dashed var(--sage); }
+  .contact .sec-head h2::after { border-color: var(--leaf); }
+
+  /* Work rows: wash sweeps in on hover */
+  .work-row { position: relative; isolation: isolate; }
+  .work-row::before { content: ''; position: absolute; inset: 0 -1rem; z-index: -1; border-radius: 12px; background: linear-gradient(90deg, var(--mint), rgba(227,238,224,0)); transform: scaleX(0); transform-origin: left; transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+  .work-row:hover::before, .work-row:focus-within::before { transform: scaleX(1); }
+  .work-title { transition: color .2s, transform .35s cubic-bezier(.2,.7,.2,1); }
+  .work-row:hover .work-title { transform: translateX(8px); }
+  .work-row:hover .tags li { background: var(--white); border-color: var(--sage); }
+  .tags li { transition: background .3s, border-color .3s; }
+  .demo video { cursor: pointer; }
+  .hero-actions .btn { transition: background .2s, color .2s, border-color .2s, transform .2s, translate .25s ease-out; }
+
+  /* Experience: the thread fills as you read down the timeline */
+  .roles::before, .roles::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: repeating-linear-gradient(to bottom, var(--leaf) 0 7px, transparent 7px 13px); }
+  .roles::after { background: repeating-linear-gradient(to bottom, var(--moss) 0 7px, transparent 7px 13px); clip-path: inset(0 0 calc((1 - var(--fill, 0)) * 100%) 0); }
+
+  /* Scroll reveals (only added by JS when motion is allowed) */
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .js .work-row.reveal { transition: opacity .7s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+  .js .sec-head.reveal h2::after { clip-path: inset(0 100% 0 0); transition: clip-path .9s ease .35s; }
+  .js .sec-head.reveal.in h2::after { clip-path: inset(0); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-name .ch { animation: drop .9s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--k, 0) * 55ms + 150ms); }
+    .stitch { animation: stitch-draw 1.3s ease-out .95s backwards; }
+    .status-dot::after { animation: ping 2.2s ease-out infinite; }
+    .caret { animation: blink 1s steps(1) infinite; }
+    .hero::after { animation: drift 16s ease-in-out infinite alternate; }
+    .portrait-frame { animation: float 7s ease-in-out infinite; }
+    .portrait::before { animation: breathe 6s ease-in-out infinite; }
+    .badge .spin { animation: spin 22s linear infinite; }
+    .marquee-track { animation: marquee 48s linear infinite; }
+    @keyframes drop { from { opacity: 0; transform: translateY(.55em) rotate(5deg); } }
+    @keyframes stitch-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    @keyframes ping { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(3.4); opacity: 0; } }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(-6%, 9%) scale(1.12); } }
+    @keyframes float { 50% { transform: translateY(-10px); } }
+    @keyframes breathe { 50% { transform: scale(1.03); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+  }
+
   /* ── EXPERIENCE ───────────────────────────────────── */
-  .roles { border-left: 2px dashed var(--leaf); padding-left: 2.25rem; margin-left: 6px; }
+  .roles { position: relative; padding-left: 2.25rem; margin-left: 6px; }
   .role { position: relative; padding-bottom: 2.75rem; }
   .role:last-child { padding-bottom: 0; }
-  .role::before { content: ''; position: absolute; left: calc(-2.25rem - 7px); top: .5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 0 4px var(--white); }
+  .role::before { content: ''; position: absolute; left: calc(-2.25rem - 5px); top: .5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 4px var(--white); transition: background .4s, transform .4s, box-shadow .4s; }
+  .role.reached::before { background: var(--moss); transform: scale(1.25); box-shadow: 0 0 0 4px var(--white), 0 0 0 9px rgba(168,201,160,.5); }
   .role-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .25rem 1rem; }
   .role-company { font-weight: 700; font-size: 1.08rem; }
   .role-period { font-size: .88rem; color: var(--muted); font-weight: 600; }
@@ -190,6 +292,7 @@
     .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
     .portrait { margin: 0 auto 0 14px; order: -1; width: min(70%, 260px); }
     .portrait-initials { font-size: 5rem; }
+    .badge { left: -6px; bottom: -22px; width: 92px; height: 92px; }
     .hero-facts { grid-template-columns: 1fr 1fr; }
     .sec-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .sec-head { position: static; }
@@ -209,12 +312,144 @@
     .sec { padding: 4.5rem 1.2rem; }
     .hero-facts { grid-template-columns: 1fr; }
     .work-row { grid-template-columns: 1fr; }
+    .demo-wide { width: 100%; }
+    .demo-phone { width: calc(50% - .625rem); }
     .work-year { padding: 0 0 .25rem; font-size: 1.05rem; }
     .skill-row, .facts div, .contact-list div { grid-template-columns: 1fr; gap: .15rem; }
     .beyond-grid { grid-template-columns: 1fr; }
     .roles { padding-left: 1.6rem; }
-    .role::before { left: calc(-1.6rem - 7px); }
+    .role::before { left: calc(-1.6rem - 5px); }
   }
+</style>
+<style>
+/* Rimeh Mechichi — an expressive blend of engineering and design. */
+:root{--ink:#102c25;--forest:#194b3c;--moss:#27634c;--sage:#638778;--leaf:#d6ec9a;--mint:#eaf1df;--paper:#f8f7f0;--text:#183a30;--text-2:#415a50;--muted:#586b60;--line:rgba(34,78,60,.16);--lilac:#ddd4f3;--lime:#d6ec9a;--max:1240px;--nav-h:76px}
+::selection{background:var(--lilac);color:var(--ink)}
+nav{background:rgba(248,247,240,.92);padding-inline:max(2rem,calc((100vw - 1240px)/2));}
+.nav-logo{font-size:1.65rem}.nav-logo::after{content:'✦';color:var(--moss);font-size:.85rem;margin-left:.6rem}
+.hero{background:radial-gradient(ellipse at 88% 70%,#2b5040 0,transparent 55%),var(--ink);padding-bottom:5rem;min-height:850px;min-height:max(850px,100svh)}
+.hero::before{background:radial-gradient(500px circle at var(--mx,72%) var(--my,30%),rgba(214,236,154,.13),transparent 65%)}
+.hero::after{background:radial-gradient(circle,rgba(221,212,243,.16),transparent 68%)}
+.hero-inner{grid-template-columns:1.15fr .85fr;gap:5rem}
+.hero-kicker{font-size:.83rem;border:1px solid rgba(214,236,154,.25);padding:.45rem .8rem;border-radius:99px;margin-bottom:1.75rem}
+.hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.22em;color:var(--leaf);margin-bottom:1rem}
+.hero-name{font-size:clamp(4rem,8.2vw,7.6rem);letter-spacing:-.035em;line-height:.95}
+.hero-name .ln:last-child{font-style:italic;color:var(--lilac)}
+.hero-lead{font-size:1.04rem;max-width:30em;color:#d4e0d8}
+.hero-type{color:var(--lime);font-size:clamp(1.5rem,2.5vw,2rem)}
+.stitch{border-top:1px solid rgba(214,236,154,.4);width:110px;margin:1.6rem 0}
+.btn{min-height:49px;gap:.5rem}.btn-light{background:var(--lime);box-shadow:0 4px 24px rgba(214,236,154,.12)}
+.btn:hover{transform:translateY(-3px)}.hero-actions{margin-bottom:1.5rem}
+.demo-shortcuts{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin:0 0 2rem;font-size:.78rem}
+.demo-shortcuts>span{color:#d4e0d8;margin-right:.4rem}
+.demo-shortcuts a{border:1px solid rgba(214,236,154,.3);border-radius:8px;padding:.3rem .7rem;text-decoration:none;color:var(--lime);transition:background .2s}
+.demo-shortcuts a:hover{background:rgba(214,236,154,.15)}
+.hero-facts{gap:1rem 1.8rem;padding-top:1.5rem;border-top:1px solid rgba(214,236,154,.2)}
+.hero-facts dt{font-size:.72rem}.hero-facts dd{font-size:.8rem;max-width:15em}
+.portrait{width:min(100%,420px);aspect-ratio:446/567;margin:1rem 0 1rem auto;isolation:isolate}
+.portrait-frame{border-radius:180px 180px 28px 28px;background:#373938;box-shadow:0 28px 65px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2)}
+.portrait-frame img{object-position:center center}
+.portrait::before{inset:-15px;transform:rotate(4deg);border:1px solid rgba(214,236,154,.55);border-radius:200px 200px 32px 32px}
+.portrait::after{content:'✦';position:absolute;top:-35px;right:-12px;color:var(--lime);font-size:5.5rem;line-height:1;z-index:2}
+.portrait-note{position:absolute;z-index:3;font-size:.75rem;font-weight:600;padding:.7rem 1rem;border-radius:12px;box-shadow:0 8px 20px #0002;white-space:nowrap}
+.note-code{left:-35px;top:24%;background:var(--lilac);color:var(--ink);transform:rotate(-7deg)}
+.note-design{right:-20px;bottom:15%;background:var(--lime);color:var(--ink);transform:rotate(6deg)}
+.badge{left:-25px;bottom:-32px;width:118px;height:118px}.badge .bg{fill:var(--ink);stroke:var(--lime)}
+.marquee{background:var(--lime);padding:1.1rem 0;border:none;transform:rotate(-1deg);margin:-.7rem 0;position:relative;z-index:2;box-shadow:0 8px 20px #102c2510}
+.marquee-set li{color:var(--ink);font-size:1.8rem}.marquee-set li::after{content:'✦';border:0;opacity:1;width:auto;color:var(--moss);font-style:normal;font-size:1.1rem}
+.sec{padding-block:7rem}.sec-inner{grid-template-columns:220px minmax(0,1fr);gap:4rem}
+.sec-head h2{font-size:3rem;letter-spacing:-.035em}.sec-head h2::after{width:50px;border-top:3px solid var(--moss)}
+.sec-head p{font-size:.9rem}.filters{gap:.6rem;margin-bottom:1.5rem}.filter{min-height:42px;padding:.45rem 1.15rem}
+.work-list{border:0;display:grid;gap:1.3rem;counter-reset:project}
+.work-row{counter-increment:project;background:#fff;padding:1.8rem;border:1px solid var(--line);border-radius:20px;grid-template-columns:48px minmax(0,1fr);gap:1.1rem;box-shadow:0 5px 20px rgba(16,44,37,.025);transition:box-shadow .3s,border-color .3s}
+.work-row:hover{border-color:#88a291;box-shadow:0 12px 32px rgba(16,44,37,.07)}
+.work-row::before{inset:0;background:linear-gradient(120deg,#eff3e6,transparent 70%);border-radius:20px}
+.work-year{font:500 .78rem var(--sans);padding-top:.5rem;color:var(--muted)}
+.work-year::before{content:'0' counter(project);display:block;font-family:var(--serif);font-style:italic;font-size:1.9rem;line-height:1;margin-bottom:.6rem;color:var(--moss)}
+.work-title{font-size:2.2rem;letter-spacing:-.025em;scroll-margin-top:110px}.work-desc{font-size:.94rem;line-height:1.7}
+.tags li{background:var(--paper);padding:.15rem .7rem;font-size:.72rem}.work-ctx{font-size:.8rem}
+.demos{gap:1.1rem;margin-top:1.5rem}.demo-wide{width:100%}.demo-phone{width:min(46%,228px)}
+.demo-frame{border-radius:12px;box-shadow:0 8px 20px rgba(16,44,37,.1)}
+.demo-phone .demo-frame{aspect-ratio:416/850;border:5px solid var(--ink);border-radius:24px}
+.demo-phone:nth-child(2) .demo-frame{aspect-ratio:392/850}
+.demo video{object-fit:contain;cursor:auto}.demo-toolbar{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:.75rem}
+.demo-play,.demo-phone .demo-play{position:static;transform:none;background:var(--forest);color:white;padding:.5rem .85rem;border:0;border-radius:8px;min-height:40px;white-space:normal;font-size:.78rem;gap:.5rem;backdrop-filter:none}
+.demo.is-playing .demo-play{display:inline-flex}.demo-play::before{border-left-color:var(--lime);border-top-width:5px;border-bottom-width:5px;border-left-width:8px}
+.demo.is-playing .demo-play::before{width:8px;height:11px;border:0;border-left:3px solid var(--lime);border-right:3px solid var(--lime);margin-left:0}
+.demo-toolbar a{font-size:.75rem;color:var(--moss);text-underline-offset:4px;padding:.4rem 0}.demo-status{color:#8d3030;font-size:.8rem}.demo-status:empty{display:none}
+.demo figcaption{font-size:.77rem;margin-top:.55rem}.role{padding-bottom:2.5rem}.beyond-item{padding:1.6rem;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+.beyond-item:nth-child(2){background:#eeeaf7}.beyond-item:nth-child(3){background:#eef2df}
+.skill-row{transition:background .2s;padding-inline:.7rem;border-radius:8px}.skill-row:hover{background:var(--paper)}
+.contact{background:radial-gradient(ellipse at 85% 20%,#31513d,transparent 60%),var(--ink)}
+.mail-big{font-size:clamp(1.4rem,3.5vw,2.6rem);overflow-wrap:anywhere;color:var(--lime)}
+@media(prefers-reduced-motion:no-preference){.portrait::after{animation:sparkle 8s ease-in-out infinite}.note-code{animation:note-a 6s ease-in-out infinite}.note-design{animation:note-b 7s ease-in-out infinite}@keyframes sparkle{50%{transform:rotate(60deg) scale(.85)}}@keyframes note-a{50%{transform:translateY(-8px) rotate(-4deg)}}@keyframes note-b{50%{transform:translateY(8px) rotate(3deg)}}}
+@media(max-width:1100px) and (min-width:981px){.hero-inner{gap:3rem}.hero-name{font-size:6rem}.portrait-note{font-size:.65rem}.sec-inner{gap:2.5rem}}
+@media(max-width:980px){.hero{min-height:auto;padding-top:calc(var(--nav-h) + 4rem)}.hero-inner{grid-template-columns:1fr 1fr;gap:2rem}.portrait{order:0;width:100%;margin-left:auto}.hero-name{font-size:clamp(3.5rem,8vw,6rem)}.hero-facts{grid-template-columns:1fr 1fr}.note-code{left:-15px}.note-design{right:-12px}.portrait-note{font-size:.65rem;padding:.5rem .7rem}.sec-inner{grid-template-columns:1fr;gap:2rem}.sec-head h2{font-size:2.8rem}.sec-head p{max-width:34em}.sec{padding-block:5rem}}
+@media(max-width:700px){.hero-inner{grid-template-columns:1fr;gap:3rem}.hero{padding-inline:1.5rem;padding-top:calc(var(--nav-h) + 2.5rem);padding-bottom:4rem}.hero-name{font-size:clamp(4.3rem,14vw,6.5rem)}.portrait{width:min(78%,330px);margin:0 auto 1.5rem;order:0}.hero-facts{grid-template-columns:1fr 1fr}.hero-facts>div:last-child{grid-column:1/-1}.hero-eyebrow{font-size:.66rem}.hero-kicker{font-size:.74rem}.hero-lead{max-width:100%}.sec{padding-inline:1.15rem}.work-row{grid-template-columns:1fr;padding:1.3rem;gap:.6rem}.work-year{display:flex;gap:.6rem;align-items:center;padding:0}.work-year::before{font-size:1.2rem;margin:0}.work-title{font-size:2rem}.demo-phone{width:calc(50% - .55rem)}.demo-play,.demo-phone .demo-play{font-size:.7rem;padding:.45rem .6rem}.portrait::after{right:-8px;top:-26px;font-size:4rem}.note-code{left:-20px}.note-design{right:-20px}.hero-actions .btn{font-size:.85rem;padding:.75rem 1.15rem}.nav-logo{font-size:1.4rem}.mail-big{font-size:clamp(1.15rem,5.5vw,2rem)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+
+@media(max-width:380px){.demo-phone{width:min(100%,240px)}.portrait-note{font-size:.6rem}.hero-facts{gap:1rem}.hero-name{font-size:4.1rem}}
+
+</style>
+<style>
+/* A project studio: the reference's selector and device staging, in Rimeh's palette. */
+#work>.sec-inner{display:block}
+#work .sec-head{position:static;display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:2.5rem}
+#work .sec-head p{max-width:28em}
+#work .filters{margin-bottom:1.5rem}
+.project-browser{display:grid;grid-template-columns:260px minmax(0,1fr);gap:2rem;align-items:start}
+.project-tabs{display:flex;flex-direction:column;gap:.65rem;position:sticky;top:calc(var(--nav-h) + 2rem)}
+.project-tab{display:flex;align-items:center;gap:.8rem;text-align:left;width:100%;padding:1rem;border:1px solid var(--line);background:#fff;border-radius:14px;cursor:pointer;transition:background .25s,color .25s,transform .25s,box-shadow .25s;min-height:82px}
+.project-tab[hidden]{display:none}
+.project-tab:hover{background:var(--mint);transform:translateX(4px)}
+.project-tab[aria-selected=true]{background:var(--forest);color:#fff;border-color:var(--forest);box-shadow:0 8px 24px #102c2518;transform:translateX(6px)}
+.project-tab-number{font-family:var(--serif);font-size:1.4rem;color:var(--sage);flex:none}
+.project-tab[aria-selected=true] .project-tab-number{color:var(--lime)}
+.project-tab-label{flex:1;min-width:0}.project-tab-label strong{display:block;font-size:1rem;font-weight:600;line-height:1.3}
+.project-tab-label small{display:block;font-size:.71rem;color:var(--muted);margin-top:.3rem}
+.project-tab[aria-selected=true] small{color:#d3e5d8}
+.project-tab-arrow{font-size:1.05rem;color:var(--sage)}.project-tab[aria-selected=true] .project-tab-arrow{color:var(--lime)}
+.project-stage{min-width:0;background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 15px 45px #102c2506;overflow:hidden}
+.project-tools{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 1.8rem;border-bottom:1px solid var(--line);background:linear-gradient(100deg,#eef3e3,#f3eff9)}
+.project-counter{font-size:.76rem;font-weight:600;color:var(--text-2);letter-spacing:.04em}
+.project-arrows{display:flex;gap:.5rem}.project-arrows button{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;cursor:pointer;background:#fff;font-size:1.1rem;transition:background .2s,transform .2s}
+.project-arrows button:hover{background:var(--lime);transform:translateY(-2px)}
+.project-stage .work-list{display:block;counter-reset:none}
+.project-stage .work-row{border:0;background:transparent;border-radius:0;box-shadow:none;padding:2rem 2.1rem;display:block;min-height:450px;transition:none}
+.project-stage .work-row[hidden]{display:none}
+.project-stage .work-row:hover{border:0;box-shadow:none}
+.project-stage .work-row::before{display:none}
+.project-stage .work-row:hover .work-title{transform:none}
+.project-stage .work-year{display:block;font-size:.76rem;font-weight:600;letter-spacing:.1em;margin-bottom:.8rem;color:var(--sage)}
+.project-stage .work-year::before{display:none}
+.project-stage .work-title{font-size:clamp(2rem,3.5vw,3rem);max-width:20em;margin-bottom:.5rem}
+.project-stage .work-desc{max-width:48em}
+.project-stage .work-ctx{margin-bottom:1rem}
+.project-stage .demos{margin-top:2rem;align-items:flex-start;gap:1.5rem}
+.project-stage .demo-wide{width:100%;flex:none}
+.project-stage .demo-phone{width:min(44%,236px)}
+.device-bar{display:flex;align-items:center;justify-content:space-between;background:var(--ink);color:#cddbcf;padding:.6rem 1rem;border-radius:12px 12px 0 0;font-size:.67rem;letter-spacing:.04em}
+.device-bar+ .demo-frame{border-radius:0 0 12px 12px;border-top:0}
+.device-bar>span:first-child{color:var(--lilac);font-size:.55rem;letter-spacing:3px}
+.pending-frame{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;text-align:center;aspect-ratio:16/8.5;padding:1.5rem;background:radial-gradient(circle at 80% 10%,#eee8f7,transparent 55%),#f0f4e8;border:1px solid var(--line);border-radius:14px;min-height:160px}
+.demo-phone .pending-frame{aspect-ratio:9/19;border:5px solid var(--ink);border-radius:26px;padding:1rem}
+.pending-frame strong{font-size:.85rem}.pending-frame p{font-size:.73rem;color:var(--muted);max-width:14em}
+.device-icon{font-size:2.6rem;line-height:1;color:var(--moss)}
+.preview-phone{position:absolute;z-index:4;right:-44px;bottom:15px;width:136px;padding:6px;background:#11291f;border-radius:23px;box-shadow:0 15px 35px #0005;transform:rotate(8deg);border:1px solid #63786c;transform-origin:bottom center}
+.preview-screen{position:relative;aspect-ratio:416/850;border-radius:17px;overflow:hidden;background:#fff}
+.preview-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.97);transition:opacity .7s,transform .7s}
+.preview-shot.active{opacity:1;transform:scale(1)}
+.preview-controls{display:flex;align-items:center;justify-content:space-between;gap:4px;color:var(--lime);padding:6px 3px 1px}
+.preview-controls a{font-size:.62rem;text-decoration:none}
+.preview-controls button{display:grid;place-items:center;border:0;border-radius:6px;background:#3d5748;color:var(--lime);font-size:.65rem;min-width:26px;min-height:26px;cursor:pointer}
+.portrait .note-design{bottom:4%;right:22px}.portrait .note-code{top:20%}
+@media(prefers-reduced-motion:no-preference){.preview-phone{animation:phone-float 6s ease-in-out infinite}.preview-phone.preview-paused{animation-play-state:paused}.panel-enter{animation:project-swap .5s cubic-bezier(.2,.8,.2,1)}@keyframes phone-float{50%{transform:translateY(-12px) rotate(5deg)}}@keyframes project-swap{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}}
+@media(max-width:1100px){.project-browser{grid-template-columns:230px minmax(0,1fr);gap:1.5rem}.preview-phone{width:110px;right:-15px;bottom:5px}.portrait .note-design{right:60px}}
+@media(max-width:850px){#work .sec-head{display:block}#work .sec-head p{margin-top:.8rem}.project-browser{grid-template-columns:1fr;gap:1.25rem}.project-tabs{position:static;flex-direction:row;overflow-x:auto;padding:4px 3px 12px;scrollbar-width:thin;scrollbar-color:var(--sage) transparent}.project-tab{width:205px;min-width:205px;min-height:83px}.project-tab:hover,.project-tab[aria-selected=true]{transform:none}.project-stage .work-row{padding:1.6rem;min-height:0}.project-stage .work-title{font-size:2.4rem}.project-tools{padding:.8rem 1.4rem}}
+@media(max-width:700px){.preview-phone{width:105px;right:-25px;bottom:10px}.portrait .note-design{right:65px;bottom:-8px}.project-stage .work-row{padding:1.25rem}.project-stage .work-title{font-size:2.15rem}.project-stage .demo-phone{width:calc(50% - .75rem)}.project-tab{width:185px;min-width:185px;padding:.8rem}.project-tab-label strong{font-size:.9rem}.project-tab-arrow{display:none}.project-stage .demos{gap:1.5rem 1rem}.pending-frame{padding:1rem}.project-stage .demo-phone{width:calc(50% - .5rem)}}
+@media(max-width:380px){.project-stage .demo-phone{width:min(100%,236px)}.preview-phone{width:90px;right:-18px}.portrait .note-design{font-size:.55rem;right:55px}}
+@media(prefers-reduced-motion:reduce){.preview-shot{transition:none}.project-tab{transition:none}.panel-enter{animation:none}}
+
 </style>
 </head>
 <body>
@@ -237,6 +472,7 @@
     </div>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span></button>
   </div>
+  <div class="thread" id="thread" aria-hidden="true"></div>
 </nav>
 
 <main id="main">
@@ -246,13 +482,16 @@
   <div class="hero-inner">
     <div>
       <p class="hero-kicker rise" style="--i:0"><span class="status-dot" aria-hidden="true"></span><span data-i18n="status">Open to work · Flutter & full-stack roles</span></p>
-      <h1 class="hero-name rise" style="--i:1">Rimeh<br>Mechichi</h1>
-      <span class="stitch rise" style="--i:2" aria-hidden="true"></span>
+      <p class="hero-eyebrow" data-i18n="hero_eyebrow">ENGINEERING × CREATIVITY</p>
+      <h1 class="hero-name" aria-label="Rimeh Mechichi">Rimeh<br>Mechichi</h1>
+      <span class="stitch" aria-hidden="true"></span>
+      <p class="hero-type rise" style="--i:3"><span data-i18n="type_pre">I make</span> <span id="typed">Flutter apps</span><span class="caret" aria-hidden="true"></span></p>
       <p class="hero-lead rise" style="--i:3" data-i18n="hero_lead">Software engineer building Flutter apps, AI-powered features and full-stack platforms. I also design fashion.</p>
       <div class="hero-actions rise" style="--i:4">
         <a href="#work" class="btn btn-light" data-i18n="cta1">View my work</a>
-        <a href="rimeh_cv.pdf" class="btn btn-ghost" target="_blank" rel="noopener" data-i18n="cta2">Download CV</a>
+        <a href="#contact" class="btn btn-ghost" data-i18n="cta2">Let’s talk ↗</a>
       </div>
+      <div class="demo-shortcuts"><span data-i18n="live_work">See it in action</span><a href="#project-waw">WAW <span aria-hidden="true">↗</span></a><a href="#project-elarab">El Arab <span aria-hidden="true">↗</span></a></div>
       <dl class="hero-facts rise" style="--i:5">
         <div><dt data-i18n="hf1_l">Based in</dt><dd data-i18n="hf1_v">El Mourouj, Tunisia</dd></div>
         <div><dt data-i18n="hf2_l">Degree</dt><dd data-i18n="hf2_v">National Engineering Degree, ESPRIT 2025</dd></div>
@@ -260,14 +499,36 @@
       </dl>
     </div>
     <div class="portrait rise" style="--i:3">
+      <span class="portrait-note note-code" data-i18n="note_code">&lt;/&gt; Built with purpose</span>
+      <span class="portrait-note note-design" data-i18n="note_design">✦ Designed with feeling</span>
       <div class="portrait-frame">
-        <span class="portrait-initials" aria-hidden="true">RM</span>
-        <!-- Drop a portrait named photo.jpg next to this file and it replaces the initials automatically -->
-        <img src="photo.jpg" alt="Portrait of Rimeh Mechichi" onerror="this.remove()">
+        
+        
+        <img src="media/rimeh-portrait.png" alt="Portrait of Rimeh Mechichi" width="446" height="567" fetchpriority="high">
       </div>
+
+      <div class="preview-phone" aria-label="El Arab app preview">
+        <div class="preview-screen"><img class="preview-shot active" src="media/elarab-poster-1.jpg" alt="" width="416" height="850"><img class="preview-shot" src="media/elarab-poster-2.jpg" alt="" width="392" height="850"></div>
+        <div class="preview-controls"><a href="#project-elarab">El Arab ↗</a><button type="button" id="preview-pause" aria-pressed="false" data-i18n-label="pause_preview" aria-label="Pause preview">Ⅱ</button></div>
+      </div>      <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="bg" cx="60" cy="60" r="58"/>
+        <g class="spin">
+          <defs><path id="badge-path" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs>
+          <text><textPath href="#badge-path" textLength="254" lengthAdjust="spacing">Flutter · Full-stack · Fashion · </textPath></text>
+        </g>
+        <circle class="dot" cx="60" cy="60" r="3.5"/>
+      </svg>
     </div>
   </div>
 </header>
+
+<!-- ── SKILLS TICKER ─────────────────────────────────── -->
+<div class="marquee on-dark" aria-hidden="true">
+  <div class="marquee-track">
+    <ul class="marquee-set"><li>Flutter</li><li>Dart</li><li>Node.js</li><li>Unity</li><li>REST APIs</li><li>Clean Architecture</li><li>AI / NLP</li><li>Strapi</li><li>React</li><li>Docker</li><li>MongoDB</li><li>Fashion design</li></ul>
+    <ul class="marquee-set"><li>Flutter</li><li>Dart</li><li>Node.js</li><li>Unity</li><li>REST APIs</li><li>Clean Architecture</li><li>AI / NLP</li><li>Strapi</li><li>React</li><li>Docker</li><li>MongoDB</li><li>Fashion design</li></ul>
+  </div>
+</div>
 
 <!-- ── WORK ─────────────────────────────────────────── -->
 <section class="sec bg-paper" id="work">
@@ -285,13 +546,26 @@
       </div>
       <ul class="work-list" id="work-list">
 
-        <li class="work-row" data-cat="mobile">
+
+
+        <li class="work-row" data-cat="mobile fullstack">
           <span class="work-year">2026</span>
           <div>
-            <h3 class="work-title">WAW</h3>
+            <h3 class="work-title" id="project-waw">WAW</h3>
             <p class="work-ctx" data-i18n="p1_ctx">Digital Group Performance</p>
-            <p class="work-desc" data-i18n="p1_desc">Tourism platform that connects users with activities and tourism businesses. I added new features, REST API integrations, state management and UI/UX improvements.</p>
-            <ul class="tags"><li>Flutter</li><li>REST APIs</li><li>State management</li></ul>
+            <p class="work-desc" data-i18n="p1_desc">WAW is a tourism platform that connects people with activities and tourism businesses. Alongside my contributions to the Flutter app, I worked on its web version, developed with React and Spring Boot. The new website template gives the platform a refreshed presentation, with a redesigned homepage and clearer navigation. My work also included REST API integration, state management and UI/UX improvements to the mobile experience. The demo below presents the new web template.</p>
+            <ul class="tags"><li>React</li><li>Spring Boot</li><li>Flutter</li><li>REST APIs</li><li>UI/UX</li></ul>
+            <div class="demos">
+              <figure class="demo demo-wide">
+                <div class="device-bar" aria-hidden="true"><span>● ● ●</span><span>WAW · Web</span><span>↗</span></div>
+                <div class="demo-frame">
+                  <video controls muted loop playsinline preload="metadata" poster="media/waw-poster.jpg" src="media/waw-demo.mp4" data-i18n-label="demo_waw_label"></video>
+                  </div>
+                <div class="demo-toolbar"><button class="demo-play" type="button" data-i18n="demo_play">Play demo</button></div>
+                <p class="demo-status" role="status"></p>
+                <figcaption data-i18n="demo_waw_cap">Web · New WAW website template.</figcaption>
+              </figure>
+            </div>
           </div>
         </li>
 
@@ -300,18 +574,39 @@
           <div>
             <h3 class="work-title">Ecoplat</h3>
             <p class="work-ctx" data-i18n="p2_ctx">Digital Group Performance</p>
-            <p class="work-desc" data-i18n="p2_desc">Food-waste reduction platform that connects restaurants with consumers. I maintained the app and extended it with new features and API integrations.</p>
+            <p class="work-desc" data-i18n="p2_desc">Ecoplat is a food-waste reduction platform that connects restaurants with consumers, helping give unsold food a second chance. I maintained and extended its Flutter app, adding features and integrating REST APIs. My contribution focused on improving the interface and the way users move through the app, while keeping existing functionality working as the platform evolved. The project combined ongoing maintenance with practical improvements to the mobile experience.</p>
             <ul class="tags"><li>Flutter</li><li>REST APIs</li><li>UI/UX</li></ul>
+            <div class="demos">
+              <figure class="demo demo-wide pending-demo" data-pending-src="media/Ecoplat-demo.mp4" data-pending-poster="media/Ecoplat-poster.jpg" data-label-key="demo_Ecoplat_label">
+                <div class="pending-frame"><span class="device-icon" aria-hidden="true">▷</span><strong data-i18n="project_walkthrough">Project walkthrough</strong><p data-i18n="recording_pending">Recording not included yet</p></div>
+                <figcaption data-i18n="demo_Ecoplat_cap">Ecoplat · Mobile app.</figcaption>
+              </figure>
+            </div>
           </div>
         </li>
 
         <li class="work-row" data-cat="mobile">
           <span class="work-year">2026</span>
           <div>
-            <h3 class="work-title">El Arab</h3>
+            <h3 class="work-title" id="project-elarab">El Arab</h3>
             <p class="work-ctx" data-i18n="p3_ctx">Digital Group Performance</p>
-            <p class="work-desc" data-i18n="p3_desc">News app for Arabic and Tunisian readers, with a redesigned interface and features for browsing and managing news content.</p>
+            <p class="work-desc" data-i18n="p3_desc">El Arab is a mobile news app for Arabic-speaking and Tunisian readers. I worked on a redesigned interface and features for browsing and managing news content, with attention to the Arabic reading experience. The app brings together category-based browsing, article reading, sign-in and profile settings. The recordings show these flows in practice, from exploring the news feed to reading an article and managing a user profile.</p>
             <ul class="tags"><li>Flutter</li><li>UI redesign</li></ul>
+            <div class="demos">
+              <figure class="demo demo-phone">
+                <div class="demo-frame">
+                  <video controls muted loop playsinline preload="metadata" poster="media/elarab-poster-1.jpg" src="media/elarab-demo-1.mp4" data-i18n-label="demo_arab1_label"></video>
+                  </div>
+                <div class="demo-toolbar"><button class="demo-play" type="button" data-i18n="demo_play">Play demo</button></div>
+                <p class="demo-status" role="status"></p>
+                <figcaption data-i18n="demo_arab1_cap">Sign-in, reading an article, profile settings.</figcaption>
+              </figure>
+              <figure class="demo demo-phone">
+                <div class="demo-frame"><video controls muted loop playsinline preload="metadata" poster="media/elarab-poster-2.jpg" src="media/elarab-demo-2.mp4" data-i18n-label="demo_arab2_label"></video></div>
+                <div class="demo-toolbar"><button class="demo-play" type="button" data-i18n="demo_play">Play demo</button></div><p class="demo-status" role="status"></p>
+                <figcaption data-i18n="demo_arab2_cap">Browsing the news feed by category.</figcaption>
+              </figure>
+            </div>
           </div>
         </li>
 
@@ -320,7 +615,7 @@
           <div>
             <h3 class="work-title">DRAPE</h3>
             <p class="work-ctx"><span data-i18n="p4_ctx">Personal project</span><span class="wip" data-i18n="wip">In development</span></p>
-            <p class="work-desc" data-i18n="p4_desc">Flutter app that brings fashion design and digital art together, exploring digital tools for creating and managing fashion designs.</p>
+            <p class="work-desc" data-i18n="p4_desc">DRAPE is my personal Flutter project at the intersection of fashion design and digital art. It explores digital tools for creating and managing fashion designs, bringing my software engineering work together with my creative practice. The goal is to translate the needs of a fashion designer into a useful mobile experience. The project is still in development, with its design and functionality evolving as I explore that connection.</p>
             <ul class="tags"><li>Flutter</li><li>Fashion design</li><li>Digital art</li></ul>
           </div>
         </li>
@@ -328,10 +623,17 @@
         <li class="work-row" data-cat="mobile fullstack">
           <span class="work-year">2025</span>
           <div>
-            <h3 class="work-title" data-i18n="p5_title">AI Workplace Platform</h3>
+            <h3 class="work-title" data-i18n="p5_title">App Salary MAXIT AI Workplace Platform</h3>
             <p class="work-ctx" data-i18n="p5_ctx">Final year project, Orange Tunisia</p>
-            <p class="work-desc" data-i18n="p5_desc">HR mobile app with leave management, notifications and real-time features, plus an AI meeting assistant that live-captions and summarises meetings, live-stream meetings and a 3D virtual workspace built in Unity.</p>
+            <p class="work-desc" data-i18n="p5_desc">Salary MAXIT is an AI-powered workplace platform developed during my final-year project at Orange Tunisia. I built Flutter HR features for leave management, notifications and real-time interactions. The platform also includes an AI meeting assistant with live captions and automatic summaries, alongside live-stream meetings for internal communication. A Unity 3D virtual workspace adds an interactive office experience. The project brought mobile development, AI and immersive interfaces together around workplace needs.</p>
             <ul class="tags"><li>Flutter</li><li>AI / NLP</li><li>Unity</li><li>Node.js</li><li>Live stream</li></ul>
+            <div class="demos">
+              <figure class="demo demo-phone">
+                <div class="demo-frame" style="aspect-ratio:590/1280"><video controls muted loop playsinline preload="metadata" src="media/AppSalary-demo2.mp4" data-i18n-label="demo_salary2_label"></video></div>
+                <div class="demo-toolbar"><button class="demo-play" type="button" data-i18n="demo_play">Play demo</button></div><p class="demo-status" role="status"></p>
+                <figcaption data-i18n="demo_salary2_cap">Salary MAXIT · Demo 2.</figcaption>
+              </figure>
+            </div>
           </div>
         </li>
 
@@ -340,7 +642,7 @@
           <div>
             <h3 class="work-title" data-i18n="p6_title">Strapi Auto-Diagram Feature</h3>
             <p class="work-ctx" data-i18n="p6_ctx">Group project</p>
-            <p class="work-desc" data-i18n="p6_desc">Strapi plugin that automatically generates UML class diagrams and CRUD operations, then pushes the generated code to GitHub branches.</p>
+            <p class="work-desc" data-i18n="p6_desc">This Strapi plugin automates part of the process of turning a data model into application code. It generates UML class diagrams and CRUD operations, then pushes the generated code to GitHub branches. Built as a group project using Strapi, Koa.js and the GitHub API, it connects modelling with backend development. The aim is to reduce repetitive work and make generated outputs easier to review through a familiar Git workflow.</p>
             <ul class="tags"><li>Strapi</li><li>Koa.js</li><li>GitHub API</li><li>UML</li></ul>
           </div>
         </li>
@@ -350,7 +652,7 @@
           <div>
             <h3 class="work-title" data-i18n="p7_title">Sports Community Platform</h3>
             <p class="work-ctx" data-i18n="p7_ctx">Microservices architecture</p>
-            <p class="work-desc" data-i18n="p7_desc">Scalable sports and gym management platform with event management and community features, built on JavaScript microservices behind an API gateway.</p>
+            <p class="work-desc" data-i18n="p7_desc">This sports community platform brings gym and sports management together with event management and community features. It uses JavaScript microservices behind an API gateway, with Node.js and MongoDB in the stack. The architecture separates functionality into services rather than placing everything in a single backend. The project explored how to organise a platform that supports both operational management and the activities that connect a sports community.</p>
             <ul class="tags"><li>Node.js</li><li>Microservices</li><li>API Gateway</li><li>MongoDB</li></ul>
           </div>
         </li>
@@ -360,7 +662,7 @@
           <div>
             <h3 class="work-title" data-i18n="p8_title">Bike Rental App</h3>
             <p class="work-ctx" data-i18n="p8_ctx">iOS and Android</p>
-            <p class="work-desc" data-i18n="p8_desc">Mobile app with real-time bike tracking and Google Maps integration, refined through iterative user testing.</p>
+            <p class="work-desc" data-i18n="p8_desc">This cross-platform bike rental app was built for iOS and Android with Flutter. It combines real-time bike tracking with Google Maps integration, making location information part of the rental experience. I refined the app through iterative user testing, using feedback to improve its interface and the way users navigate it. The project focused on bringing mapping and real-time functionality into a practical mobile experience.</p>
             <ul class="tags"><li>Flutter</li><li>Google Maps API</li></ul>
           </div>
         </li>
@@ -370,7 +672,7 @@
           <div>
             <h3 class="work-title" data-i18n="p9_title">E-Commerce Platform</h3>
             <p class="work-ctx" data-i18n="p9_ctx">Full-stack web</p>
-            <p class="work-desc" data-i18n="p9_desc">E-commerce site with product management, user authentication, secure payment processing and a responsive design.</p>
+            <p class="work-desc" data-i18n="p9_desc">This full-stack e-commerce platform brings together product management, user authentication and secure payment processing. Its responsive interface adapts the shopping experience to different screen sizes. The stack includes React, Node.js, MySQL and Docker, connecting the frontend with backend services and persistent data. The project covered the main parts of an online store, from presenting products to supporting the workflows needed to manage and purchase them.</p>
             <ul class="tags"><li>React</li><li>Node.js</li><li>MySQL</li><li>Docker</li></ul>
           </div>
         </li>
@@ -541,7 +843,7 @@ const i18n = {
     nav_work:"Work", nav_exp:"Experience", nav_about:"About", nav_skills:"Skills", nav_contact:"Contact",
     status:"Open to work · Flutter & full-stack roles",
     hero_lead:"Software engineer building Flutter apps, AI-powered features and full-stack platforms. I also design fashion.",
-    cta1:"View my work", cta2:"Download CV",
+    cta1:"View my work", cta2:"Let’s talk ↗",
     hf1_l:"Based in", hf1_v:"El Mourouj, Tunisia",
     hf2_l:"Degree", hf2_v:"National Engineering Degree, ESPRIT 2025",
     hf3_l:"Languages", hf3_v:"Arabic, English, French, Turkish, Russian, Italian",
@@ -549,24 +851,33 @@ const i18n = {
     work_title:"Selected work", work_sub:"Mobile apps and platforms, from client projects to my own experiments.",
     f_all:"All", f_mobile:"Mobile", f_fullstack:"Full-stack", f_design:"Design",
     wip:"In development",
+    note_code:"</> Built with purpose", note_design:"✦ Designed with feeling", hero_eyebrow:"ENGINEERING × CREATIVITY", live_work:"See it in action", demo_pause:"Pause demo", demo_open:"Open video ↗", demo_error:"Unable to play here. Use Open video to watch the recording.", demo_play:"Play demo",
+    type_pre:"I make",
+    type_words:["Flutter apps","AI-powered features","full-stack platforms","fashion pieces"],
+    demo_waw_cap:"Walkthrough of the new WAW homepage.",
+    demo_waw_label:"Screen recording of the new WAW homepage",
+    demo_arab1_cap:"Sign-in, reading an article, profile settings.",
+    demo_arab1_label:"Phone recording of El Arab: sign-in, article and profile settings",
+    demo_arab2_cap:"Browsing the news feed by category.",
+    demo_arab2_label:"Phone recording of El Arab: news feed",
     p1_ctx:"Digital Group Performance",
-    p1_desc:"Tourism platform that connects users with activities and tourism businesses. I added new features, REST API integrations, state management and UI/UX improvements.",
+    p1_desc:"WAW is a tourism platform that connects people with activities and tourism businesses. Alongside my contributions to the Flutter app, I worked on its web version, developed with React and Spring Boot. The new website template gives the platform a refreshed presentation, with a redesigned homepage and clearer navigation. My work also included REST API integration, state management and UI/UX improvements to the mobile experience. The demo below presents the new web template.",
     p2_ctx:"Digital Group Performance",
-    p2_desc:"Food-waste reduction platform that connects restaurants with consumers. I maintained the app and extended it with new features and API integrations.",
+    p2_desc:"Ecoplat is a food-waste reduction platform that connects restaurants with consumers, helping give unsold food a second chance. I maintained and extended its Flutter app, adding features and integrating REST APIs. My contribution focused on improving the interface and the way users move through the app, while keeping existing functionality working as the platform evolved. The project combined ongoing maintenance with practical improvements to the mobile experience.",
     p3_ctx:"Digital Group Performance",
-    p3_desc:"News app for Arabic and Tunisian readers, with a redesigned interface and features for browsing and managing news content.",
+    p3_desc:"El Arab is a mobile news app for Arabic-speaking and Tunisian readers. I worked on a redesigned interface and features for browsing and managing news content, with attention to the Arabic reading experience. The app brings together category-based browsing, article reading, sign-in and profile settings. The recordings show these flows in practice, from exploring the news feed to reading an article and managing a user profile.",
     p4_ctx:"Personal project",
-    p4_desc:"Flutter app that brings fashion design and digital art together, exploring digital tools for creating and managing fashion designs.",
-    p5_title:"AI Workplace Platform", p5_ctx:"Final year project, Orange Tunisia",
-    p5_desc:"HR mobile app with leave management, notifications and real-time features, plus an AI meeting assistant that live-captions and summarises meetings, live-stream meetings and a 3D virtual workspace built in Unity.",
+    p4_desc:"DRAPE is my personal Flutter project at the intersection of fashion design and digital art. It explores digital tools for creating and managing fashion designs, bringing my software engineering work together with my creative practice. The goal is to translate the needs of a fashion designer into a useful mobile experience. The project is still in development, with its design and functionality evolving as I explore that connection.",
+    p5_title:"App Salary MAXIT AI Workplace Platform", p5_ctx:"Final year project, Orange Tunisia",
+    p5_desc:"Salary MAXIT is an AI-powered workplace platform developed during my final-year project at Orange Tunisia. I built Flutter HR features for leave management, notifications and real-time interactions. The platform also includes an AI meeting assistant with live captions and automatic summaries, alongside live-stream meetings for internal communication. A Unity 3D virtual workspace adds an interactive office experience. The project brought mobile development, AI and immersive interfaces together around workplace needs.",
     p6_title:"Strapi Auto-Diagram Feature", p6_ctx:"Group project",
-    p6_desc:"Strapi plugin that automatically generates UML class diagrams and CRUD operations, then pushes the generated code to GitHub branches.",
+    p6_desc:"This Strapi plugin automates part of the process of turning a data model into application code. It generates UML class diagrams and CRUD operations, then pushes the generated code to GitHub branches. Built as a group project using Strapi, Koa.js and the GitHub API, it connects modelling with backend development. The aim is to reduce repetitive work and make generated outputs easier to review through a familiar Git workflow.",
     p7_title:"Sports Community Platform", p7_ctx:"Microservices architecture",
-    p7_desc:"Scalable sports and gym management platform with event management and community features, built on JavaScript microservices behind an API gateway.",
+    p7_desc:"This sports community platform brings gym and sports management together with event management and community features. It uses JavaScript microservices behind an API gateway, with Node.js and MongoDB in the stack. The architecture separates functionality into services rather than placing everything in a single backend. The project explored how to organise a platform that supports both operational management and the activities that connect a sports community.",
     p8_title:"Bike Rental App", p8_ctx:"iOS and Android",
-    p8_desc:"Mobile app with real-time bike tracking and Google Maps integration, refined through iterative user testing.",
+    p8_desc:"This cross-platform bike rental app was built for iOS and Android with Flutter. It combines real-time bike tracking with Google Maps integration, making location information part of the rental experience. I refined the app through iterative user testing, using feedback to improve its interface and the way users navigate it. The project focused on bringing mapping and real-time functionality into a practical mobile experience.",
     p9_title:"E-Commerce Platform", p9_ctx:"Full-stack web",
-    p9_desc:"E-commerce site with product management, user authentication, secure payment processing and a responsive design.",
+    p9_desc:"This full-stack e-commerce platform brings together product management, user authentication and secure payment processing. Its responsive interface adapts the shopping experience to different screen sizes. The stack includes React, Node.js, MySQL and Docker, connecting the frontend with backend services and persistent data. The project covered the main parts of an online store, from presenting products to supporting the workflows needed to manage and purchase them.",
 
     exp_title:"Experience", exp_sub:"Freelance contracts, internships and a few years of student leadership.",
     e1_period:"Jun – Aug 2026", e1_role:"Mobile Developer, Flutter",
@@ -615,14 +926,16 @@ const i18n = {
     ct_title:"Let's work together", ct_sub:"Open to Flutter and full-stack roles, freelance projects and collaborations.",
     ct_copy:"Copy email", ct_copied:"Email copied", ct_failed:"Couldn't copy. Select the address above instead.",
     ct_phone:"Phone", ct_loc:"Location", ct_loc_v:"El Mourouj, Tunisia",
-    menu:"Menu", title:"Rimeh Mechichi — Flutter & Full-Stack Engineer, Fashion Designer"
+    menu:"Menu", title:"Rimeh Mechichi — Flutter & Full-Stack Engineer, Fashion Designer",
+"work_sub":"Pick a project to explore the details and watch its demos.","demo_waw_cap":"Web · New WAW website template.","demo_waw_label":"Screen recording of the new WAW web template","mobile_app":"Mobile app","recording_pending":"Recording not included yet","project_walkthrough":"Project walkthrough","demo_Ecoplat_cap":"Ecoplat · Mobile app.","demo_Ecoplat_label":"Screen recording of the Ecoplat app","demo_APP_Salary_cap":"Salary MAXIT · AI workplace walkthrough.","demo_APP_Salary_label":"Screen recording of the Salary MAXIT AI workplace platform","browse_projects":"Explore the projects","project_detail":"Project details","project_count":"projects","previous_project":"Previous project","next_project":"Next project","pause_preview":"Pause preview","resume_preview":"Resume preview","demo_live":"Demo available","project_info":"Project overview",
+"demo_salary1_cap":"Salary MAXIT · Demo 1.","demo_salary2_cap":"Salary MAXIT · Demo 2.","demo_salary1_label":"Salary MAXIT screen recording, part 1","demo_salary2_label":"Salary MAXIT screen recording, part 2"
   },
   fr: {
     skip:"Aller au contenu",
     nav_work:"Réalisations", nav_exp:"Expérience", nav_about:"À propos", nav_skills:"Compétences", nav_contact:"Contact",
     status:"Disponible · Postes Flutter et full-stack",
     hero_lead:"Ingénieure logiciel, je développe des applications Flutter, des fonctionnalités basées sur l'IA et des plateformes full-stack. Je crée aussi des vêtements.",
-    cta1:"Voir mes réalisations", cta2:"Télécharger le CV",
+    cta1:"Voir mes réalisations", cta2:"Parlons ensemble ↗",
     hf1_l:"Basée à", hf1_v:"El Mourouj, Tunisie",
     hf2_l:"Diplôme", hf2_v:"Diplôme national d'ingénieur, ESPRIT 2025",
     hf3_l:"Langues", hf3_v:"Arabe, anglais, français, turc, russe, italien",
@@ -630,24 +943,33 @@ const i18n = {
     work_title:"Réalisations", work_sub:"Applications mobiles et plateformes, de mes missions clients à mes propres expérimentations.",
     f_all:"Tout", f_mobile:"Mobile", f_fullstack:"Full-stack", f_design:"Design",
     wip:"En développement",
+    note_code:"</> Du code qui a du sens", note_design:"✦ Du design qui fait vibrer", hero_eyebrow:"INGÉNIERIE × CRÉATIVITÉ", live_work:"Voir en action", demo_pause:"Mettre en pause", demo_open:"Ouvrir la vidéo ↗", demo_error:"Lecture impossible ici. Ouvrez la vidéo pour voir l’enregistrement.", demo_play:"Lancer la démo",
+    type_pre:"Je crée",
+    type_words:["des apps Flutter","des fonctionnalités IA","des plateformes full-stack","des vêtements"],
+    demo_waw_cap:"Parcours de la nouvelle page d'accueil de WAW.",
+    demo_waw_label:"Enregistrement d'écran de la nouvelle page d'accueil de WAW",
+    demo_arab1_cap:"Connexion, lecture d'un article, paramètres du profil.",
+    demo_arab1_label:"Enregistrement sur téléphone d'El Arab : connexion, article et paramètres du profil",
+    demo_arab2_cap:"Navigation dans le fil d'actualités par catégorie.",
+    demo_arab2_label:"Enregistrement sur téléphone d'El Arab : fil d'actualités",
     p1_ctx:"Digital Group Performance",
-    p1_desc:"Plateforme de tourisme qui met en relation les utilisateurs avec des activités et des acteurs du tourisme. J'y ai ajouté de nouvelles fonctionnalités, des intégrations d'API REST, de la gestion d'état et des améliorations UI/UX.",
+    p1_desc:"WAW est une plateforme de tourisme qui met en relation les utilisateurs avec des activités et des acteurs du secteur. En parallèle de mes contributions à l’application Flutter, j’ai travaillé sur sa version web, développée avec React et Spring Boot. Le nouveau template renouvelle la présentation du site, avec une page d’accueil repensée et une navigation plus claire. Mon travail sur l’application mobile comprenait aussi l’intégration d’API REST, la gestion d’état et des améliorations UI/UX. La démo ci-dessous présente le nouveau template web.",
     p2_ctx:"Digital Group Performance",
-    p2_desc:"Plateforme de réduction du gaspillage alimentaire qui met en relation restaurants et consommateurs. J'ai assuré la maintenance de l'application et l'ai enrichie de nouvelles fonctionnalités et d'intégrations d'API.",
+    p2_desc:"Ecoplat est une plateforme de réduction du gaspillage alimentaire qui met en relation restaurants et consommateurs, pour donner une seconde chance aux invendus. J’ai assuré la maintenance de son application Flutter, ajouté des fonctionnalités et intégré des API REST. Ma contribution portait sur l’amélioration de l’interface et de la navigation, tout en préservant les fonctionnalités existantes au fil des évolutions. Le projet associait maintenance continue et améliorations concrètes de l’expérience mobile.",
     p3_ctx:"Digital Group Performance",
-    p3_desc:"Application d'actualités pour un public arabophone et tunisien, avec une interface repensée et des fonctionnalités pour consulter et gérer les contenus d'actualité.",
+    p3_desc:"El Arab est une application mobile d’actualités destinée à un public arabophone et tunisien. J’ai travaillé sur une interface repensée et sur des fonctionnalités de consultation et de gestion des contenus, avec une attention portée à la lecture en arabe. L’application réunit navigation par catégorie, lecture d’articles, connexion et paramètres du profil. Les enregistrements présentent ces parcours, de l’exploration du fil d’actualités à la lecture d’un article et à la gestion du profil.",
     p4_ctx:"Projet personnel",
-    p4_desc:"Application Flutter qui réunit design de mode et art numérique, pour explorer des outils numériques de création et de gestion de designs de mode.",
-    p5_title:"Plateforme IA Workplace", p5_ctx:"Projet de fin d'études, Orange Tunisie",
-    p5_desc:"Application mobile RH avec gestion des congés, notifications et fonctionnalités temps réel, ainsi qu'un assistant IA de réunion (sous-titres en direct et résumés), des réunions en live-stream et un espace de travail virtuel 3D développé sous Unity.",
+    p4_desc:"DRAPE est mon projet personnel Flutter, à la croisée du design de mode et de l’art numérique. Il explore des outils numériques de création et de gestion de designs de mode, en associant mon travail d’ingénieure à ma pratique créative. L’objectif est de traduire les besoins d’une designeuse de mode en une expérience mobile utile. Le projet reste en développement : son interface et ses fonctionnalités évoluent au fil de cette exploration.",
+    p5_title:"App Salary MAXIT — Plateforme IA Workplace", p5_ctx:"Projet de fin d'études, Orange Tunisie",
+    p5_desc:"Salary MAXIT est une plateforme de travail enrichie par l’IA, développée pendant mon projet de fin d’études chez Orange Tunisie. J’ai réalisé des fonctionnalités RH en Flutter : gestion des congés, notifications et interactions temps réel. La plateforme intègre aussi un assistant IA de réunion avec sous-titres en direct et résumés automatiques, ainsi que des réunions en live-stream. Un espace de travail virtuel Unity 3D ajoute une expérience de bureau interactive. Le projet associe développement mobile, IA et interfaces immersives autour des besoins de l’entreprise.",
     p6_title:"Fonctionnalité Auto-Diagramme Strapi", p6_ctx:"Projet de groupe",
-    p6_desc:"Plugin Strapi qui génère automatiquement des diagrammes de classes UML et des opérations CRUD, puis pousse le code généré vers des branches GitHub.",
+    p6_desc:"Ce plugin Strapi automatise une partie du passage d’un modèle de données au code applicatif. Il génère des diagrammes de classes UML et des opérations CRUD, puis pousse le code produit vers des branches GitHub. Réalisé en groupe avec Strapi, Koa.js et l’API GitHub, il relie la modélisation au développement backend. L’objectif est de réduire les tâches répétitives et de faciliter la revue des résultats générés dans un workflow Git familier.",
     p7_title:"Plateforme de communauté sportive", p7_ctx:"Architecture microservices",
-    p7_desc:"Plateforme évolutive de gestion sportive et de salle de sport, avec gestion d'événements et fonctionnalités communautaires, construite sur des microservices JavaScript derrière une API gateway.",
+    p7_desc:"Cette plateforme de communauté sportive associe gestion de salle de sport, gestion d’événements et fonctionnalités communautaires. Elle repose sur des microservices JavaScript derrière une API gateway, avec Node.js et MongoDB dans sa stack. L’architecture répartit les fonctionnalités entre plusieurs services plutôt que de les regrouper dans un seul backend. Le projet explore l’organisation d’une plateforme qui répond à la fois aux besoins de gestion et aux activités qui rassemblent une communauté sportive.",
     p8_title:"Application de location de vélos", p8_ctx:"iOS et Android",
-    p8_desc:"Application mobile avec suivi des vélos en temps réel et intégration Google Maps, affinée par des tests utilisateurs itératifs.",
+    p8_desc:"Cette application de location de vélos a été développée avec Flutter pour iOS et Android. Elle associe suivi des vélos en temps réel et intégration Google Maps, pour rendre les informations de localisation accessibles dans le parcours de location. J’ai affiné l’application au moyen de tests utilisateurs itératifs, en m’appuyant sur les retours pour améliorer l’interface et la navigation. Le projet intègre cartographie et fonctionnalités temps réel dans une expérience mobile pratique.",
     p9_title:"Plateforme e-commerce", p9_ctx:"Web full-stack",
-    p9_desc:"Site e-commerce avec gestion des produits, authentification, paiement sécurisé et design responsive.",
+    p9_desc:"Cette plateforme e-commerce full-stack réunit gestion des produits, authentification des utilisateurs et paiement sécurisé. Son interface responsive adapte l’expérience d’achat aux différentes tailles d’écran. La stack comprend React, Node.js, MySQL et Docker, en reliant le frontend aux services backend et aux données persistantes. Le projet couvre les principaux éléments d’une boutique en ligne, de la présentation des produits aux parcours nécessaires pour les gérer et les acheter.",
 
     exp_title:"Expérience", exp_sub:"Missions freelance, stages et plusieurs années d'engagement étudiant.",
     e1_period:"Juin – Août 2026", e1_role:"Développeuse mobile, Flutter",
@@ -696,11 +1018,16 @@ const i18n = {
     ct_title:"Travaillons ensemble", ct_sub:"Ouverte aux postes Flutter et full-stack, aux missions freelance et aux collaborations.",
     ct_copy:"Copier l'e-mail", ct_copied:"E-mail copié", ct_failed:"Copie impossible. Sélectionnez l'adresse ci-dessus.",
     ct_phone:"Téléphone", ct_loc:"Localisation", ct_loc_v:"El Mourouj, Tunisie",
-    menu:"Menu", title:"Rimeh Mechichi — Ingénieure Flutter & Full-Stack, Designeuse de mode"
+    menu:"Menu", title:"Rimeh Mechichi — Ingénieure Flutter & Full-Stack, Designeuse de mode",
+"work_sub":"Choisissez un projet pour explorer les détails et regarder ses démos.","demo_waw_cap":"Web · Nouveau template du site WAW.","demo_waw_label":"Enregistrement du nouveau template web WAW","mobile_app":"Application mobile","recording_pending":"Enregistrement non fourni pour le moment","project_walkthrough":"Présentation du projet","demo_Ecoplat_cap":"Ecoplat · Application mobile.","demo_Ecoplat_label":"Enregistrement de l’application Ecoplat","demo_APP_Salary_cap":"Salary MAXIT · Présentation de la plateforme IA.","demo_APP_Salary_label":"Enregistrement de la plateforme IA Salary MAXIT","browse_projects":"Explorez les projets","project_detail":"Détails du projet","project_count":"projets","previous_project":"Projet précédent","next_project":"Projet suivant","pause_preview":"Mettre l’aperçu en pause","resume_preview":"Reprendre l’aperçu","demo_live":"Démo disponible","project_info":"Présentation du projet",
+"demo_salary1_cap":"Salary MAXIT · Démo 1.","demo_salary2_cap":"Salary MAXIT · Démo 2.","demo_salary1_label":"Enregistrement de Salary MAXIT, partie 1","demo_salary2_label":"Enregistrement de Salary MAXIT, partie 2"
   }
 };
 
+const motionOK = !matchMedia('(prefers-reduced-motion: reduce)').matches && !(navigator.connection && navigator.connection.saveData);
+const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 let currentLang = 'en';
+let typeTimer;
 
 function setLang(lang) {
   if (!i18n[lang]) lang = 'en';
@@ -710,12 +1037,20 @@ function setLang(lang) {
     const v = t[el.getAttribute('data-i18n')];
     if (v !== undefined) el.textContent = v;
   });
+  document.querySelectorAll('[data-i18n-label]').forEach(el => {
+    const v = t[el.getAttribute('data-i18n-label')];
+    if (v !== undefined) el.setAttribute('aria-label', v);
+  });
   document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
   document.documentElement.lang = lang;
   document.title = t.title;
   document.getElementById('menu-btn').setAttribute('aria-label', t.menu);
   document.getElementById('copy-status').textContent = '';
   try { localStorage.setItem('lang', lang); } catch (e) {}
+  startTyping();
+  document.querySelectorAll('.demo video[id]').forEach(updateDemoUI);
+  if (document.getElementById('project-tabs')) refreshProjectLabels();
+  if (document.getElementById('preview-pause')) updatePreviewLabel();
 }
 
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
@@ -728,16 +1063,388 @@ document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', 
   setLang(saved || browser);
 })();
 
-/* Project filters */
+/* Project filters feed the project selector below. */
 document.querySelectorAll('.filter').forEach(btn => {
   btn.addEventListener('click', () => {
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.filter').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-    document.querySelectorAll('.work-row').forEach(row => {
-      row.hidden = !(f === 'all' || row.dataset.cat.split(' ').includes(f));
-    });
+    document.querySelectorAll('.filter').forEach(other => other.setAttribute('aria-pressed', String(other === btn)));
+    applyProjectFilter(btn.dataset.filter);
   });
 });
+
+/* Rotating role line in the hero */
+function startTyping() {
+  const el = document.getElementById('typed');
+  if (!el) return;
+  clearTimeout(typeTimer);
+  const words = i18n[currentLang].type_words;
+  if (!motionOK) { el.textContent = words[0]; return; }
+  let w = 0, c = 0, deleting = false;
+  (function tick() {
+    const word = words[w % words.length];
+    el.textContent = word.slice(0, c);
+    let delay = 70;
+    if (!deleting) {
+      if (c === word.length) { deleting = true; delay = 1600; } else { c++; }
+    } else if (c === 0) {
+      deleting = false; w++; delay = 320;
+    } else { c--; delay = 30; }
+    typeTimer = setTimeout(tick, delay);
+  })();
+}
+
+/* Name drops in letter by letter */
+(function splitName() {
+  const h1 = document.querySelector('.hero-name');
+  if (!h1 || !motionOK) return;
+  let k = 0;
+  h1.innerHTML = ['Rimeh', 'Mechichi'].map(word =>
+    '<span class="ln">' + [...word].map(ch => `<span class="ch" aria-hidden="true" style="--k:${k++}">${ch}</span>`).join('') + '</span>'
+  ).join('<br>');
+})();
+
+/* Hero: cursor glow, portrait parallax, magnetic buttons */
+(function heroPointer() {
+  const hero = document.getElementById('home');
+  if (!hero || !motionOK || !finePointer) return;
+  let raf = 0, last = null;
+  hero.addEventListener('pointermove', e => {
+    last = e;
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const r = hero.getBoundingClientRect();
+      const x = last.clientX - r.left, y = last.clientY - r.top;
+      hero.style.setProperty('--mx', x + 'px');
+      hero.style.setProperty('--my', y + 'px');
+      hero.style.setProperty('--px', ((x / r.width) - .5) * 2);
+      hero.style.setProperty('--py', ((y / r.height) - .5) * 2);
+    });
+  });
+  hero.addEventListener('pointerleave', () => { hero.style.setProperty('--px', 0); hero.style.setProperty('--py', 0); });
+  document.querySelectorAll('.hero-actions .btn').forEach(b => {
+    b.addEventListener('pointermove', e => {
+      const r = b.getBoundingClientRect();
+      b.style.translate = `${(e.clientX - r.left - r.width / 2) * .18}px ${(e.clientY - r.top - r.height / 2) * .28}px`;
+    });
+    b.addEventListener('pointerleave', () => { b.style.translate = ''; });
+  });
+})();
+
+/* Scroll thread, timeline fill, timeline dots */
+(function scrollLife() {
+  const thread = document.getElementById('thread');
+  const roles = document.querySelector('.roles');
+  const roleEls = [...document.querySelectorAll('.role')];
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    thread.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max) : 0);
+    if (roles) {
+      const r = roles.getBoundingClientRect();
+      roles.style.setProperty('--fill', Math.min(1, Math.max(0, (innerHeight * .65 - r.top) / r.height)));
+    }
+    roleEls.forEach(el => el.classList.toggle('reached', el.getBoundingClientRect().top < innerHeight * .65));
+  }
+  const request = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  addEventListener('scroll', request, { passive: true });
+  addEventListener('resize', request);
+  update();
+})();
+
+/* Scroll reveals */
+function replayRows() {
+  if (!motionOK) return;
+  let i = 0;
+  document.querySelectorAll('.work-row:not([hidden])').forEach(row => {
+    row.style.setProperty('--d', (i++ * 70) + 'ms');
+    row.classList.remove('in');
+    void row.offsetWidth;
+    requestAnimationFrame(() => row.classList.add('in'));
+  });
+}
+if (motionOK && 'IntersectionObserver' in window) {
+  const targets = document.querySelectorAll('.sec-head, .filters, .work-row, .role, .about-text, .facts div, .skill-row, .beyond-item, .copy-row, .contact-list div, .mail-big');
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      revealObserver.unobserve(e.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+  targets.forEach(el => {
+    const idx = [...el.parentElement.children].indexOf(el);
+    el.style.setProperty('--d', Math.min(idx, 8) * 70 + 'ms');
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+}
+
+/* Optional recordings retain their filenames and activate when supplied. */
+function loadPendingDemos(row) {
+  row.querySelectorAll('.pending-demo').forEach(figure => {
+    if (figure.dataset.checked) return;
+    figure.dataset.checked = 'true';
+    const video = document.createElement('video');
+    video.controls = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.dataset.i18nLabel = figure.dataset.labelKey;
+    video.setAttribute('aria-label', i18n[currentLang][figure.dataset.labelKey]);
+    video.addEventListener('loadedmetadata', () => {
+      const frame = document.createElement('div');
+      frame.className = 'demo-frame';
+      frame.append(video);
+      const toolbar = document.createElement('div');
+      toolbar.className = 'demo-toolbar';
+      const button = document.createElement('button');
+      button.className = 'demo-play';
+      button.type = 'button';
+      button.dataset.i18n = 'demo_play';
+      button.textContent = i18n[currentLang].demo_play;
+      toolbar.append(button);
+      const status = document.createElement('p');
+      status.className = 'demo-status';
+      status.setAttribute('role', 'status');
+      figure.querySelector('.pending-frame').replaceWith(frame);
+      frame.after(toolbar, status);
+      figure.classList.remove('pending-demo');
+      // Use the recording's own shape to choose a phone or browser frame.
+      figure.classList.toggle('demo-phone', video.videoHeight > video.videoWidth);
+      figure.classList.toggle('demo-wide', video.videoWidth >= video.videoHeight);
+      if (video.videoHeight > video.videoWidth) frame.style.aspectRatio = video.videoWidth + ' / ' + video.videoHeight;
+      const poster = new Image();
+      poster.onload = () => { video.poster = figure.dataset.pendingPoster; };
+      poster.src = figure.dataset.pendingPoster;
+      demoVideos.push(video);
+      wireDemo(video, demoVideos.length - 1);
+      if (demoObserver) demoObserver.observe(video);
+      refreshProjectLabels();
+    }, { once: true });
+    // If absent, keep the honest, already-rendered unavailable card.
+    video.addEventListener('error', () => { video.removeAttribute('src'); }, { once: true });
+    video.src = figure.dataset.pendingSrc;
+    video.load();
+  });
+}
+
+/* Native controls always work, including with JavaScript disabled.
+   Ambient playback is muted and only runs while a recording is visible. */
+const demoVideos = [...document.querySelectorAll('.demo video')];
+const visibleDemos = new Set();
+function updateDemoUI(video) {
+  const demo = video.closest('.demo');
+  const btn = demo.querySelector('.demo-play');
+  const playing = !video.paused && !video.ended;
+  demo.classList.toggle('is-playing', playing);
+  btn.dataset.i18n = playing ? 'demo_pause' : 'demo_play';
+  btn.textContent = i18n[currentLang][btn.dataset.i18n];
+  btn.setAttribute('aria-label', btn.textContent + ': ' + video.getAttribute('aria-label'));
+}
+async function playDemo(video, explicit = false) {
+  if (explicit) {
+    video.dataset.manual = 'play';
+    video.closest('.demo').querySelector('.demo-status').textContent = '';
+  }
+  try { await video.play(); }
+  catch (error) {
+    if (explicit && error.name !== 'AbortError') {
+      const status = video.closest('.demo').querySelector('.demo-status');
+      status.dataset.i18n = 'demo_error';
+      status.textContent = i18n[currentLang].demo_error;
+    }
+    updateDemoUI(video);
+  }
+}
+function wireDemo(video, index) {
+  const demo = video.closest('.demo');
+  const btn = demo.querySelector('.demo-play');
+  video.id = 'demo-video-' + index;
+  btn.setAttribute('aria-controls', video.id);
+  const open = document.createElement('a');
+  open.href = video.getAttribute('src');
+  open.target = '_blank';
+  open.rel = 'noopener';
+  open.dataset.i18n = 'demo_open';
+  open.textContent = i18n[currentLang].demo_open;
+  demo.querySelector('.demo-toolbar').append(open);
+  btn.addEventListener('click', () => {
+    if (video.paused) playDemo(video, true);
+    else { video.dataset.manual = 'pause'; video.pause(); }
+  });
+  // Native control interaction takes priority over automatic playback.
+  video.addEventListener('pointerdown', () => { video.dataset.manual = 'pause'; });
+  video.addEventListener('keydown', () => { video.dataset.manual = 'pause'; });
+  ['play', 'pause', 'ended'].forEach(event => video.addEventListener(event, () => {
+    if (event === 'play') {
+      const status = demo.querySelector('.demo-status');
+      status.textContent = '';
+      delete status.dataset.i18n;
+    }
+    updateDemoUI(video);
+  }));
+  video.addEventListener('error', () => {
+    const status = demo.querySelector('.demo-status');
+    status.dataset.i18n = 'demo_error';
+    status.textContent = i18n[currentLang].demo_error;
+    updateDemoUI(video);
+  });
+  updateDemoUI(video);
+}
+demoVideos.forEach(wireDemo);
+let demoObserver;
+if ('IntersectionObserver' in window) {
+  demoObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        visibleDemos.add(video);
+        if (motionOK && !document.hidden && video.dataset.manual !== 'pause') playDemo(video);
+      } else {
+        visibleDemos.delete(video);
+        video.pause();
+      }
+    });
+  }, { threshold: 0.45 });
+  demoVideos.forEach(video => demoObserver.observe(video));
+}
+document.addEventListener('visibilitychange', () => {
+  demoVideos.forEach(video => {
+    if (document.hidden) video.pause();
+    else if (motionOK && visibleDemos.has(video) && video.dataset.manual !== 'pause') playDemo(video);
+  });
+});
+
+/* The reference's project selector, backed by the current portfolio's real content. */
+const projectRows = [...document.querySelectorAll('.work-row')];
+const workList = document.getElementById('work-list');
+const projectBrowser = document.createElement('div');
+projectBrowser.className = 'project-browser';
+const projectTabs = document.createElement('div');
+projectTabs.id = 'project-tabs';
+projectTabs.className = 'project-tabs';
+projectTabs.setAttribute('role', 'tablist');
+const projectStage = document.createElement('div');
+projectStage.className = 'project-stage';
+const projectTools = document.createElement('div');
+projectTools.className = 'project-tools';
+const projectCounter = document.createElement('span');
+projectCounter.className = 'project-counter';
+const projectArrows = document.createElement('div');
+projectArrows.className = 'project-arrows';
+for (const [direction, glyph, key] of [[-1, '←', 'previous_project'], [1, '→', 'next_project']]) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = glyph;
+  button.dataset.i18nLabel = key;
+  button.addEventListener('click', () => stepProject(direction));
+  projectArrows.append(button);
+}
+projectTools.append(projectCounter, projectArrows);
+workList.before(projectBrowser);
+projectBrowser.append(projectTabs, projectStage);
+projectStage.append(projectTools, workList);
+workList.setAttribute('role', 'presentation');
+let activeProject = 0;
+let projectFilter = 'all';
+const projectButtons = projectRows.map((row, index) => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.id = 'project-tab-' + index;
+  button.className = 'project-tab';
+  button.setAttribute('role', 'tab');
+  row.id = 'project-panel-' + index;
+  row.setAttribute('role', 'tabpanel');
+  row.setAttribute('aria-labelledby', button.id);
+  row.tabIndex = 0;
+  button.setAttribute('aria-controls', row.id);
+  const number = document.createElement('span');
+  number.className = 'project-tab-number';
+  number.textContent = String(index + 1).padStart(2, '0');
+  const label = document.createElement('span');
+  label.className = 'project-tab-label';
+  const name = document.createElement('strong');
+  const category = document.createElement('small');
+  label.append(name, category);
+  const arrow = document.createElement('span');
+  arrow.className = 'project-tab-arrow';
+  arrow.textContent = '↗';
+  arrow.setAttribute('aria-hidden', 'true');
+  button.append(number, label, arrow);
+  button.addEventListener('click', () => selectProject(index, true));
+  button.addEventListener('keydown', event => {
+    if (['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'].includes(event.key)) {
+      event.preventDefault();
+      stepProject(['ArrowDown', 'ArrowRight'].includes(event.key) ? 1 : -1, true);
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      const allowed = eligibleProjects();
+      selectProject(event.key === 'Home' ? allowed[0] : allowed[allowed.length - 1], true, true);
+    }
+  });
+  projectTabs.append(button);
+  return button;
+});
+function eligibleProjects() {
+  return projectRows.map((row, index) => index).filter(index => projectFilter === 'all' || projectRows[index].dataset.cat.split(' ').includes(projectFilter));
+}
+function refreshProjectLabels() {
+  const t = i18n[currentLang];
+  projectTabs.setAttribute('aria-label', t.browse_projects);
+  projectButtons.forEach((button, index) => {
+    button.querySelector('strong').textContent = projectRows[index].querySelector('.work-title').textContent;
+    button.querySelector('small').textContent = projectRows[index].querySelector('video') ? t.demo_live : t.project_info;
+  });
+  projectArrows.querySelectorAll('button').forEach(button => button.setAttribute('aria-label', t[button.dataset.i18nLabel]));
+  const allowed = eligibleProjects();
+  projectCounter.textContent = String(allowed.indexOf(activeProject) + 1).padStart(2, '0') + ' / ' + String(allowed.length).padStart(2, '0') + ' · ' + t.project_count;
+}
+function selectProject(index, animate = false, focus = false) {
+  if (!eligibleProjects().includes(index)) return;
+  activeProject = index;
+  projectRows.forEach((row, i) => {
+    row.hidden = i !== index;
+    if (row.hidden) row.querySelectorAll('video').forEach(video => video.pause());
+    else {
+      row.classList.add('in');
+      row.style.setProperty('--d', '0ms');
+      row.classList.remove('panel-enter');
+      if (animate && motionOK) { void row.offsetWidth; row.classList.add('panel-enter'); }
+    }
+    projectButtons[i].setAttribute('aria-selected', String(i === index));
+    projectButtons[i].tabIndex = i === index ? 0 : -1;
+  });
+  refreshProjectLabels();
+  loadPendingDemos(projectRows[index]);
+  if (focus) projectButtons[index].focus({ preventScroll: true });
+  // The selector is horizontally scrollable on smaller screens.
+  if (matchMedia('(max-width: 850px)').matches) projectButtons[index].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: motionOK ? 'smooth' : 'auto' });
+}
+function stepProject(direction, focus = false) {
+  const allowed = eligibleProjects();
+  const position = allowed.indexOf(activeProject);
+  selectProject(allowed[(position + direction + allowed.length) % allowed.length], true, focus);
+}
+function applyProjectFilter(filter) {
+  projectFilter = filter;
+  const allowed = eligibleProjects();
+  projectButtons.forEach((button, index) => { button.hidden = !allowed.includes(index); });
+  selectProject(allowed.includes(activeProject) ? activeProject : allowed[0], true);
+}
+function updateTabOrientation() {
+  projectTabs.setAttribute('aria-orientation', matchMedia('(max-width: 850px)').matches ? 'horizontal' : 'vertical');
+}
+addEventListener('resize', updateTabOrientation);
+updateTabOrientation();
+selectProject(0);
+// Every existing shortcut keeps its exact target, even after filtering.
+document.querySelectorAll('.demo-shortcuts a, .preview-controls a').forEach(link => link.addEventListener('click', () => {
+  document.querySelector('.filter[data-filter="all"]').click();
+  const target = document.querySelector(link.getAttribute('href'));
+  if (target) selectProject(projectRows.indexOf(target.closest('.work-row')), true);
+}));
 
 /* Mobile menu */
 const nav = document.getElementById('nav');
@@ -752,7 +1459,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
 
 /* Highlight the section you're reading */
 const navLinks = [...document.querySelectorAll('.nav-links a')];
-const sectionObserver = new IntersectionObserver(entries => {
+const sectionObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     navLinks.forEach(a => {
@@ -760,10 +1467,10 @@ const sectionObserver = new IntersectionObserver(entries => {
       else a.removeAttribute('aria-current');
     });
   });
-}, { rootMargin: '-45% 0px -50% 0px' });
+}, { rootMargin: '-45% 0px -50% 0px' }) : null;
 ['work', 'experience', 'about', 'skills', 'contact'].forEach(id => {
   const el = document.getElementById(id);
-  if (el) sectionObserver.observe(el);
+  if (el && sectionObserver) sectionObserver.observe(el);
 });
 
 /* Copy email */
@@ -777,6 +1484,36 @@ document.getElementById('copy-btn').addEventListener('click', async () => {
     status.textContent = i18n[currentLang].ct_failed;
   }
 });
+/* Floating phone from the reference, using real El Arab screens. */
+let previewPaused = !motionOK;
+let previewIndex = 0;
+const previewButton = document.getElementById('preview-pause');
+const previewShots = [...document.querySelectorAll('.preview-shot')];
+function updatePreviewLabel() {
+  const button = document.getElementById('preview-pause');
+  if (!button) return;
+  // Initial language setup happens before preview state is initialized.
+  const paused = button.getAttribute('aria-pressed') === 'true';
+  button.dataset.i18nLabel = paused ? 'resume_preview' : 'pause_preview';
+  button.setAttribute('aria-label', i18n[currentLang][button.dataset.i18nLabel]);
+}
+previewButton.addEventListener('click', () => {
+  previewPaused = !previewPaused;
+  previewButton.setAttribute('aria-pressed', String(previewPaused));
+  previewButton.textContent = previewPaused ? '▷' : 'Ⅱ';
+  document.querySelector('.preview-phone').classList.toggle('preview-paused', previewPaused);
+  updatePreviewLabel();
+});
+previewButton.setAttribute('aria-pressed', String(previewPaused));
+previewButton.textContent = previewPaused ? '▷' : 'Ⅱ';
+updatePreviewLabel();
+if (motionOK) setInterval(() => {
+  if (previewPaused || document.hidden) return;
+  previewShots[previewIndex].classList.remove('active');
+  previewIndex = (previewIndex + 1) % previewShots.length;
+  previewShots[previewIndex].classList.add('active');
+}, 4200);
+
 </script>
 </body>
 </html>
